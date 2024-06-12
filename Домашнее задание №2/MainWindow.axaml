@@ -1,0 +1,67 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="840" d:DesignHeight="600"
+        x:Class="dz2.MainWindow"
+        Title="Homework 2"
+		Width="600"
+		Height="400"
+		MinWidth="300"
+		MinHeight="300">
+	<Grid ColumnDefinitions="33*, 0.1*, 66*">
+		<Grid.Styles>
+			<Style Selector="Button">
+				<Setter Property="HorizontalAlignment" Value="Stretch" />
+				<Setter Property="HorizontalContentAlignment" Value="Center" />
+				<Setter Property="BorderBrush" Value="Black" />
+				<Setter Property="BorderThickness" Value="2" />	
+			</Style>
+		</Grid.Styles>
+		
+		<StackPanel Grid.Column="0">
+			<Button Name="buttonKhaki" 
+					Background="Khaki" 
+					Content="Khaki" 
+					Click="ClickHandler" />		
+			<Button Name="buttonRed" 
+					Background="Red" 
+					Content="Red"
+					Click="ClickHandler" />				
+			<Button Name="buttonMediumVioletRed" 
+					Background="MediumVioletRed" 
+					Content="MediumVioletRed"
+					Click="ClickHandler"/>
+			<Button Name="buttonBisque" 
+					Background="Bisque" 
+					Content="Bisque"
+					Click="ClickHandler" />
+			<Button Name="buttonLemonChiffon" 
+					Background="LemonChiffon" 
+					Content="LemonChiffon"
+					Click="ClickHandler" />
+			<Button Name="buttonPowderBlue" 
+					Background="PowderBlue" 
+					Content="PowderBlue"
+					Click="ClickHandler" />
+			<Button Name="buttonMintCream" 
+					Background="MintCream" 
+					Content="MintCream"
+					Click="ClickHandler" />
+			<Button Name="buttonMaroon" 
+					Background="Maroon" 
+					Content="Maroon"
+					Click="ClickHandler" />
+			<Button Name="buttonRosyBrown" 
+					Background="RosyBrown" 
+					Content="RosyBrown"
+					Click="ClickHandler" />
+			<Button Name="buttonLightPink" 
+					Background="LightPink" 
+					Content="LightPink"
+					Click="ClickHandler" />
+		</StackPanel>
+		<GridSplitter Background="Black" Grid.Column="1"></GridSplitter>
+		<TextBlock x:Name="rectangleRect" Grid.Column="2" Background="Khaki"></TextBlock>
+	</Grid>
+</Window>
