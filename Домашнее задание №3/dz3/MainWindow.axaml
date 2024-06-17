@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="dz3.MainWindow"
+        Title="dz3"
+		MinHeight="250"
+		MinWidth="400"
+		MaxHeight="250"
+		MaxWidth="250">
+
+	<Window.Resources>
+		<con:InputData x:Key="InputData"/>
+	</Window.Resources>
+		
+		<Grid Grid.Row="1" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" ShowGridLines="True">
+		<Grid.Styles>
+			<Style Selector="Button">
+				<Setter Property="HorizontalAlignment" Value="Stretch" />
+				<Setter Property="VerticalAlignment" Value="Stretch" />
+				<Setter Property="HorizontalContentAlignment" Value="Center" />
+				<Setter Property="VerticalContentAlignment" Value="Center" />
+				<Setter Property="BorderBrush" Value="Black" />
+				<Setter Property="BorderThickness" Value="1" />
+				<Setter Property="Background" Value="Silver" />
+			</Style>
+			<Style Selector="TextBlock">
+				<Setter Property="Background" Value="White" />
+				<Setter Property="HorizontalAlignment" Value="Right" />
+				<Setter Property="VerticalAlignment" Value="Bottom" />
+				<Setter Property="Margin" Value="5" />				
+			</Style>			
+		</Grid.Styles>
+
+			<TextBlock x:Name="example" Text="{Binding PrintFirstVariable}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"></TextBlock>
+			<TextBlock x:Name="answer" Text="0" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3"></TextBlock>
+			
+			<Button Name="value1" Grid.Row="1" Grid.Column="0" Content="1" Click="ClickHandler"></Button>
+			<Button Name="value2" Grid.Row="1" Grid.Column="1" Content="2" Click="ClickHandler"></Button>
+			<Button Name="value3" Grid.Row="1" Grid.Column="2" Content="3" Click="ClickHandler"></Button>
+			<Button Name="value4" Grid.Row="2" Grid.Column="0" Content="4" Click="ClickHandler"></Button>
+			<Button Name="value5" Grid.Row="2" Grid.Column="1" Content="5" Click="ClickHandler"></Button>
+			<Button Name="value6" Grid.Row="2" Grid.Column="2" Content="6" Click="ClickHandler"></Button>
+			<Button Name="value7" Grid.Row="3" Grid.Column="0" Content="7" Click="ClickHandler"></Button>
+			<Button Name="value8" Grid.Row="3" Grid.Column="1" Content="8" Click="ClickHandler"></Button>
+			<Button Name="value9" Grid.Row="3" Grid.Column="2" Content="9" Click="ClickHandler"></Button>
+			<Button Name="value0" Grid.Row="4" Grid.Column="0" Content="0" Click="ClickHandler"></Button>
+			<Button Name="valuePoint" Grid.Row="4" Grid.Column="1" Content="." Click="ClickHandler"></Button>
+
+
+
+	</Grid>
+</Window>
