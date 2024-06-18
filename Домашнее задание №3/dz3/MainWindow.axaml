@@ -1,54 +1,79 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"	
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:dc="clr-namespace:dz3"
         x:Class="dz3.MainWindow"
+		x:DataType="dc:DataContextMainWindow"
         Title="dz3"
-		MinHeight="250"
-		MinWidth="400"
-		MaxHeight="250"
-		MaxWidth="250">
+		Height="300"
+		Width="600"
+		CanResize="False">
+	
+	<Design.DataContext>
+		<dc:DataContextMainWindow/>
+	</Design.DataContext>
 
-	<Window.Resources>
-		<con:InputData x:Key="InputData"/>
-	</Window.Resources>
-		
-		<Grid Grid.Row="1" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" ShowGridLines="True">
-		<Grid.Styles>
+	<Grid Grid.Row="1" RowDefinitions="*,*,*,*,*" ColumnDefinitions="*,*,*,*,*,*,*" Background="Gray">
+		<Grid.Styles>			
 			<Style Selector="Button">
 				<Setter Property="HorizontalAlignment" Value="Stretch" />
 				<Setter Property="VerticalAlignment" Value="Stretch" />
+				<Setter Property="Margin" Value="5" />
 				<Setter Property="HorizontalContentAlignment" Value="Center" />
 				<Setter Property="VerticalContentAlignment" Value="Center" />
 				<Setter Property="BorderBrush" Value="Black" />
 				<Setter Property="BorderThickness" Value="1" />
 				<Setter Property="Background" Value="Silver" />
+				<Setter Property="FontSize" Value="25" />
 			</Style>
 			<Style Selector="TextBlock">
-				<Setter Property="Background" Value="White" />
 				<Setter Property="HorizontalAlignment" Value="Right" />
 				<Setter Property="VerticalAlignment" Value="Bottom" />
-				<Setter Property="Margin" Value="5" />				
-			</Style>			
+				<Setter Property="Margin" Value="5" />
+				<Setter Property="FontSize" Value="35" />
+			</Style>
 		</Grid.Styles>
 
-			<TextBlock x:Name="example" Text="{Binding PrintFirstVariable}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"></TextBlock>
-			<TextBlock x:Name="answer" Text="0" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3"></TextBlock>
-			
-			<Button Name="value1" Grid.Row="1" Grid.Column="0" Content="1" Click="ClickHandler"></Button>
-			<Button Name="value2" Grid.Row="1" Grid.Column="1" Content="2" Click="ClickHandler"></Button>
-			<Button Name="value3" Grid.Row="1" Grid.Column="2" Content="3" Click="ClickHandler"></Button>
-			<Button Name="value4" Grid.Row="2" Grid.Column="0" Content="4" Click="ClickHandler"></Button>
-			<Button Name="value5" Grid.Row="2" Grid.Column="1" Content="5" Click="ClickHandler"></Button>
-			<Button Name="value6" Grid.Row="2" Grid.Column="2" Content="6" Click="ClickHandler"></Button>
-			<Button Name="value7" Grid.Row="3" Grid.Column="0" Content="7" Click="ClickHandler"></Button>
-			<Button Name="value8" Grid.Row="3" Grid.Column="1" Content="8" Click="ClickHandler"></Button>
-			<Button Name="value9" Grid.Row="3" Grid.Column="2" Content="9" Click="ClickHandler"></Button>
-			<Button Name="value0" Grid.Row="4" Grid.Column="0" Content="0" Click="ClickHandler"></Button>
-			<Button Name="valuePoint" Grid.Row="4" Grid.Column="1" Content="." Click="ClickHandler"></Button>
+		<Grid Background="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="10" >
+			<TextBlock x:Name="input" Text="{Binding Text}" Background="White"></TextBlock>
+		</Grid>
+		<Grid Background="White" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" Margin="10" >
+			<TextBlock Text="0"></TextBlock>
+		</Grid>
+		
+		
 
+		<Button Name="value1" Grid.Row="1" Grid.Column="0" Content="1" Command="{Binding ExecuteCommand}" CommandParameter="2"/>
+		<Button Name="value2" Grid.Row="1" Grid.Column="1" Content="2" Command="{Binding ExecuteCommand}" CommandParameter="2"/> 
+		<Button Name="value3" Grid.Row="1" Grid.Column="2" Content="3" Command="{Binding ExecuteCommand}" CommandParameter="3"/>
+		<Button Name="value4" Grid.Row="2" Grid.Column="0" Content="4" Command="{Binding ExecuteCommand}" CommandParameter="4"/>
+		<Button Name="value5" Grid.Row="2" Grid.Column="1" Content="5" Command="{Binding ExecuteCommand}" CommandParameter="5"/>
+		<Button Name="value6" Grid.Row="2" Grid.Column="2" Content="6" Command="{Binding ExecuteCommand}" CommandParameter="6"/>
+		<Button Name="value7" Grid.Row="3" Grid.Column="0" Content="7" Command="{Binding ExecuteCommand}" CommandParameter="7"/>
+		<Button Name="value8" Grid.Row="3" Grid.Column="1" Content="8" Command="{Binding ExecuteCommand}" CommandParameter="8"/>
+		<Button Name="value9" Grid.Row="3" Grid.Column="2" Content="9" Command="{Binding ExecuteCommand}" CommandParameter="9"/>
+		<Button Name="value0" Grid.Row="4" Grid.Column="0" Content="0" Command="{Binding ExecuteCommand}" CommandParameter="0"/>
+		<Button Name="valuePoint" Grid.Row="4" Grid.Column="1" Content="." Command="{Binding ExecuteCommand}" CommandParameter="."/>
 
+		<Button Name="equally" Grid.Row="4" Grid.Column="2" Content="="/>
+		<Button Name="buttonPlus" Grid.Row="1" Grid.Column="3" Content="+" Command="{Binding Calculation}" CommandParameter="Plus"/>
+		<Button Name="buttonMinus" Grid.Row="2" Grid.Column="3" Content="-" Command="{Binding Calculation}" CommandParameter="Minus"/>
+		<Button Name="buttonMultiply" Grid.Row="3" Grid.Column="3" Content="*" Command="{Binding Calculation}" CommandParameter="Multiply"/>
+		<Button Name="buttonDivide" Grid.Row="4" Grid.Column="3" Content="/" Command="{Binding Calculation}" CommandParameter="Divide"/>
+		<Button Name="buttonMod" Grid.Row="1" Grid.Column="4" Content="mod"/>
+		<Button Name="buttonFactorial" Grid.Row="2" Grid.Column="4" Content="n!"/>
+		<Button Name="buttonDegree" Grid.Row="3" Grid.Column="4" Content="x^y"/>
+		<Button Name="buttonLog" Grid.Row="4" Grid.Column="4" Content="lg"/>
+		<Button Name="buttonLn" Grid.Row="1" Grid.Column="5" Content="ln"/>
+		<Button Name="buttonSin" Grid.Row="2" Grid.Column="5" Content="sin"/>
+		<Button Name="buttonCos" Grid.Row="3" Grid.Column="5" Content="cos"/>
+		<Button Name="buttonTan" Grid.Row="4" Grid.Column="5" Content="tan"/>
+		<Button Name="buttonFloor" Grid.Row="1" Grid.Column="6" Content="Floor"/>
+		<Button Name="buttonCeil" Grid.Row="2" Grid.Column="6" Content="Ceil"/>
+		<Button Name="buttonC" Grid.Row="3" Grid.Column="6" Content="C" Background="LightBlue" Command="{Binding DeleteLastElement}"/>
+		<Button Name="buttonCe" Grid.Row="4" Grid.Column="6" Content="CE" Background="LightBlue" Command="{Binding Clear}"/>
 
 	</Grid>
 </Window>

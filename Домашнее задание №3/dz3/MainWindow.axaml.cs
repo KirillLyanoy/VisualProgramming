@@ -1,8 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
-using System.Xml.XPath;
-using Tmds.DBus.Protocol;
+
 
 namespace dz3
 {
@@ -12,5 +11,5 @@ namespace dz3
         {
             InitializeComponent();
         }
-    }
+    }    
 }
