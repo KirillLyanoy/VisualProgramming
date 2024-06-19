@@ -6,7 +6,7 @@
 		xmlns:dc="clr-namespace:dz3"
         x:Class="dz3.MainWindow"
 		x:DataType="dc:DataContextMainWindow"
-        Title="dz3"
+        Title="Калькулятор"
 		Height="300"
 		Width="600"
 		CanResize="False">
@@ -36,16 +36,18 @@
 			</Style>
 		</Grid.Styles>
 
-		<Grid Background="White" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Margin="10" >
+		
+		<Grid Background="White" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="5" Margin="10" >
 			<TextBlock x:Name="input" Text="{Binding Text}" Background="White"></TextBlock>
 		</Grid>
-		<Grid Background="White" Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" Margin="10" >
-			<TextBlock Text="0"></TextBlock>
-		</Grid>
-		
+
+
+			<Button Name="buttonC" Grid.Row="0" Grid.Column="0" Content="C" Background="LightBlue" Command="{Binding DeleteLastElement}"/>
+			<Button Name="buttonCe" Grid.Row="0" Grid.Column="1" Content="CE" Background="LightBlue" Command="{Binding Clear}"/>
+
 		
 
-		<Button Name="value1" Grid.Row="1" Grid.Column="0" Content="1" Command="{Binding ExecuteCommand}" CommandParameter="2"/>
+		<Button Name="value1" Grid.Row="1" Grid.Column="0" Content="1" Command="{Binding ExecuteCommand}" CommandParameter="1"/>
 		<Button Name="value2" Grid.Row="1" Grid.Column="1" Content="2" Command="{Binding ExecuteCommand}" CommandParameter="2"/> 
 		<Button Name="value3" Grid.Row="1" Grid.Column="2" Content="3" Command="{Binding ExecuteCommand}" CommandParameter="3"/>
 		<Button Name="value4" Grid.Row="2" Grid.Column="0" Content="4" Command="{Binding ExecuteCommand}" CommandParameter="4"/>
@@ -55,25 +57,25 @@
 		<Button Name="value8" Grid.Row="3" Grid.Column="1" Content="8" Command="{Binding ExecuteCommand}" CommandParameter="8"/>
 		<Button Name="value9" Grid.Row="3" Grid.Column="2" Content="9" Command="{Binding ExecuteCommand}" CommandParameter="9"/>
 		<Button Name="value0" Grid.Row="4" Grid.Column="0" Content="0" Command="{Binding ExecuteCommand}" CommandParameter="0"/>
-		<Button Name="valuePoint" Grid.Row="4" Grid.Column="1" Content="." Command="{Binding ExecuteCommand}" CommandParameter="."/>
+		<Button Name="valuePoint" Grid.Row="4" Grid.Column="1" Content="." Command="{Binding ExecuteCommand}" CommandParameter=","/>
 
-		<Button Name="equally" Grid.Row="4" Grid.Column="2" Content="="/>
-		<Button Name="buttonPlus" Grid.Row="1" Grid.Column="3" Content="+" Command="{Binding Calculation}" CommandParameter="Plus"/>
-		<Button Name="buttonMinus" Grid.Row="2" Grid.Column="3" Content="-" Command="{Binding Calculation}" CommandParameter="Minus"/>
-		<Button Name="buttonMultiply" Grid.Row="3" Grid.Column="3" Content="*" Command="{Binding Calculation}" CommandParameter="Multiply"/>
-		<Button Name="buttonDivide" Grid.Row="4" Grid.Column="3" Content="/" Command="{Binding Calculation}" CommandParameter="Divide"/>
-		<Button Name="buttonMod" Grid.Row="1" Grid.Column="4" Content="mod"/>
-		<Button Name="buttonFactorial" Grid.Row="2" Grid.Column="4" Content="n!"/>
-		<Button Name="buttonDegree" Grid.Row="3" Grid.Column="4" Content="x^y"/>
-		<Button Name="buttonLog" Grid.Row="4" Grid.Column="4" Content="lg"/>
-		<Button Name="buttonLn" Grid.Row="1" Grid.Column="5" Content="ln"/>
-		<Button Name="buttonSin" Grid.Row="2" Grid.Column="5" Content="sin"/>
-		<Button Name="buttonCos" Grid.Row="3" Grid.Column="5" Content="cos"/>
-		<Button Name="buttonTan" Grid.Row="4" Grid.Column="5" Content="tan"/>
-		<Button Name="buttonFloor" Grid.Row="1" Grid.Column="6" Content="Floor"/>
-		<Button Name="buttonCeil" Grid.Row="2" Grid.Column="6" Content="Ceil"/>
-		<Button Name="buttonC" Grid.Row="3" Grid.Column="6" Content="C" Background="LightBlue" Command="{Binding DeleteLastElement}"/>
-		<Button Name="buttonCe" Grid.Row="4" Grid.Column="6" Content="CE" Background="LightBlue" Command="{Binding Clear}"/>
+		<Button Name="equally" Grid.Row="4" Grid.Column="2" Content="=" Command="{Binding Equally}"/>
+		<Button Name="buttonPlus" Grid.Row="1" Grid.Column="3" Content="+" Command="{Binding CalculateWithTwoElements}" CommandParameter="Plus"/>
+		<Button Name="buttonMinus" Grid.Row="2" Grid.Column="3" Content="-" Command="{Binding CalculateWithTwoElements}" CommandParameter="Minus"/>
+		<Button Name="buttonMultiply" Grid.Row="3" Grid.Column="3" Content="*" Command="{Binding CalculateWithTwoElements}" CommandParameter="Multiply"/>
+		<Button Name="buttonDivide" Grid.Row="4" Grid.Column="3" Content="/" Command="{Binding CalculateWithTwoElements}" CommandParameter="Divide"/>
+		<Button Name="buttonMod" Grid.Row="1" Grid.Column="4" Content="mod" Command="{Binding CalculateWithTwoElements}" CommandParameter="Mod"/>
+		<Button Name="buttonFactorial" Grid.Row="2" Grid.Column="4" Content="n!" Command="{Binding CalculateWithOneElement}" CommandParameter="Factorial"/>
+		<Button Name="buttonDegree" Grid.Row="3" Grid.Column="4" Content="x^y" Command="{Binding CalculateWithTwoElements}" CommandParameter="Degree"/>
+		<Button Name="buttonLog" Grid.Row="4" Grid.Column="4" Content="log" Command="{Binding CalculateWithOneElement}" CommandParameter="Log"/>
+		<Button Name="buttonLn" Grid.Row="1" Grid.Column="5" Content="ln" Command="{Binding CalculateWithOneElement}" CommandParameter="Ln"/>
+		<Button Name="buttonSin" Grid.Row="2" Grid.Column="5" Content="sin" Command="{Binding CalculateWithOneElement}" CommandParameter="Sin"/>
+		<Button Name="buttonCos" Grid.Row="3" Grid.Column="5" Content="cos" Command="{Binding CalculateWithOneElement}" CommandParameter="Cos"/>
+		<Button Name="buttonTan" Grid.Row="4" Grid.Column="5" Content="tan" Command="{Binding CalculateWithOneElement}" CommandParameter="Tan"/>
+		<Button Name="buttonFloor" Grid.Row="1" Grid.Column="6" Content="Floor" Command="{Binding CalculateWithOneElement}" CommandParameter="Floor"/>
+		<Button Name="buttonCeil" Grid.Row="2" Grid.Column="6" Content="Ceil" Command="{Binding CalculateWithOneElement}" CommandParameter="Ceil"/>
 
+
+		<Button Name="buttonNegativeNumber" Grid.Row="3" Grid.Column="6" Grid.RowSpan="5" Content="Negative&#13;&#10; number" FontSize="12" Command="{Binding NegativeNumber}"/>
 	</Grid>
 </Window>
