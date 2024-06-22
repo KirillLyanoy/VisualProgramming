@@ -14,15 +14,9 @@ public class DataContextMainWindow : INotifyPropertyChanged
                                  
     public string Text
     {
-        get
-        {
-            return _text;
-        }
+        get { return _text; }
 
-        set
-        {
-            _ = SetField(ref _text, value);
-        }
+        set { _ = SetField(ref _text, value); }
     }
 
     public void ExecuteCommand(object parameter)
@@ -38,26 +32,26 @@ public class DataContextMainWindow : INotifyPropertyChanged
             }
         }
     }
-    public void DeleteLastElement()
+    public void DeleteLastElement() //удаление последнего элемента текстового блока//
     {
         int n = Text.Length;
         if (n > 0) Text = Text.Remove(n - 1);
         if (Text.Length == 0) Text = "0";
     }
-    public void Clear()
+    public void Clear() //очистка текстового блока и переменных//
     {
         Text = "0";
         Calculator.SetX(0);
         Calculator.SetY(0);
     }
-    public void CalculateWithOneElement(string _operator)
+    public void CalculateWithOneElement(string _operator) // запись и вычисление используя одну переменную// 
     {
         Calculator.SetX(Convert.ToDouble(_text));
         Calculator.SetOperator(_operator);
         Calculator.SetX(Calculator.Calculation());
         Text = Convert.ToString(Calculator.GetX());
     }
-    public void CalculateWithTwoElements(string _operator)
+    public void CalculateWithTwoElements(string _operator) //запись первой переменной в память для вычислений с двумя переменными//
     {
         Calculator.SetX(Convert.ToDouble(_text));
         Text = "0";
@@ -67,16 +61,14 @@ public class DataContextMainWindow : INotifyPropertyChanged
 
     public void Equally()
     {        
-        if (yIndex) Calculator.SetY(Convert.ToDouble(_text));
+        if (yIndex) Calculator.SetY(Convert.ToDouble(_text)); //запись второй переменной в память для вычислений с двумя переменными//
         Calculator.SetX(Calculator.Calculation());
         Text = Convert.ToString(Calculator.GetX());       
         yIndex = false;
     }
 
-    public void NegativeNumber()
+    public void NegativeNumber() //ввод отрицательного числа//
     {
-        
-
         if (_text[0] == '-') Text = _text.Remove(0, 1);
         else Text = "-" + _text;
     }
