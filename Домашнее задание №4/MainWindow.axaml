@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:dz4"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="dz4.MainWindow"
+        Title="dz4"
+        x:DataType="local:DataContextWithCollection">
+
+	<Window.DataContext>
+		<local:DataContextWithCollection/>
+	</Window.DataContext>	
+	
+	<ListBox ItemsSource="{Binding Collection}" >
+		<ListBox.ItemTemplate>
+			<DataTemplate>
+				<Grid ColumnDefinitions="*, 20*" DoubleTapped="{Binding SetNewPath}">
+					<TextBlock Grid.Column="0" Text="1" />
+					<TextBlock Grid.Column="1" Text="{Binding }" />	
+				</Grid>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+		
+		
+		
+		
+	</ListBox>
+</Window>
