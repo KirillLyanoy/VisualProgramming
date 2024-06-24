@@ -7,6 +7,8 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Avalonia.Interactivity;
+using Tmds.DBus.Protocol;
 
 namespace dz4
 {
@@ -44,11 +46,6 @@ namespace dz4
             field = value;
             OnPropertyChanged(propertyName);
             return true;
-        }
-
-        public void SetNewPath(object? sender, Avalonia.Input.TappedEventArgs e)
-        {
-
         }
     }
 }

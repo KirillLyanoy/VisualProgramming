@@ -12,18 +12,14 @@
 		<local:DataContextWithCollection/>
 	</Window.DataContext>	
 	
-	<ListBox ItemsSource="{Binding Collection}" >
+	<ListBox ItemsSource="{Binding Collection}">
 		<ListBox.ItemTemplate>
 			<DataTemplate>
-				<Grid ColumnDefinitions="*, 20*" DoubleTapped="{Binding SetNewPath}">
-					<TextBlock Grid.Column="0" Text="1" />
-					<TextBlock Grid.Column="1" Text="{Binding }" />	
+				<Grid ColumnDefinitions="*, 20*">
+					<TextBlock Name="Image" Grid.Column="0" Text="1" />
+					<TextBlock Name="Path" Grid.Column="1" Text="{Binding }" DoubleTapped="DoubleTappedOnTextBox" />				
 				</Grid>
-			</DataTemplate>
+			</DataTemplate>			
 		</ListBox.ItemTemplate>
-		
-		
-		
-		
 	</ListBox>
 </Window>

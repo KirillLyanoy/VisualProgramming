@@ -13,5 +13,13 @@ namespace dz4
         {
             InitializeComponent();
         }
+
+        private void DoubleTappedOnTextBox(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            TextBlock textBlock = sender as TextBlock;
+            GetDirectory.SetNewDirectory(Convert.ToString(textBlock.Text));
+
+            //  GetDirectory.SetNewDirectory(Convert.ToString(Directory.GetParent(GetDirectory.GetPath())));
+        }
     }
 }
