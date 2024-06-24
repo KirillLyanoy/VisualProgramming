@@ -16,30 +16,24 @@ namespace dz4
     {
         public DataContextWithCollection()
         {
-            Collection = new ObservableCollection<string>(
-                new string[] { ".." }.Concat(GetDirectory.allfolders.Concat(GetDirectory.allfiles)));
+            Collection = new ObservableCollection<string>(new string[] { ".." }.Concat(GetDirectory.GetDirectories().Concat(GetDirectory.GetFiles())));            
         }
-
         public ObservableCollection<string> Collection
         {
             get => _collection;
             set => _ = SetField(ref _collection, value);
         }
-
         public event PropertyChangedEventHandler? PropertyChanged;
-
         public void RemoveData(string str)
         {
             Collection.Remove(str);
         }
-
         private ObservableCollection<string> _collection;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
