@@ -1,13 +1,11 @@
 using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
-using Avalonia.Data;
-using Avalonia.Interactivity;
-using Microsoft.VisualBasic;
+using Avalonia.Media.Imaging;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using Tmds.DBus.Protocol;
+using System.Threading.Tasks;
+
 
 namespace dz4
 {
@@ -36,10 +34,8 @@ namespace dz4
                         break;
                 }
                 GetDirectory.SetNewDirectory();
-                MainListBox.ItemsSource = new ObservableCollection<string>(new string[] { ".." }.Concat(GetDirectory.GetDirectories().Concat(GetDirectory.GetFiles())));                
-            }
+                MainListBox.ItemsSource = new ObservableCollection<string>(new string[] { ".." }.Concat(GetDirectory.GetDirectories().Concat(GetDirectory.GetFiles())));    
+            }           
         }
     }
 }
-
-//	<Image Name="DirectoryImage"  Grid.Column="0" Source="{Binding Collection2}" Width="30" Height="30" />	

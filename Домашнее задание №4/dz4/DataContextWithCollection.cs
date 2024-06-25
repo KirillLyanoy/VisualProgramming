@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.IO;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Avalonia.Interactivity;
-using Tmds.DBus.Protocol;
+
 
 namespace dz4
 {
@@ -16,7 +11,7 @@ namespace dz4
     {
         public DataContextWithCollection()
         {
-            Collection = new ObservableCollection<string>(new string[] { ".." }.Concat(GetDirectory.GetDirectories().Concat(GetDirectory.GetFiles())));            
+            Collection = new ObservableCollection<string>(new string[] { ".." }.Concat(GetDirectory.GetDirectories().Concat(GetDirectory.GetFiles())));           
         }
         public ObservableCollection<string> Collection
         {
@@ -24,12 +19,7 @@ namespace dz4
             set => _ = SetField(ref _collection, value);
         }
         public event PropertyChangedEventHandler? PropertyChanged;
-        public void RemoveData(string str)
-        {
-            Collection.Remove(str);
-        }
-        private ObservableCollection<string> _collection;
-
+        private ObservableCollection<string> _collection;   
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

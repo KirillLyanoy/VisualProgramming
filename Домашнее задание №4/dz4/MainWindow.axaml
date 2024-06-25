@@ -7,19 +7,18 @@
         x:Class="dz4.MainWindow"
         Title="dz4"
         x:DataType="local:DataContextWithCollection">
-
 	<Window.DataContext>
 		<local:DataContextWithCollection/>
-	</Window.DataContext>	
-	
-	<ListBox Name="MainListBox" ItemsSource="{Binding Collection}" DoubleTapped="ListBox_DoubleTapped">
-		<ListBox.ItemTemplate>
-			<DataTemplate>
-				<Grid ColumnDefinitions="*, 20*">
-				
-						<TextBlock Name="DirectoryPath" Grid.Column="1" Text="{Binding }"/>
-				</Grid>
-			</DataTemplate>			
-		</ListBox.ItemTemplate>
-	</ListBox>
+	</Window.DataContext>
+
+		<ListBox Name="MainListBox" ItemsSource="{Binding Collection}" DoubleTapped="ListBox_DoubleTapped">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid ColumnDefinitions="*, 20*">
+						<Image Grid.Column="0" Source="{Binding }" Width="20"/>
+						<TextBlock Grid.Column="1" Text="{Binding }"/>
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
 </Window>
