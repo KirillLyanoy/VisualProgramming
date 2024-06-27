@@ -12,8 +12,8 @@ namespace dz4
     internal class DataContextWithCollection : INotifyPropertyChanged
     {
         public DataContextWithCollection()
-        {
-            Collection = new ObservableCollection<FileSystemInfo>( Path.GetTypeDirectories().Concat((FileSystemInfo[])Path.GetTypeFiles()));
+        {            
+            Collection = new ObservableCollection<FileSystemInfo>( Path.GetDirectoryUp().Concat(Path.GetTypeDirectories().Concat((FileSystemInfo[])Path.GetTypeFiles())));
         }
         public ObservableCollection<FileSystemInfo> Collection
         {

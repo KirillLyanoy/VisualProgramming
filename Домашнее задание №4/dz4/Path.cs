@@ -18,9 +18,16 @@ namespace dz4
         }
         static public void SetPath(string path) { _path = path; }
         static public string GetPath() { return _path; }
-        static public void SetLogicalDrives()
+        static public DirectoryInfo[] GetLogicalDrives()
         {
-     //       _allDirectories = Environment.GetLogicalDrives();
+            DirectoryInfo[] directoryInfo = new DirectoryInfo[Environment.GetLogicalDrives().Length];
+            int i = 0;
+            foreach (string logicalDrive in Environment.GetLogicalDrives())
+            {
+                directoryInfo[i] = new DirectoryInfo(logicalDrive);
+                i++;
+            }
+            return directoryInfo; 
         }
         static public DirectoryInfo[] GetTypeDirectories()
         {
@@ -31,6 +38,12 @@ namespace dz4
         {
             DirectoryInfo directoryInfo = new DirectoryInfo(_path);
             return directoryInfo.GetFiles();
+        }
+        static public DirectoryInfoUp[] GetDirectoryUp()
+        {
+            DirectoryInfoUp[] directoryInfoUp = new DirectoryInfoUp[1];
+            directoryInfoUp[0] = new DirectoryInfoUp();
+            return directoryInfoUp;
         }
     }
 }
