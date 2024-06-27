@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.VisualBasic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -11,15 +13,15 @@ namespace dz4
     {
         public DataContextWithCollection()
         {
-            Collection = new ObservableCollection<string>(new string[] { ".." }.Concat(GetDirectory.GetDirectories().Concat(GetDirectory.GetFiles())));           
+            Collection = new ObservableCollection<FileSystemInfo>( Path.GetTypeDirectories().Concat((FileSystemInfo[])Path.GetTypeFiles()));
         }
-        public ObservableCollection<string> Collection
+        public ObservableCollection<FileSystemInfo> Collection
         {
             get => _collection;
             set => _ = SetField(ref _collection, value);
         }
         public event PropertyChangedEventHandler? PropertyChanged;
-        private ObservableCollection<string> _collection;   
+        private ObservableCollection<FileSystemInfo> _collection;   
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

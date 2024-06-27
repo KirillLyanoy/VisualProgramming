@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -22,20 +23,20 @@ namespace dz4
                 switch (textBlock.Text)
                 {
                     case "..":
-                        string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectory.GetPath()));
-                        if (_getParentPath != "") GetDirectory.SetPath(_getParentPath);
-                        else GetDirectory.SetLogicalDrives();
+                        string _getParentPath = Convert.ToString(Directory.GetParent(Path.GetPath()));
+                        if (_getParentPath != "") Path.SetPath(_getParentPath);
+                        else Path.SetLogicalDrives();
                         break;
                     default:
-                        if (Directory.Exists(GetDirectory.GetPath() + "\\" + textBlock.Text))
+                        if (Directory.Exists(textBlock.Text))
                         {
-                            GetDirectory.SetPath(Convert.ToString((GetDirectory.GetPath() + "\\" + textBlock.Text)));
+                            Path.SetPath(Convert.ToString((textBlock.Text)));
                         }
                         break;
                 }
-                GetDirectory.SetNewDirectory();
-                MainListBox.ItemsSource = new ObservableCollection<string>(new string[] { ".." }.Concat(GetDirectory.GetDirectories().Concat(GetDirectory.GetFiles())));    
-            }           
-        }
+                DirectoryInfo directoryInfo = new DirectoryInfo(Path.GetPath());
+                MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(Path.GetTypeDirectories().Concat((FileSystemInfo[])Path.GetTypeFiles()));
+            }
+        }   
     }
 }

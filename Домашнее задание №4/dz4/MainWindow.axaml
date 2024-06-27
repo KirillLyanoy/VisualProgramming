@@ -5,20 +5,31 @@
 		xmlns:local="clr-namespace:dz4"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="dz4.MainWindow"
+		xmlns:k="using:System.IO"
         Title="dz4"
         x:DataType="local:DataContextWithCollection">
 	<Window.DataContext>
 		<local:DataContextWithCollection/>
 	</Window.DataContext>
 
-		<ListBox Name="MainListBox" ItemsSource="{Binding Collection}" DoubleTapped="ListBox_DoubleTapped">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Grid ColumnDefinitions="*, 20*">
-						<Image Grid.Column="0" Source="{Binding }" Width="20"/>
-						<TextBlock Grid.Column="1" Text="{Binding }"/>
-					</Grid>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
+	<Window.DataTemplates>
+		<DataTemplate DataType="{x:Type k:FileInfo}">
+			<Grid ColumnDefinitions="*, 20*">
+				<Image Grid.Column="0" Source="/Assets/file.png" Width="20"/>
+				<TextBlock Grid.Column="1" Text="{Binding }"/>
+			</Grid>
+		</DataTemplate>		
+		<DataTemplate DataType="{x:Type k:DirectoryInfo}">
+			<Grid ColumnDefinitions="*, 20*">
+				<Image Grid.Column="0" Source="/Assets/folder.png" Width="20"/>
+				<TextBlock Grid.Column="1" Text="{Binding }"/>
+			</Grid>
+		</DataTemplate>
+	</Window.DataTemplates>
+
+	
+	<ListBox Name="MainListBox" 
+			 ItemsSource="{Binding Collection}" 
+			 DoubleTapped="ListBox_DoubleTapped" />		
+
 </Window>
