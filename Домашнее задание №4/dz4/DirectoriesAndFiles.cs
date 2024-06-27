@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace dz4
 {
-    internal class Path
+    internal class DirectoriesAndFiles
     {   
         static private string _path;
-        static Path()
+        static DirectoriesAndFiles()
         {
             _path = Directory.GetCurrentDirectory();
         }

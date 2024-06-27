@@ -13,7 +13,7 @@ namespace dz4
     {
         public DataContextWithCollection()
         {            
-            Collection = new ObservableCollection<FileSystemInfo>( Path.GetDirectoryUp().Concat(Path.GetTypeDirectories().Concat((FileSystemInfo[])Path.GetTypeFiles())));
+            Collection = new ObservableCollection<FileSystemInfo>( DirectoriesAndFiles.GetDirectoryUp().Concat(DirectoriesAndFiles.GetTypeDirectories().Concat((FileSystemInfo[])DirectoriesAndFiles.GetTypeFiles())));
         }
         public ObservableCollection<FileSystemInfo> Collection
         {

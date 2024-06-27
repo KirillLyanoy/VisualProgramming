@@ -16,19 +16,19 @@
 		<DataTemplate DataType="{x:Type k:FileInfo}">
 			<Grid ColumnDefinitions="*, 20*">
 				<Image Grid.Column="0" Source="/Assets/file.png" Width="20"/>
-				<TextBlock Grid.Column="1" Text="{Binding }"/>
+				<TextBlock Grid.Column="1" Text="{Binding }" />
 			</Grid>
 		</DataTemplate>		
 		<DataTemplate DataType="{x:Type k:DirectoryInfo}">
 			<Grid ColumnDefinitions="*, 20*">
 				<Image Grid.Column="0" Source="/Assets/folder.png" Width="20"/>
-				<TextBlock Grid.Column="1" Text="{Binding }"/>
+				<TextBlock Grid.Column="1" Text="{Binding }" />
 			</Grid>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type local:DirectoryInfoUp}">
 			<Grid ColumnDefinitions="*, 20*">
 				<Image Grid.Column="0" Source="/Assets/folderUp.png" Width="20"/>
-				<TextBlock Grid.Column="1" Text=".."/>
+				<TextBlock Grid.Column="1" Text=".." />
 			</Grid>
 		</DataTemplate>
 	</Window.DataTemplates>

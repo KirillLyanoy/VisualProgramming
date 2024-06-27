@@ -23,30 +23,28 @@ namespace dz4
                 switch (textBlock.Text)
                 {
                     case "..":
-                        string _getParentPath = Convert.ToString(Directory.GetParent(Path.GetPath()));
+                        string _getParentPath = Convert.ToString(Directory.GetParent(DirectoriesAndFiles.GetPath()));
                         if (_getParentPath != "")
                         {
-                            Path.SetPath(_getParentPath);
-                            DirectoryInfo directoryInfo = new DirectoryInfo(Path.GetPath());
-                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(Path.GetDirectoryUp().Concat(Path.GetTypeDirectories().Concat((FileSystemInfo[])Path.GetTypeFiles())));
+                            DirectoriesAndFiles.SetPath(_getParentPath);
+                            DirectoryInfo directoryInfo = new DirectoryInfo(DirectoriesAndFiles.GetPath());
+                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetDirectoryUp().Concat(DirectoriesAndFiles.GetTypeDirectories().Concat((FileSystemInfo[])DirectoriesAndFiles.GetTypeFiles())));
                         }
                         else
                         {
-                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(Path.GetLogicalDrives());
+                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetLogicalDrives());
                         }
                         break;
                     default:
                         if (Directory.Exists(textBlock.Text))
                         {
-                            Path.SetPath(Convert.ToString((textBlock.Text)));
-                            DirectoryInfo directoryInfo = new DirectoryInfo(Path.GetPath());
-                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(Path.GetDirectoryUp().Concat(Path.GetTypeDirectories().Concat((FileSystemInfo[])Path.GetTypeFiles())));
+                            DirectoriesAndFiles.SetPath(Convert.ToString((textBlock.Text)));
+                            DirectoryInfo directoryInfo = new DirectoryInfo(DirectoriesAndFiles.GetPath());
+                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetDirectoryUp().Concat(DirectoriesAndFiles.GetTypeDirectories().Concat((FileSystemInfo[])DirectoriesAndFiles.GetTypeFiles())));
                         }
                         break;
                 }
-                
-                
-            }
+            }           
         }   
     }
 }
