@@ -29,8 +29,7 @@ namespace dz4
         }
 
         public void ChangeListBox<T>(T currentObject)
-        {
-            
+        {            
             string temp = Convert.ToString(currentObject);
             switch (temp)
             {
@@ -52,7 +51,11 @@ namespace dz4
                     {
                         if (Directory.Exists(DirectoriesAndFiles.GetPath() + "\\" + temp))
                         {
-                            DirectoriesAndFiles.SetPath(DirectoriesAndFiles.GetPath() + "\\" + temp);                            
+                            DirectoriesAndFiles.SetPath(DirectoriesAndFiles.GetPath() + "\\" + temp);
+                        }
+                        else 
+                        { 
+                            break; 
                         }
                     }
                     MainListBox.ItemsSource = new ObservableCollection<GetTypes>(DirectoriesAndFiles.GetTypeDirectories().Concat((GetTypes[])(DirectoriesAndFiles.GetTypeFiles())));
