@@ -15,19 +15,23 @@ namespace dz4
 
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
         {
-            //определение источника, для того чтобы функция вызывалась при нажатии даже на пустом поле возле текста, а не только на сам текст//
+            //определение источника, для того чтобы функция вызывалась при нажатии на текст, на картинку и на пустое поле//
             if (RoutedEventArgs.Source is TextBlock textBlock) ChangeListBox(textBlock.Text);
             if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter)
             {           
-                TypeWithImage getTypes = (TypeWithImage)presenter.DataContext;
+                TypeWithImage getTypes = presenter.DataContext as TypeWithImage;
                 ChangeListBox(getTypes.FileName);                
+            }
+            if (RoutedEventArgs.Source is Image image)
+            {
+                TypeWithImage getTypes = image.DataContext as TypeWithImage;
+                ChangeListBox(getTypes.FileName);
             }
         }
 
-        public void ChangeListBox<T>(T currentObject)
-        {            
-            string temp = Convert.ToString(currentObject);
-            switch (temp)
+        public void ChangeListBox(string currentObject)
+        {                   
+            switch (currentObject)
             {
                 case "..":                
                     string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
@@ -39,11 +43,11 @@ namespace dz4
                     else MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());                    
                     break;
                 default:
-                    if (GetDirectories.GetPath() == "") GetDirectories.SetPath(temp);
+                    if (GetDirectories.GetPath() == "") GetDirectories.SetPath(currentObject);
                     else
                     {
-                        if (Directory.Exists(GetDirectories.GetPath() + "\\" + temp)) 
-                            GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + temp);                        
+                        if (Directory.Exists(GetDirectories.GetPath() + "\\" + currentObject)) 
+                            GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + currentObject);                        
                         else break;                       
                     }
                     MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
