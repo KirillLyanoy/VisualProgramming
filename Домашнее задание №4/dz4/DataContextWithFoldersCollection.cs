@@ -11,7 +11,7 @@ namespace dz4
     {
         public DataContextWithCollection()
         {            
-            Collection = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetTypeDirectories().Concat((TypeWithImage[])(GetCurrentDirectories.GetTypeFiles())));
+            Collection = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
         }
         public ObservableCollection<TypeWithImage> Collection
         {

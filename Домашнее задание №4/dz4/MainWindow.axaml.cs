@@ -30,23 +30,23 @@ namespace dz4
             switch (temp)
             {
                 case "..":                
-                    string _getParentPath = Convert.ToString(Directory.GetParent(GetCurrentDirectories.GetPath()));
+                    string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
                     if (_getParentPath != "")
                     {
-                        GetCurrentDirectories.SetPath(_getParentPath);
-                        MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetTypeDirectories().Concat((TypeWithImage[])(GetCurrentDirectories.GetTypeFiles())));
+                        GetDirectories.SetPath(_getParentPath);
+                        MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
                     }
-                    else MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetLogicalDrives());                    
+                    else MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());                    
                     break;
                 default:
-                    if (GetCurrentDirectories.GetPath() == "") GetCurrentDirectories.SetPath(temp);
+                    if (GetDirectories.GetPath() == "") GetDirectories.SetPath(temp);
                     else
                     {
-                        if (Directory.Exists(GetCurrentDirectories.GetPath() + "\\" + temp)) 
-                            GetCurrentDirectories.SetPath(GetCurrentDirectories.GetPath() + "\\" + temp);                        
+                        if (Directory.Exists(GetDirectories.GetPath() + "\\" + temp)) 
+                            GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + temp);                        
                         else break;                       
                     }
-                    MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetTypeDirectories().Concat((TypeWithImage[])(GetCurrentDirectories.GetTypeFiles())));
+                    MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
                     break;
             }           
         }

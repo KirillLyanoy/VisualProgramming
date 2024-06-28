@@ -4,10 +4,10 @@ using System.IO;
 
 namespace dz4
 {
-    internal class GetCurrentDirectories
+    internal class GetDirectories
     {   
         static private string _path;
-        static GetCurrentDirectories() { _path = Directory.GetCurrentDirectory(); }
+        static GetDirectories() { _path = Directory.GetCurrentDirectory(); }
         static public void SetPath(string path) { _path = path; }
         static public string GetPath() { return _path; }
         //получить список логических дисков//
@@ -22,7 +22,7 @@ namespace dz4
             return logicalDrives; 
         }
         //получить массив папок//
-        static public FolderWithImage[] GetTypeDirectories()
+        static public FolderWithImage[] GetCurrentDirectories()
         {           
             FolderWithImage[] folders = new FolderWithImage[Directory.GetDirectories(_path).Length + 1];
             //первый элемент является будет переходить на родительскую директорию//
@@ -36,7 +36,7 @@ namespace dz4
             return folders;
         }
         //получить массив файлов//
-        static public FileWithImage[] GetTypeFiles()
+        static public FileWithImage[] GetCurrentFiles()
         {            
             FileWithImage[] files = new FileWithImage[Directory.GetFiles(_path).Length];
             int i = 0;
