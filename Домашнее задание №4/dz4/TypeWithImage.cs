@@ -13,13 +13,11 @@ namespace dz4
 {
     internal abstract class TypeWithImage //класс, определяющий картинку, путь и имя объекта//
     {
-        private Bitmap image;
-        private string filePath;
+        private Bitmap image; 
         private string fileName; 
 
         public TypeWithImage(string path)
-        {
-            filePath = path;
+        {           
             if (path == "..")
             {
                 image = new Bitmap(AssetLoader.Open(new Uri("avares://dz4/Assets/folderUp.png")));
@@ -42,9 +40,6 @@ namespace dz4
             }
         }
         public Bitmap ImagePath { get { return image; } }
-        public string FilePath { get { return filePath; } }
-        public string FileName { get { return fileName; } }
-
-        
+        public string FileName { get { return fileName; } }        
     }
 }

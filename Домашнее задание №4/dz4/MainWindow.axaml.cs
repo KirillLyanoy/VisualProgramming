@@ -41,23 +41,15 @@ namespace dz4
                         GetCurrentDirectories.SetPath(_getParentPath);
                         MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetTypeDirectories().Concat((TypeWithImage[])(GetCurrentDirectories.GetTypeFiles())));
                     }
-                    else
-                    {                        
-                        MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetLogicalDrives());
-                    }
+                    else MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetLogicalDrives());                    
                     break;
                 default:
                     if (GetCurrentDirectories.GetPath() == "") GetCurrentDirectories.SetPath(temp);
                     else
                     {
-                        if (Directory.Exists(GetCurrentDirectories.GetPath() + "\\" + temp))
-                        {
-                            GetCurrentDirectories.SetPath(GetCurrentDirectories.GetPath() + "\\" + temp);
-                        }
-                        else 
-                        { 
-                            break; 
-                        }
+                        if (Directory.Exists(GetCurrentDirectories.GetPath() + "\\" + temp)) 
+                            GetCurrentDirectories.SetPath(GetCurrentDirectories.GetPath() + "\\" + temp);                        
+                        else break;                       
                     }
                     MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetTypeDirectories().Concat((TypeWithImage[])(GetCurrentDirectories.GetTypeFiles())));
                     break;
