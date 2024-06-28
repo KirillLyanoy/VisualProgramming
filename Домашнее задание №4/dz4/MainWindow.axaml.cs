@@ -21,8 +21,11 @@ namespace dz4
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
         {
             if (RoutedEventArgs.Source is TextBlock textBlock) ChangeListBox(textBlock.Text);
-            if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter) ChangeListBox(presenter.DataContext); 
-            
+            if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter)
+            {           
+                GetTypes getTypes = (GetTypes)presenter.DataContext;
+                ChangeListBox(getTypes.FileName);                
+            }
         }
 
         public void ChangeListBox<T>(T currentObject)
@@ -45,8 +48,14 @@ namespace dz4
                     break;
                 default:
                     if (DirectoriesAndFiles.GetPath() == "") DirectoriesAndFiles.SetPath(temp);
-                    else DirectoriesAndFiles.SetPath(Directory.GetCurrentDirectory() + "\\" + temp);
-                    MainListBox.ItemsSource = new ObservableCollection<GetTypes>(DirectoriesAndFiles.GetTypeDirectories().Concat((GetTypes[])(DirectoriesAndFiles.GetTypeFiles())));                    
+                    else
+                    {
+                        if (Directory.Exists(DirectoriesAndFiles.GetPath() + "\\" + temp))
+                        {
+                            DirectoriesAndFiles.SetPath(DirectoriesAndFiles.GetPath() + "\\" + temp);                            
+                        }
+                    }
+                    MainListBox.ItemsSource = new ObservableCollection<GetTypes>(DirectoriesAndFiles.GetTypeDirectories().Concat((GetTypes[])(DirectoriesAndFiles.GetTypeFiles())));
                     break;
             }           
         }

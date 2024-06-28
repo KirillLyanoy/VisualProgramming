@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace dz4
 {
-    internal class GetTypes
+    internal abstract class GetTypes
     {
         private Bitmap image;
         private string filePath;
