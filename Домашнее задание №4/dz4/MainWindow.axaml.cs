@@ -14,37 +14,42 @@ namespace dz4
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
+
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
         {
-            if (RoutedEventArgs.Source is TextBlock textBlock)
+            if (RoutedEventArgs.Source is TextBlock textBlock) ChangeListBox(textBlock.Text);
+            if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter) ChangeListBox(presenter.Content); 
+        }
+
+        public void ChangeListBox<T>(T currentObject)
+        {
+            string temp = Convert.ToString(currentObject);
+            switch (temp)
             {
-                switch (textBlock.Text)
-                {
-                    case "..":
-                        string _getParentPath = Convert.ToString(Directory.GetParent(DirectoriesAndFiles.GetPath()));
-                        if (_getParentPath != "")
-                        {
-                            DirectoriesAndFiles.SetPath(_getParentPath);
-                            DirectoryInfo directoryInfo = new DirectoryInfo(DirectoriesAndFiles.GetPath());
-                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetDirectoryUp().Concat(DirectoriesAndFiles.GetTypeDirectories().Concat((FileSystemInfo[])DirectoriesAndFiles.GetTypeFiles())));
-                        }
-                        else
-                        {
-                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetLogicalDrives());
-                        }
-                        break;
-                    default:
-                        if (Directory.Exists(textBlock.Text))
-                        {
-                            DirectoriesAndFiles.SetPath(Convert.ToString((textBlock.Text)));
-                            DirectoryInfo directoryInfo = new DirectoryInfo(DirectoriesAndFiles.GetPath());
-                            MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetDirectoryUp().Concat(DirectoriesAndFiles.GetTypeDirectories().Concat((FileSystemInfo[])DirectoriesAndFiles.GetTypeFiles())));
-                        }
-                        break;
-                }
-            }           
-        }   
+                case "..":
+                    string _getParentPath = Convert.ToString(Directory.GetParent(DirectoriesAndFiles.GetPath()));
+                    if (_getParentPath != "")
+                    {
+                        DirectoriesAndFiles.SetPath(_getParentPath);
+                        DirectoryInfo directoryInfo = new DirectoryInfo(DirectoriesAndFiles.GetPath());
+                        MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetDirectoryUp().Concat(DirectoriesAndFiles.GetTypeDirectories().Concat((FileSystemInfo[])DirectoriesAndFiles.GetTypeFiles())));
+                    }
+                    else
+                    {
+                        MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetLogicalDrives());
+                    }
+                    break;
+                default:
+                    if (Directory.Exists(temp))
+                    {
+                        DirectoriesAndFiles.SetPath(temp);
+                        DirectoryInfo directoryInfo = new DirectoryInfo(DirectoriesAndFiles.GetPath());
+                        MainListBox.ItemsSource = new ObservableCollection<FileSystemInfo>(DirectoriesAndFiles.GetDirectoryUp().Concat(DirectoriesAndFiles.GetTypeDirectories().Concat((FileSystemInfo[])DirectoriesAndFiles.GetTypeFiles())));
+                    }
+                    break;
+            }
+        }
     }
 }

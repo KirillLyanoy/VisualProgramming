@@ -39,11 +39,11 @@ namespace dz4
             DirectoryInfo directoryInfo = new DirectoryInfo(_path);
             return directoryInfo.GetFiles();
         }
-        static public DirectoryInfoUp[] GetDirectoryUp()
+        static public DirectoryInfo[] GetDirectoryUp()
         {
-            DirectoryInfoUp[] directoryInfoUp = new DirectoryInfoUp[1];
-            directoryInfoUp[0] = new DirectoryInfoUp();
-            return directoryInfoUp;
+            DirectoryInfo[] directoryInfo = new DirectoryInfo[1];
+            directoryInfo[0] = new DirectoryInfo("..");
+            return directoryInfo;
         }
     }
 }
