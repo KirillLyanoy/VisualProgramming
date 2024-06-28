@@ -5,7 +5,7 @@ using System.IO;
 
 namespace dz4
 {
-    internal abstract class TypeWithImage //класс, определяющий картинку, путь и имя объекта//
+    internal abstract class TypeWithImage //класс, определяющий картинку и имя объекта//
     {
         private Bitmap image; 
         private string fileName; 
