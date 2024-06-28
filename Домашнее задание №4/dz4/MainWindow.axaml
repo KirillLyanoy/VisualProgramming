@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:local="clr-namespace:dz4"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"	
         x:Class="dz4.MainWindow"
 		xmlns:k="using:System.IO"
         Title="dz4"
@@ -13,20 +13,19 @@
 	</Window.DataContext>
 
 	<Window.DataTemplates>
-		<DataTemplate DataType="{x:Type k:FileInfo}">
+		<DataTemplate DataType="{x:Type local:TypeFolder}">
 			<Grid ColumnDefinitions="*, 20*">
-				<Image Grid.Column="0" Source="/Assets/file.png" Width="20" />
-				<TextBlock Grid.Column="1" Text="{Binding }" />
+				<Image Grid.Column="0" Source="{Binding ImagePath}" Width="20"/>
+				<TextBlock Grid.Column="1" Text="{Binding FileName}" />
 			</Grid>
-		</DataTemplate>		
-		<DataTemplate DataType="{x:Type k:DirectoryInfo}">
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type local:TypeFile}">
 			<Grid ColumnDefinitions="*, 20*">
-				<Image Grid.Column="0" Source="/Assets/folder.png" Width="20"/>
-				<TextBlock Grid.Column="1" Text="{Binding }" />
+				<Image Grid.Column="0" Source="{Binding ImagePath}" Width="20" />
+				<TextBlock Grid.Column="1" Text="{Binding FileName}" DataContextChanged="" />
 			</Grid>
 		</DataTemplate>
 	</Window.DataTemplates>
-
 	
 	<ListBox Name="MainListBox" 
 			 ItemsSource="{Binding Collection}" 

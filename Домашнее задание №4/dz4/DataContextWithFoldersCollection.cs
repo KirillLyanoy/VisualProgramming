@@ -13,15 +13,15 @@ namespace dz4
     {
         public DataContextWithCollection()
         {            
-            Collection = new ObservableCollection<FileSystemInfo>( DirectoriesAndFiles.GetDirectoryUp().Concat(DirectoriesAndFiles.GetTypeDirectories().Concat((FileSystemInfo[])DirectoriesAndFiles.GetTypeFiles())));
+            Collection = new ObservableCollection<GetTypes>(DirectoriesAndFiles.GetTypeDirectories().Concat((GetTypes[])(DirectoriesAndFiles.GetTypeFiles())));
         }
-        public ObservableCollection<FileSystemInfo> Collection
+        public ObservableCollection<GetTypes> Collection
         {
             get => _collection;
             set => _ = SetField(ref _collection, value);
         }
         public event PropertyChangedEventHandler? PropertyChanged;
-        private ObservableCollection<FileSystemInfo> _collection;   
+        private ObservableCollection<GetTypes> _collection;   
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
