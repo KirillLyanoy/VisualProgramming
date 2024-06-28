@@ -20,10 +20,11 @@ namespace dz4
 
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
         {
+            //определение источника, для того чтобы функция вызывалась при нажатии даже на пустом поле возле текста, а не только на сам текст//
             if (RoutedEventArgs.Source is TextBlock textBlock) ChangeListBox(textBlock.Text);
             if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter)
             {           
-                GetTypes getTypes = (GetTypes)presenter.DataContext;
+                TypeWithImage getTypes = (TypeWithImage)presenter.DataContext;
                 ChangeListBox(getTypes.FileName);                
             }
         }
@@ -34,31 +35,31 @@ namespace dz4
             switch (temp)
             {
                 case "..":                
-                    string _getParentPath = Convert.ToString(Directory.GetParent(DirectoriesAndFiles.GetPath()));
+                    string _getParentPath = Convert.ToString(Directory.GetParent(GetCurrentDirectories.GetPath()));
                     if (_getParentPath != "")
                     {
-                        DirectoriesAndFiles.SetPath(_getParentPath);
-                        MainListBox.ItemsSource = new ObservableCollection<GetTypes>(DirectoriesAndFiles.GetTypeDirectories().Concat((GetTypes[])(DirectoriesAndFiles.GetTypeFiles())));
+                        GetCurrentDirectories.SetPath(_getParentPath);
+                        MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetTypeDirectories().Concat((TypeWithImage[])(GetCurrentDirectories.GetTypeFiles())));
                     }
                     else
                     {                        
-                        MainListBox.ItemsSource = new ObservableCollection<GetTypes>(DirectoriesAndFiles.GetLogicalDrives());
+                        MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetLogicalDrives());
                     }
                     break;
                 default:
-                    if (DirectoriesAndFiles.GetPath() == "") DirectoriesAndFiles.SetPath(temp);
+                    if (GetCurrentDirectories.GetPath() == "") GetCurrentDirectories.SetPath(temp);
                     else
                     {
-                        if (Directory.Exists(DirectoriesAndFiles.GetPath() + "\\" + temp))
+                        if (Directory.Exists(GetCurrentDirectories.GetPath() + "\\" + temp))
                         {
-                            DirectoriesAndFiles.SetPath(DirectoriesAndFiles.GetPath() + "\\" + temp);
+                            GetCurrentDirectories.SetPath(GetCurrentDirectories.GetPath() + "\\" + temp);
                         }
                         else 
                         { 
                             break; 
                         }
                     }
-                    MainListBox.ItemsSource = new ObservableCollection<GetTypes>(DirectoriesAndFiles.GetTypeDirectories().Concat((GetTypes[])(DirectoriesAndFiles.GetTypeFiles())));
+                    MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetCurrentDirectories.GetTypeDirectories().Concat((TypeWithImage[])(GetCurrentDirectories.GetTypeFiles())));
                     break;
             }           
         }

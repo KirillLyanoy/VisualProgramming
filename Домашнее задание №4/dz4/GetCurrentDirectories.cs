@@ -1,0 +1,57 @@
+﻿using Avalonia.Controls.Shapes;
+using SkiaSharp;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.NetworkInformation;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace dz4
+{
+    internal class GetCurrentDirectories
+    {   
+        static private string _path;
+        static GetCurrentDirectories() { _path = Directory.GetCurrentDirectory(); }
+        static public void SetPath(string path) { _path = path; }
+        static public string GetPath() { return _path; }
+        //получить список логических дисков//
+        static public List<FolderWithImage> GetLogicalDrives() 
+        {
+            List<FolderWithImage> logicalDrives = new List<FolderWithImage> { };            
+            foreach (string logicalDrive in Environment.GetLogicalDrives())
+            {                
+                if (Directory.Exists(logicalDrive)) logicalDrives.Add(new FolderWithImage(logicalDrive));
+            }
+            _path = "";
+            return logicalDrives; 
+        }
+        //получить массив папок//
+        static public FolderWithImage[] GetTypeDirectories()
+        {           
+            FolderWithImage[] folders = new FolderWithImage[Directory.GetDirectories(_path).Length + 1];
+            //первый элемент является будет переходить на родительскую директорию//
+            folders[0] = new FolderWithImage("..");
+            int i = 1;
+            foreach (string path in Directory.GetDirectories(_path))
+            {
+                folders[i] = new FolderWithImage(path);
+                i++;
+            }
+            return folders;
+        }
+        //получить массив файлов//
+        static public FileWithImage[] GetTypeFiles()
+        {            
+            FileWithImage[] files = new FileWithImage[Directory.GetFiles(_path).Length];
+            int i = 0;
+            foreach (string path in Directory.GetFiles(_path))
+            {
+                files[i] = new FileWithImage(path);
+                i++;
+            }
+            return files;
+        }
+    }
+}

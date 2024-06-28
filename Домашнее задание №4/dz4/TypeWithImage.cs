@@ -11,14 +11,13 @@ using System.Threading.Tasks;
 
 namespace dz4
 {
-    internal abstract class GetTypes
+    internal abstract class TypeWithImage //класс, определяющий картинку, путь и имя объекта//
     {
         private Bitmap image;
         private string filePath;
-        private string fileName;
-  
+        private string fileName; 
 
-        public GetTypes(string path)
+        public TypeWithImage(string path)
         {
             filePath = path;
             if (path == "..")
