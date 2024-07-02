@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 namespace dz5
 {
@@ -30,19 +31,24 @@ namespace dz5
         }
 
         public void ChangeListBox(string currentObject)
-        {
+        {            
+            Thread t = new Thread(DataContextWithCollection.DirectoriesBelowAbove);
             switch (currentObject)
-            {
-                case "..":
+            {                
+                case "..":                    
                     string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
                     if (_getParentPath != "")
                     {
                         GetDirectories.SetPath(_getParentPath);
-                        MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
+
+                        ?
+
+                                               
+                        t.Start();
                     }
                     else MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());
                     break;
-                default:
+                default:                    
                     if (GetDirectories.GetPath() == "") GetDirectories.SetPath(currentObject);
                     else
                     {
@@ -50,7 +56,9 @@ namespace dz5
                             GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + currentObject);
                         else break;
                     }
-                    MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
+
+                    ?
+
                     break;
             }
         }

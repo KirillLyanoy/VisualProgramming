@@ -9,9 +9,11 @@ namespace dz5
     {
         private Bitmap image;
         private string fileName;
+        private string filePath;
 
         public TypeWithImage(string path)
         {
+            filePath = path;
             if (path == "..")
             {
                 image = new Bitmap(AssetLoader.Open(new Uri("avares://dz5/Assets/folderUp.png")));
@@ -35,5 +37,7 @@ namespace dz5
         }
         public Bitmap ImagePath { get { return image; } }
         public string FileName { get { return fileName; } }
+
+        public string FilePath { get { return filePath; } }
     }
 }
