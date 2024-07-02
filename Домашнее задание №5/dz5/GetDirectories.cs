@@ -37,16 +37,23 @@ namespace dz5
         }
         static public FolderWithImage[] GetCurrentDirectories(string path)
         {
-            FolderWithImage[] folders = new FolderWithImage[Directory.GetDirectories(path).Length + 1];
-            //первый элемент является будет переходить на родительскую директорию//
-            folders[0] = new FolderWithImage("..");
-            int i = 1;
-            foreach (string getPath in Directory.GetDirectories(path))
+            try
             {
-                folders[i] = new FolderWithImage(getPath);
-                i++;
+                FolderWithImage[] folders = new FolderWithImage[Directory.GetDirectories(path).Length + 1];
+                //первый элемент является будет переходить на родительскую директорию//
+                folders[0] = new FolderWithImage("..");
+                int i = 1;
+                foreach (string getPath in Directory.GetDirectories(path))
+                {
+                    folders[i] = new FolderWithImage(getPath);
+                    i++;
+                }
+                return folders;
             }
-            return folders;
+            catch
+            {
+                return null;
+            }
         }
         //получить массив файлов//
         static public FileWithImage[] GetCurrentFiles()
@@ -62,14 +69,21 @@ namespace dz5
         }
         static public FileWithImage[] GetCurrentFiles(string path)
         {
-            FileWithImage[] files = new FileWithImage[Directory.GetFiles(path).Length];
-            int i = 0;
-            foreach (string getPath in Directory.GetFiles(path))
+            try
             {
-                files[i] = new FileWithImage(getPath);
-                i++;
+                FileWithImage[] files = new FileWithImage[Directory.GetFiles(path).Length];
+                int i = 0;
+                foreach (string getPath in Directory.GetFiles(path))
+                {
+                    files[i] = new FileWithImage(getPath);
+                    i++;
+                }
+                return files;
             }
-            return files;
+            catch
+            {
+                return null;
+            }
         }
     }
 }
