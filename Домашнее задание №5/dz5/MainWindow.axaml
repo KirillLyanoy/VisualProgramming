@@ -1,0 +1,34 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:dz5"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="dz5.MainWindow"
+		xmlns:k="using:System.IO"
+        Title="dz5"
+        x:DataType="local:DataContextWithCollection">
+	<Window.DataContext>
+		<local:DataContextWithCollection/>
+	</Window.DataContext>
+
+	<Window.DataTemplates>
+		<DataTemplate DataType="{x:Type local:FolderWithImage}">
+			<Grid ColumnDefinitions="*, 20*">
+				<Image Grid.Column="0" Source="{Binding ImagePath}" Width="20"/>
+				<TextBlock Grid.Column="1" Text="{Binding FileName}" />
+			</Grid>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type local:FileWithImage}">
+			<Grid ColumnDefinitions="*, 20*">
+				<Image Grid.Column="0" Source="{Binding ImagePath}" Width="20" />
+				<TextBlock Grid.Column="1" Text="{Binding FileName}" DataContextChanged="" />
+			</Grid>
+		</DataTemplate>
+	</Window.DataTemplates>
+
+	<ListBox Name="MainListBox"
+			 ItemsSource="{Binding Collection}"
+			 DoubleTapped="ListBox_DoubleTapped" />
+
+</Window>
