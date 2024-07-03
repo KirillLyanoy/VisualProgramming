@@ -36,16 +36,27 @@ namespace dz5
         }
 
         static public ObservableCollection<TypeWithImage>[] CollectionBelowAbove;
+        static private bool gotLock = true;
         public ObservableCollection<TypeWithImage> GetBelowAboveDirectories(string name)
         {
-            int temp = 0;
-            foreach (var directory in Collection)
+            if (gotLock)
             {
-                if (directory.FileName == name) break;
-                else temp++;
+                gotLock = false;
+                int temp = 0;
+                foreach (var directory in Collection)
+                {
+                    if (directory.FileName == name) break;
+                    else temp++;
+                }
+                Collection = CollectionBelowAbove[temp];
+                gotLock = true;
+                return Collection;
             }
-            Collection = CollectionBelowAbove[temp];
-            return Collection;
+            else
+            {
+                GetBelowAboveDirectories(name);
+                return Collection;
+            }
         }
 
         public void DirectoriesBelowAbove()
