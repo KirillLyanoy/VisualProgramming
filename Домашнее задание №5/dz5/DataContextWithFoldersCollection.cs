@@ -13,9 +13,8 @@ namespace dz5
     {
         public DataContextWithCollection()
         {
-            Collection = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
-            Thread t = new Thread(DirectoriesBelowAbove);   
-            t.Start();
+            if (GetDirectories.GetPath() != "" && Collection == null) Collection = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
+            if (CollectionBelowAbove == null) DirectoriesBelowAbove();              
         }
         public ObservableCollection<TypeWithImage> Collection
         {
@@ -23,7 +22,7 @@ namespace dz5
             set => _ = SetField(ref _collection, value);
         }
         public event PropertyChangedEventHandler? PropertyChanged;
-        private ObservableCollection<TypeWithImage> _collection;
+        static private ObservableCollection<TypeWithImage> _collection;
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -37,34 +36,49 @@ namespace dz5
         }
 
         static public ObservableCollection<TypeWithImage>[] CollectionBelowAbove;
-
-        public void GetBelowAboveDirectories(string name)
+        public ObservableCollection<TypeWithImage> GetBelowAboveDirectories(string name)
         {
             int temp = 0;
             foreach (var directory in Collection)
             {
-                if (directory.FileName == name)
-                {
-                    Collection = CollectionBelowAbove[temp];
-                    break;
-                }
+                if (directory.FileName == name) break;
                 else temp++;
             }
+            Collection = CollectionBelowAbove[temp];
+            return Collection;
         }
-        static public void DirectoriesBelowAbove()
+
+        public void DirectoriesBelowAbove()
         {
-            CollectionBelowAbove = new ObservableCollection<TypeWithImage>[GetDirectories.GetCurrentDirectories().Length + 1];
-            int i = 1;
-            string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
-            CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(_getParentPath).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(_getParentPath))));
-            foreach (var directory in Collection)
+            if (GetDirectories.GetPath() != "")
             {
-                if (Directory.Exists(directory.FilePath) && directory.FilePath != "..")
+                CollectionBelowAbove = new ObservableCollection<TypeWithImage>[GetDirectories.GetCurrentDirectories().Length + 1];
+                int i = 1;
+                string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
+
+                if (_getParentPath != "") CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(_getParentPath).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(_getParentPath))));
+                else CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());
+
+                foreach (var directory in Collection)
                 {
-                    CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(GetDirectories.GetPath() + "\\" +  directory.FileName).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(GetDirectories.GetPath() + "\\" + directory.FileName))));
-                    i++;
+                    if (Directory.Exists(directory.FilePath) && directory.FilePath != "..")
+                    {
+                        CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(GetDirectories.GetPath() + "\\" + directory.FileName).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(GetDirectories.GetPath() + "\\" + directory.FileName))));
+                        i++;
+                    }
                 }
-            }        
+            }
+            else
+            {
+                ObservableCollection<TypeWithImage> temp = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());
+                CollectionBelowAbove = new ObservableCollection<TypeWithImage>[temp.Count];
+                int i = 0;                
+                foreach (var directory in temp)
+                {
+                    CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(directory.FileName).Concat((TypeWithImage[])GetDirectories.GetCurrentFiles(directory.FileName)));
+                    i++;    
+                }
+            }
         }
     }
 }

@@ -31,34 +31,27 @@ namespace dz5
         }
 
         public void ChangeListBox(string currentObject)
-        {            
-            Thread t = new Thread(DataContextWithCollection.DirectoriesBelowAbove);
+        {
+            DataContextWithCollection dataContextWithCollection = new DataContextWithCollection();
+            Thread t = new Thread(dataContextWithCollection.DirectoriesBelowAbove);            
             switch (currentObject)
             {                
                 case "..":                    
                     string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
-                    if (_getParentPath != "")
-                    {
-                        GetDirectories.SetPath(_getParentPath);
-
-                        ?
-
-                                               
-                        t.Start();
-                    }
-                    else MainListBox.ItemsSource = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());
+                    if (_getParentPath != "") GetDirectories.SetPath(_getParentPath);                        
+                    else GetDirectories.SetPath("");     
+                    MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
+                    t.Start();
                     break;
                 default:                    
                     if (GetDirectories.GetPath() == "") GetDirectories.SetPath(currentObject);
                     else
                     {
-                        if (Directory.Exists(GetDirectories.GetPath() + "\\" + currentObject))
-                            GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + currentObject);
+                        if (Directory.Exists(GetDirectories.GetPath() + "\\" + currentObject)) GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + currentObject);
                         else break;
                     }
-
-                    ?
-
+                    MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
+                    t.Start();
                     break;
             }
         }
