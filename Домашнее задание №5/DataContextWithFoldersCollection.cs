@@ -70,7 +70,7 @@ namespace dz5
             }
             else
             {
-                ObservableCollection<TypeWithImage> temp = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());
+                ObservableCollection<TypeWithImage> temp = new(GetDirectories.GetLogicalDrives());
                 CollectionBelowAbove = new ObservableCollection<TypeWithImage>[temp.Count];
                 int i = 0;                
                 foreach (var directory in temp)

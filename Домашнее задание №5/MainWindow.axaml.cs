@@ -33,27 +33,29 @@ namespace dz5
         public void ChangeListBox(string currentObject)
         {
             DataContextWithCollection dataContextWithCollection = new DataContextWithCollection();
-            Thread t = new Thread(dataContextWithCollection.DirectoriesBelowAbove);            
+            Thread t = new Thread(dataContextWithCollection.DirectoriesBelowAbove);     
+            
             switch (currentObject)
             {                
                 case "..":                    
                     string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
                     if (_getParentPath != "") GetDirectories.SetPath(_getParentPath);                        
-                    else GetDirectories.SetPath("");     
-                    MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
-                    t.Start();
+                    else GetDirectories.SetPath("");   
                     break;
                 default:                    
                     if (GetDirectories.GetPath() == "") GetDirectories.SetPath(currentObject);
                     else
                     {
-                        if (Directory.Exists(GetDirectories.GetPath() + "\\" + currentObject)) GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + currentObject);
-                        else break;
-                    }
-                    MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
-                    t.Start();
+                        if (Directory.Exists(GetDirectories.GetPath() + "\\" + currentObject))
+                        {
+                            GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + currentObject);                            
+                        }
+                        else return;
+                    }                    
                     break;
             }
+            MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
+            t.Start();
         }
     }
 }
