@@ -32,8 +32,8 @@ namespace dz5
 
         public void ChangeListBox(string currentObject)
         {
-            DataContextWithCollection dataContextWithCollection = new DataContextWithCollection();
-            Thread t = new Thread(dataContextWithCollection.DirectoriesBelowAbove);     
+            DataContextWithCollection dataContextWithCollection = new();
+            Thread t = new(dataContextWithCollection.DirectoriesBelowAbove);     
             
             switch (currentObject)
             {                

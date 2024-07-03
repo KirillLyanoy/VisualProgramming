@@ -13,7 +13,7 @@ namespace dz5
         //получить список логических дисков//
         static public List<FolderWithImage> GetLogicalDrives()
         {
-            List<FolderWithImage> logicalDrives = new List<FolderWithImage> { };
+            List<FolderWithImage> logicalDrives = new();
             foreach (string logicalDrive in Environment.GetLogicalDrives())
             {
                 if (Directory.Exists(logicalDrive)) logicalDrives.Add(new FolderWithImage(logicalDrive));
@@ -38,8 +38,7 @@ namespace dz5
             }
             catch (System.UnauthorizedAccessException)
             {
-                FolderWithImage[] folders = new FolderWithImage[1];
-                folders[0] = new FolderWithImage("..");
+                FolderWithImage[] folders = [new FolderWithImage("..")];
                 return folders;
             }
         }
@@ -60,8 +59,7 @@ namespace dz5
             }
             catch (System.UnauthorizedAccessException) 
             {
-                FolderWithImage[] folders = new FolderWithImage[1];
-                folders[0] = new FolderWithImage("..");
+                FolderWithImage[] folders = [new FolderWithImage("..")];
                 return folders;
             }          
         }
@@ -81,7 +79,7 @@ namespace dz5
             }
             catch (System.UnauthorizedAccessException)
             {
-                FileWithImage[] files = new FileWithImage[] { };
+                FileWithImage[] files = [];
                 return files;
             }
         }
@@ -100,7 +98,7 @@ namespace dz5
             }
             catch (System.UnauthorizedAccessException)
             {
-                FileWithImage[] files = new FileWithImage[] { };
+                FileWithImage[] files = [];
                 return files;
             }
         }
