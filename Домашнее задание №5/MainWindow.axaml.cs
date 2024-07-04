@@ -13,19 +13,19 @@ namespace dz5
         }
 
         static private Thread t;
-        //вспомогательная переменная, показывающая работает первый или повторный запуск программы//
-        static private bool _firstRunning = true; 
+        //вспомогательная переменная, блокирующая запуск ожидания вспомогательного потока//
+        static private bool _joinThreadLock = true; 
 
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
         {
-            if (!_firstRunning) 
+            if (!_joinThreadLock) 
             {
                 //ожидание дозагрузки поддиректорий// 
                 t.Join();     
             }
             else
             {
-                _firstRunning = false;
+                _joinThreadLock = false;
             }
                 //определение источника, для того чтобы функция вызывалась при нажатии на текст, на картинку и на пустое поле//
             if (RoutedEventArgs.Source is TextBlock textBlock) ChangeListBox(textBlock.Text);
@@ -59,9 +59,13 @@ namespace dz5
                     {
                         if (Directory.Exists(GetDirectories.GetPath() + "\\" + currentObject))
                         {
-                            GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + currentObject);                            
+                            GetDirectories.SetPath(GetDirectories.GetPath() + "\\" + currentObject);
                         }
-                        else return;
+                        else
+                        {
+                            _joinThreadLock = true;
+                            return;
+                        }
                     }                    
                     break;
             }

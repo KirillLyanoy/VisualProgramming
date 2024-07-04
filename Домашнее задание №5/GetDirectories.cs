@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace dz5
 {
@@ -68,11 +69,20 @@ namespace dz5
         {
             try
             {
-                FileWithImage[] files = new FileWithImage[Directory.GetFiles(_path).Length];
-                int i = 0;
-                foreach (string path in Directory.GetFiles(_path))
+                //получение изображений из всего списка файлов//
+                List<string> onlyImages = new List<string>();
+                string[] formats = new[] { ".img", ".png" };
+
+                foreach (var file in Directory.EnumerateFiles(_path, "*.*", SearchOption.TopDirectoryOnly).Where(x=>formats.Any(x.EndsWith)))
                 {
-                    files[i] = new FileWithImage(path);
+                    onlyImages.Add(file);
+                }                
+
+                FileWithImage[] files = new FileWithImage[onlyImages.Count];
+                int i = 0;
+                foreach (string path in onlyImages)
+                {
+                    files[i] = new FileWithImage(_path);
                     i++;
                 }
                 return files;
@@ -87,9 +97,18 @@ namespace dz5
         {
             try
             {
-                FileWithImage[] files = new FileWithImage[Directory.GetFiles(path).Length];
+                //получение изображений из всего списка файлов//
+                List<string> onlyImages = new List<string>();
+                string[] formats = new[] { ".img", ".png" };
+
+                foreach (var file in Directory.EnumerateFiles(path, "*.*", SearchOption.TopDirectoryOnly).Where(x => formats.Any(x.EndsWith)))
+                {
+                    onlyImages.Add(file);
+                }
+
+                FileWithImage[] files = new FileWithImage[onlyImages.Count];
                 int i = 0;
-                foreach (string getPath in Directory.GetFiles(path))
+                foreach (string getPath in onlyImages)
                 {
                     files[i] = new FileWithImage(getPath);
                     i++;
