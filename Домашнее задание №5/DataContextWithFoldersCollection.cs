@@ -4,9 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks.Dataflow;
 
 namespace dz5
 {
@@ -38,6 +36,7 @@ namespace dz5
         static public ObservableCollection<TypeWithImage>[] CollectionBelowAbove;
         public ObservableCollection<TypeWithImage> GetBelowAboveDirectories(string name)
         {         
+            //просмотр коллекции и подмена текущей коллекции на коллекцию выбранной директории// 
             int temp = 0;
             foreach (var directory in Collection)
             {
@@ -49,17 +48,18 @@ namespace dz5
         }
 
         public void DirectoriesBelowAbove()
-        {           
-            if (GetDirectories.GetPath() != "")
+        {
+            //создание коллекции поддиректории для директорий//
+            if (GetDirectories.GetPath() != "") 
             {
                 CollectionBelowAbove = new ObservableCollection<TypeWithImage>[GetDirectories.GetCurrentDirectories().Length + 1];
                 int i = 1;
                 string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
-
-                if (_getParentPath != "") CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(_getParentPath).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(_getParentPath))));
+                //первый элемент - коллекция директорий уровня выше//
+                if (_getParentPath != "") CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(_getParentPath).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(_getParentPath))));            
                 else CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());
 
-                foreach (var directory in Collection)
+                foreach (var directory in Collection) //создание директорий поддиректорий//
                 {
                     if (Directory.Exists(directory.FilePath) && directory.FilePath != "..")
                     {
@@ -68,6 +68,7 @@ namespace dz5
                     }
                 }
             }
+            //создание коллекции поддиректории для локальных дисков//
             else
             {
                 ObservableCollection<TypeWithImage> temp = new(GetDirectories.GetLogicalDrives());

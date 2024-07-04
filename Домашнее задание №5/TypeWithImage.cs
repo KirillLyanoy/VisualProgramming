@@ -10,6 +10,9 @@ namespace dz5
         private Bitmap image;
         private string fileName;
         private string filePath;
+        public Bitmap ImagePath { get { return image; } }
+        public string FileName { get { return fileName; } }
+        public string FilePath { get { return filePath; } }
 
         public TypeWithImage(string path)
         {
@@ -29,15 +32,10 @@ namespace dz5
                 }
                 else
                 {
-
                     image = new Bitmap(AssetLoader.Open(new Uri("avares://dz5/Assets/file.png")));
                     fileName = new FileInfo(path).Name;
                 }
             }
         }
-        public Bitmap ImagePath { get { return image; } }
-        public string FileName { get { return fileName; } }
-
-        public string FilePath { get { return filePath; } }
     }
 }

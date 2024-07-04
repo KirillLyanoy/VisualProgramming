@@ -1,8 +1,6 @@
 using Avalonia.Controls;
 using System;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Threading;
 
 namespace dz5
@@ -15,13 +13,21 @@ namespace dz5
         }
 
         static private Thread t;
-        static private bool firstRunning = true;
-
+        //вспомогательная переменная, показывающая работает первый или повторный запуск программы//
+        static private bool _firstRunning = true; 
 
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
         {
-            if (!true) t.Join();
-            //определение источника, для того чтобы функция вызывалась при нажатии на текст, на картинку и на пустое поле//
+            if (!_firstRunning) 
+            {
+                //ожидание дозагрузки поддиректорий// 
+                t.Join();     
+            }
+            else
+            {
+                _firstRunning = false;
+            }
+                //определение источника, для того чтобы функция вызывалась при нажатии на текст, на картинку и на пустое поле//
             if (RoutedEventArgs.Source is TextBlock textBlock) ChangeListBox(textBlock.Text);
             if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter)
             {
@@ -32,14 +38,14 @@ namespace dz5
             {
                 TypeWithImage getTypes = image.DataContext as TypeWithImage;
                 ChangeListBox(getTypes.FileName);
-            }
-            firstRunning = false;
+            }           
         }
         
         public void ChangeListBox(string currentObject)
         {
             DataContextWithCollection dataContextWithCollection = new();
             t = new(dataContextWithCollection.DirectoriesBelowAbove);
+            //установка нового пути в зависимости от выбранного пользователем элемента//
             switch (currentObject)
             {                
                 case "..":                    
@@ -59,8 +65,10 @@ namespace dz5
                     }                    
                     break;
             }
-            MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);   
-            t.Start();
+            //замена коллекции в Лист Боксе//
+            MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
+            //вызов дополнительного потока, загружающего поддиректории//
+            t.Start(); 
         }
     }
 }
