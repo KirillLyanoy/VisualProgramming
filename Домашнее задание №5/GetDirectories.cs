@@ -71,7 +71,7 @@ namespace dz5
             {
                 //получение изображений из всего списка файлов//
                 List<string> onlyImages = new List<string>();
-                string[] formats = new[] { ".img", ".png" };
+                string[] formats = new[] { ".png", ".jpg", "jpeg" };
 
                 foreach (var file in Directory.EnumerateFiles(_path, "*.*", SearchOption.TopDirectoryOnly).Where(x=>formats.Any(x.EndsWith)))
                 {
@@ -99,7 +99,7 @@ namespace dz5
             {
                 //получение изображений из всего списка файлов//
                 List<string> onlyImages = new List<string>();
-                string[] formats = new[] { ".img", ".png" };
+                string[] formats = new[] { ".png", ".jpg", "jpeg" };
 
                 foreach (var file in Directory.EnumerateFiles(path, "*.*", SearchOption.TopDirectoryOnly).Where(x => formats.Any(x.EndsWith)))
                 {

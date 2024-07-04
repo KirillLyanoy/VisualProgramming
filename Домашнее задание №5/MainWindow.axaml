@@ -14,21 +14,25 @@
 
 	<Window.DataTemplates>
 		<DataTemplate DataType="{x:Type local:FolderWithImage}">
-			<Grid ColumnDefinitions="*, 20*">
+			<Grid ColumnDefinitions="25, 20*">
 				<Image Grid.Column="0" Source="{Binding ImagePath}" Width="20"/>
 				<TextBlock Grid.Column="1" Text="{Binding FileName}" />
 			</Grid>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type local:FileWithImage}">
-			<Grid ColumnDefinitions="*, 20*">
+			<Grid ColumnDefinitions="25, 20*">
 				<Image Grid.Column="0" Source="{Binding ImagePath}" Width="20" />
-				<TextBlock Grid.Column="1" Text="{Binding FileName}" DataContextChanged="" />
+				<TextBlock Grid.Column="1" Text="{Binding FileName}" />
 			</Grid>
 		</DataTemplate>
 	</Window.DataTemplates>
 
-	<ListBox Name="MainListBox"
-			 ItemsSource="{Binding Collection}"
-			 DoubleTapped="ListBox_DoubleTapped" />
-
+	<Grid ColumnDefinitions="*, 2*">
+		<ListBox Name="MainListBox"
+				 ItemsSource="{Binding Collection}"
+				 DoubleTapped="ListBox_DoubleTapped" 
+				 Grid.Column="0"
+				 Background="WhiteSmoke"/>		
+		<Image Grid.Column="2"></Image>
+	</Grid>
 </Window>
