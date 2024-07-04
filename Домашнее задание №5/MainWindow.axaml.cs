@@ -14,8 +14,13 @@ namespace dz5
             InitializeComponent();
         }
 
+        static private Thread t;
+        static private bool firstRunning = true;
+
+
         private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
         {
+            if (!true) t.Join();
             //определение источника, для того чтобы функция вызывалась при нажатии на текст, на картинку и на пустое поле//
             if (RoutedEventArgs.Source is TextBlock textBlock) ChangeListBox(textBlock.Text);
             if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter)
@@ -28,13 +33,13 @@ namespace dz5
                 TypeWithImage getTypes = image.DataContext as TypeWithImage;
                 ChangeListBox(getTypes.FileName);
             }
+            firstRunning = false;
         }
-
+        
         public void ChangeListBox(string currentObject)
         {
             DataContextWithCollection dataContextWithCollection = new();
-            Thread t = new(dataContextWithCollection.DirectoriesBelowAbove);     
-            
+            t = new(dataContextWithCollection.DirectoriesBelowAbove);
             switch (currentObject)
             {                
                 case "..":                    
@@ -54,7 +59,7 @@ namespace dz5
                     }                    
                     break;
             }
-            MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
+            MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);   
             t.Start();
         }
     }

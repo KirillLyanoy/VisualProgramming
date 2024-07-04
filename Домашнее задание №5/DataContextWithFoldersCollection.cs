@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks.Dataflow;
 
 namespace dz5
 {
@@ -36,15 +37,15 @@ namespace dz5
         }
         static public ObservableCollection<TypeWithImage>[] CollectionBelowAbove;
         public ObservableCollection<TypeWithImage> GetBelowAboveDirectories(string name)
-        { 
-             int temp = 0;
-             foreach (var directory in Collection)
-             {
-                 if (directory.FileName == name) break;
-                 else temp++;
-             }
-             Collection = CollectionBelowAbove[temp];                
-             return Collection;
+        {         
+            int temp = 0;
+            foreach (var directory in Collection)
+            {
+                if (directory.FileName == name) break;
+                else temp++;
+            }            
+            Collection = CollectionBelowAbove[temp];                
+            return Collection;
         }
 
         public void DirectoriesBelowAbove()
