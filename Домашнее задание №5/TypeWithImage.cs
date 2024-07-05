@@ -7,33 +7,38 @@ namespace dz5
 {
     internal abstract class TypeWithImage //класс, определяющий картинку и имя объекта//
     {
-        private Bitmap image;
-        private string fileName;
-        private string filePath;
-        public Bitmap ImagePath { get { return image; } }
-        public string FileName { get { return fileName; } }
-        public string FilePath { get { return filePath; } set { filePath = value; } }
+        private Bitmap _image;
+        private string _Name;
+        private string _Path;
+        private string _type;
+
+        public Bitmap ImagePath { get { return _image; } }
+        public string Name { get { return _Name; } }
+        public string Path { get { return _Path; } set { _Path = value; } }
+        public string Type { get { return _type; } }
 
         public TypeWithImage(string path)
         {
-            filePath = path;
+            _Path = path;
             if (path == "..")
             {
-                image = new Bitmap(AssetLoader.Open(new Uri("avares://dz5/Assets/folderUp.png")));
-                fileName = "..";
+                _type = "folderUp";
+                _image = new Bitmap(AssetLoader.Open(new Uri("avares://dz5/Assets/folderUp.png")));
+                _Name = "..";
             } 
             else
             {
                 if (Directory.Exists(path))
                 {
-
-                    image = new Bitmap(AssetLoader.Open(new Uri("avares://dz5/Assets/folder.png")));
-                    fileName = new DirectoryInfo(path).Name;
+                    _type = "folder";
+                    _image = new Bitmap(AssetLoader.Open(new Uri("avares://dz5/Assets/folder.png")));
+                    _Name = new DirectoryInfo(path).Name;
                 }
                 else
                 {
-                    image = new Bitmap(AssetLoader.Open(new Uri("avares://dz5/Assets/file.png")));
-                    fileName = new FileInfo(path).Name;
+                    _type = "file";
+                    _image = new Bitmap(AssetLoader.Open(new Uri("avares://dz5/Assets/file.png")));
+                    _Name = new FileInfo(path).Name;
                 }
             }
         }

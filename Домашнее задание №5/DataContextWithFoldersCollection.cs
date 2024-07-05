@@ -41,7 +41,7 @@ namespace dz5
             int temp = 0;
             foreach (var directory in Collection)
             {
-                if (directory.FileName == name) break;
+                if (directory.Name == name) break;
                 else temp++;
             }            
             Collection = CollectionBelowAbove[temp];                
@@ -63,10 +63,10 @@ namespace dz5
 
                 foreach (var directory in Collection) //создание директорий поддиректорий//
                 {
-                    if (Directory.Exists(directory.FilePath) && directory.FilePath != "..")
+                    if (Directory.Exists(directory.Path) && directory.Path != "..")
                     {
                         CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>
-                            (GetDirectories.GetCurrentDirectories(GetDirectories.GetPath() + "\\" + directory.FileName).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(GetDirectories.GetPath() + "\\" + directory.FileName))));
+                            (GetDirectories.GetCurrentDirectories(GetDirectories.GetPath() + "\\" + directory.Name).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(GetDirectories.GetPath() + "\\" + directory.Name))));
                         i++;
                     }
                 }
@@ -80,7 +80,7 @@ namespace dz5
                 foreach (var directory in temp)
                 {
                     CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>
-                        (GetDirectories.GetCurrentDirectories(directory.FileName).Concat((TypeWithImage[])GetDirectories.GetCurrentFiles(directory.FileName)));
+                        (GetDirectories.GetCurrentDirectories(directory.Name).Concat((TypeWithImage[])GetDirectories.GetCurrentFiles(directory.Name)));
                     i++;    
                 }
             }

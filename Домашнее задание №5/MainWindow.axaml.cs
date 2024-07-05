@@ -10,7 +10,7 @@ namespace dz5
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();           
             FileSystemWatch fileSystemWatch = new FileSystemWatch();
         }
 
@@ -57,6 +57,7 @@ namespace dz5
                     }                    
                     break;
             }
+            FileSystemWatch.CreateNewFileSystemWatcher(GetDirectories.GetPath());
             //замена коллекции в Лист Боксе//
             MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
             //вызов дополнительного потока, загружающего поддиректории//
@@ -82,13 +83,13 @@ namespace dz5
             if (RoutedEventArgs.Source is TextBlock textBlock) return (textBlock.Text);
             if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter)
             {
-                if (presenter.DataContext is TypeWithImage getTypes) return (getTypes.FileName);
+                if (presenter.DataContext is TypeWithImage getTypes) return (getTypes.Name);
                 else return null;
             }
             if (RoutedEventArgs.Source is Image image)
             {
                 TypeWithImage getTypes = image.DataContext as TypeWithImage;
-                return (getTypes.FileName);
+                return (getTypes.Name);
             }
             return null;
         }

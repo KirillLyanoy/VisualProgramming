@@ -16,13 +16,13 @@
 		<DataTemplate DataType="{x:Type local:FolderWithImage}">
 			<Grid ColumnDefinitions="25, 20*">
 				<Image Grid.Column="0" Source="{Binding ImagePath}" Width="20"/>
-				<TextBlock Grid.Column="1" Text="{Binding FileName}" />
+				<TextBlock Grid.Column="1" Text="{Binding Name}" />
 			</Grid>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type local:FileWithImage}">
 			<Grid ColumnDefinitions="25, 20*">
 				<Image Grid.Column="0" Source="{Binding ImagePath}" Width="20" />
-				<TextBlock Grid.Column="1" Text="{Binding FileName}" />
+				<TextBlock Grid.Column="1" Text="{Binding Name}" />
 			</Grid>
 		</DataTemplate>
 	</Window.DataTemplates>
