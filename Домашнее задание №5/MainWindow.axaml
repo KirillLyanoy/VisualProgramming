@@ -27,12 +27,13 @@
 		</DataTemplate>
 	</Window.DataTemplates>
 
-	<Grid ColumnDefinitions="*, 2*">
+	<Grid ColumnDefinitions="*, 0.1, 2*" Background="WhiteSmoke">
 		<ListBox Name="MainListBox"
 				 ItemsSource="{Binding Collection}"
-				 DoubleTapped="ListBox_DoubleTapped" 
-				 Grid.Column="0"
-				 Background="WhiteSmoke"/>		
-		<Image Grid.Column="2"></Image>
+				 DoubleTapped="ListBoxDoubleTapped" 
+				 Grid.Column="0"				 
+				 Tapped="ImageView"/>
+		<GridSplitter Grid.Column="1"></GridSplitter>
+		<Image Name="ImageViewer" Grid.Column="2" />
 	</Grid>
 </Window>

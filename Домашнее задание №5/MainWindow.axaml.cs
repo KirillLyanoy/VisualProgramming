@@ -1,4 +1,6 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using Avalonia.Media.Imaging;
 using System;
 using System.IO;
 using System.Threading;
@@ -16,7 +18,7 @@ namespace dz5
         //вспомогательная переменная, блокирующая запуск ожидания вспомогательного потока//
         static private bool _joinThreadLock = true; 
 
-        private void ListBox_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
+        private void ListBoxDoubleTapped(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
         {
             if (!_joinThreadLock) 
             {
@@ -73,6 +75,30 @@ namespace dz5
             MainListBox.ItemsSource = dataContextWithCollection.GetBelowAboveDirectories(currentObject);
             //вызов дополнительного потока, загружающего поддиректории//
             t.Start(); 
+        }
+
+        private void ImageView(object? sender, Avalonia.Input.TappedEventArgs RoutedEventArgs)
+        {
+            //определение источника, для того чтобы функция вызывалась при нажатии на текст, на картинку и на пустое поле//
+            if (RoutedEventArgs.Source is TextBlock textBlock) ChangeImage(textBlock.Text);
+            if (RoutedEventArgs.Source is Avalonia.Controls.Presenters.ContentPresenter presenter)
+            {
+                TypeWithImage getTypes = presenter.DataContext as TypeWithImage;
+                ChangeImage(getTypes.FileName);
+            }
+            if (RoutedEventArgs.Source is Image image)
+            {
+                TypeWithImage getTypes = image.DataContext as TypeWithImage;
+                ChangeImage(getTypes.FileName);
+            }
+        }
+        private void ChangeImage(string fileName)
+        {
+            if (File.Exists(GetDirectories.GetPath() + "\\" + fileName))
+            {
+                Bitmap currentImage = new Bitmap(GetDirectories.GetPath() + "\\" + fileName);
+                ImageViewer.Source = currentImage;
+            }
         }
     }
 }
