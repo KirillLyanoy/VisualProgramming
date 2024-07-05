@@ -1,8 +1,7 @@
 ﻿namespace dz5
 {
     //класс, определяющий картинку и имя файла//
-    internal class FileWithImage : TypeWithImage
+    internal class FileWithImage(string name) : TypeWithImage(name)
     {
-        public FileWithImage(string name) : base(name) { }
     }
 }

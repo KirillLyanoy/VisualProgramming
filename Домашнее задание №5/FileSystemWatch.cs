@@ -36,12 +36,12 @@ namespace dz5
             string value = $"{e.FullPath}";
             if (Directory.Exists(value))
             {
-                DataContextWithCollection dataContextWithCollection = new DataContextWithCollection();
+                DataContextWithCollection dataContextWithCollection = new();
                 dataContextWithCollection.Collection.Add(new FolderWithImage(value));
             }
             else if (CheckExtension(value))
             {
-                DataContextWithCollection dataContextWithCollection = new DataContextWithCollection();
+                DataContextWithCollection dataContextWithCollection = new();
                 dataContextWithCollection.Collection.Add(new FileWithImage(value));
             }            
         }
@@ -49,7 +49,7 @@ namespace dz5
         {
             string value = $"{e.FullPath}";
 
-            DataContextWithCollection dataContextWithCollection = new DataContextWithCollection();
+            DataContextWithCollection dataContextWithCollection = new();
             foreach (var item in dataContextWithCollection.Collection)
             {
                 if (item.Path == value)
@@ -59,13 +59,12 @@ namespace dz5
                 }
             }
         }
-
         private static void OnRenamed(object sender, RenamedEventArgs e)
         {
             string oldPath = ($"{e.OldFullPath}");
             string newName = ($"{e.FullPath}");
 
-            DataContextWithCollection dataContextWithCollection = new DataContextWithCollection();
+            DataContextWithCollection dataContextWithCollection = new();
             foreach (var item in dataContextWithCollection.Collection)
             {
                 if (item.Path == oldPath)
@@ -85,7 +84,6 @@ namespace dz5
                 }
             }
         }
-
         private static bool CheckExtension(string path) 
         {
             return (path.EndsWith(".png") || path.EndsWith(".jpg") || path.EndsWith(".jpeg"));

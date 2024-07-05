@@ -1,8 +1,7 @@
 ﻿namespace dz5
 {
     //класс, определяющий картинку и имя папки//
-    internal class FolderWithImage : TypeWithImage
+    internal class FolderWithImage(string name) : TypeWithImage(name)
     {
-        public FolderWithImage(string name) : base(name) { }
     }
 }

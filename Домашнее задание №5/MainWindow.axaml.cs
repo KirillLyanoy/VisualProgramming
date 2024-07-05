@@ -89,7 +89,7 @@ namespace dz5
             if (RoutedEventArgs.Source is Image image)
             {
                 TypeWithImage getTypes = image.DataContext as TypeWithImage;
-                return (getTypes.Name);
+                return getTypes.Name;
             }
             return null;
         }

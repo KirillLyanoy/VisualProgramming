@@ -7,10 +7,10 @@ namespace dz5
 {
     internal abstract class TypeWithImage //класс, определяющий картинку и имя объекта//
     {
-        private Bitmap _image;
-        private string _Name;
+        private readonly Bitmap _image;
+        private readonly string _Name;
         private string _Path;
-        private string _type;
+        private readonly string _type;
 
         public Bitmap ImagePath { get { return _image; } }
         public string Name { get { return _Name; } }
