@@ -12,7 +12,7 @@ namespace dz5
         private string filePath;
         public Bitmap ImagePath { get { return image; } }
         public string FileName { get { return fileName; } }
-        public string FilePath { get { return filePath; } }
+        public string FilePath { get { return filePath; } set { filePath = value; } }
 
         public TypeWithImage(string path)
         {

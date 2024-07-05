@@ -27,7 +27,7 @@
 		</DataTemplate>
 	</Window.DataTemplates>
 
-	<Grid ColumnDefinitions="*, 0.1, 2*" Background="WhiteSmoke">
+	<Grid ColumnDefinitions="*, 0.1, 3*" Background="WhiteSmoke">
 		<ListBox Name="MainListBox"
 				 ItemsSource="{Binding Collection}"
 				 DoubleTapped="ListBoxDoubleTapped" 

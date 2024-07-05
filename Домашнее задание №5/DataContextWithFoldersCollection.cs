@@ -12,7 +12,8 @@ namespace dz5
     {
         public DataContextWithCollection()
         {
-            if (GetDirectories.GetPath() != "" && Collection == null) Collection = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories().Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles())));
+            if (GetDirectories.GetPath() != "" && Collection == null) Collection = new ObservableCollection<TypeWithImage>
+                    (GetDirectories.GetCurrentDirectories(GetDirectories.GetPath()).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(GetDirectories.GetPath()))));
             if (CollectionBelowAbove == null) DirectoriesBelowAbove();              
         }
         public ObservableCollection<TypeWithImage> Collection
@@ -52,18 +53,20 @@ namespace dz5
             //создание коллекции поддиректории для директорий//
             if (GetDirectories.GetPath() != "") 
             {
-                CollectionBelowAbove = new ObservableCollection<TypeWithImage>[GetDirectories.GetCurrentDirectories().Length + 1];
+                CollectionBelowAbove = new ObservableCollection<TypeWithImage>[GetDirectories.GetCurrentDirectories(GetDirectories.GetPath()).Length + 1];
                 int i = 1;
                 string _getParentPath = Convert.ToString(Directory.GetParent(GetDirectories.GetPath()));
                 //первый элемент - коллекция директорий уровня выше//
-                if (_getParentPath != "") CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(_getParentPath).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(_getParentPath))));            
+                if (_getParentPath != "") CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>
+                        (GetDirectories.GetCurrentDirectories(_getParentPath).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(_getParentPath))));            
                 else CollectionBelowAbove[0] = new ObservableCollection<TypeWithImage>(GetDirectories.GetLogicalDrives());
 
                 foreach (var directory in Collection) //создание директорий поддиректорий//
                 {
                     if (Directory.Exists(directory.FilePath) && directory.FilePath != "..")
                     {
-                        CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(GetDirectories.GetPath() + "\\" + directory.FileName).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(GetDirectories.GetPath() + "\\" + directory.FileName))));
+                        CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>
+                            (GetDirectories.GetCurrentDirectories(GetDirectories.GetPath() + "\\" + directory.FileName).Concat((TypeWithImage[])(GetDirectories.GetCurrentFiles(GetDirectories.GetPath() + "\\" + directory.FileName))));
                         i++;
                     }
                 }
@@ -76,7 +79,8 @@ namespace dz5
                 int i = 0;                
                 foreach (var directory in temp)
                 {
-                    CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>(GetDirectories.GetCurrentDirectories(directory.FileName).Concat((TypeWithImage[])GetDirectories.GetCurrentFiles(directory.FileName)));
+                    CollectionBelowAbove[i] = new ObservableCollection<TypeWithImage>
+                        (GetDirectories.GetCurrentDirectories(directory.FileName).Concat((TypeWithImage[])GetDirectories.GetCurrentFiles(directory.FileName)));
                     i++;    
                 }
             }
