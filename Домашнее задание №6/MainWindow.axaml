@@ -3,12 +3,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		xmlns:local="clr-namespace:dz6"
         x:Class="dz6.MainWindow"
-        Title="dz6">
- 
-	
-	
-	
-	
-	
+        Title="dz6"
+		Height="600"
+		Width="400"
+		CanResize="False"
+		x:DataType="local:DataContextMainWindow">
+	<Window.DataContext>
+		<local:DataContextMainWindow/>
+	</Window.DataContext>
+
+
+	<StackPanel>
+		<TextBlock Name="Date" Text="{Binding City}"/>
+		<Grid ColumnDefinitions="*,*">
+			<StackPanel Grid.Column="0">
+				<TextBlock Name="City"/>
+				<TextBlock Name="Temperature"/>
+			</StackPanel>
+			<Image Grid.Column="1" />
+		</Grid>
+		<ListBox Name="CurrentTemperatureList"></ListBox>
+		<Grid Name="WeatherList"></Grid>
+		<Grid Name="FiveDaysWeather"/>
+	</StackPanel>
 </Window>
