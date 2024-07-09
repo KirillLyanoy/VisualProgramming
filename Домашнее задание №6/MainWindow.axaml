@@ -16,10 +16,10 @@
 
 
 	<StackPanel>
-		<TextBlock Name="Date" Text="{Binding City}"/>
+		<TextBlock Text="{Binding CurrentWeatherInfo.City.Name}"/>
 		<Grid ColumnDefinitions="*,*">
 			<StackPanel Grid.Column="0">
-				<TextBlock Name="City"/>
+				<TextBlock  Text=""/>
 				<TextBlock Name="Temperature"/>
 			</StackPanel>
 			<Image Grid.Column="1" />

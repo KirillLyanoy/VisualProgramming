@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using dz6.model;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -6,16 +7,21 @@ using System.Threading;
 
 namespace dz6
 {
-    public class DataContextMainWindow : INotifyPropertyChanged
+    internal class DataContextMainWindow : INotifyPropertyChanged
     {
-        private string _city;
-        public string City
+        public DataContextMainWindow() 
         {
-            get { return _city; }
-            set { _ = SetField(ref _city, value); }
+            if (CurrentWeatherInfo == null) CurrentWeatherInfo = new WeatherInfo() { };
         }
-        public event PropertyChangedEventHandler? PropertyChanged;
+        private static WeatherInfo? _currentWeatherInfo;
 
+        public WeatherInfo CurrentWeatherInfo 
+        {
+            get { return _currentWeatherInfo; }
+            set { _ = SetField(ref _currentWeatherInfo, value); }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
