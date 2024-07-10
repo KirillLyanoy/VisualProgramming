@@ -7,8 +7,8 @@ namespace dz6
     {
         public MainWindow()
         {            
-            InitializeComponent();
-            WeatherService.WeatherUpdate();
+            DataContextMainWindow dataContextMainWindow = new DataContextMainWindow();
+            InitializeComponent();        
         }
     }
 }

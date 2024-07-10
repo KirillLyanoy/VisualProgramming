@@ -11,8 +11,11 @@ namespace dz6
     {
         public DataContextMainWindow() 
         {
-            if (CurrentWeatherInfo == null) CurrentWeatherInfo = new WeatherInfo() { };
+            CurrentWeatherInfo = new();
+            WeatherUpdate();
+            Thread thread = new Thread(WeatherUpdate);
         }
+
         private static WeatherInfo? _currentWeatherInfo;
 
         public WeatherInfo CurrentWeatherInfo 
@@ -32,6 +35,23 @@ namespace dz6
             field = value;
             OnPropertyChanged(propertyName);
             return true;
+        }
+        
+        
+
+        //Запрос новой погоды //
+        private async void WeatherUpdate()
+        {
+            CurrentWeatherInfo = await WeatherService.GetWeather();  
+        }
+        //обновление погоды каждые 3 часа//
+        private void EveryThreeHoursUpdate()
+        {
+            while(true)
+            {               
+                Thread.Sleep(10800000);
+                WeatherUpdate();
+            }
         }
     }
 }
