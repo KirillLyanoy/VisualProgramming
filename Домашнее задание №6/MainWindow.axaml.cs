@@ -10,5 +10,10 @@ namespace dz6
             DataContextMainWindow dataContextMainWindow = new DataContextMainWindow();
             InitializeComponent();        
         }
+
+        private void SetNewCity(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+
+        }
     }
 }

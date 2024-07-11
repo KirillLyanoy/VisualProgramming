@@ -6,8 +6,8 @@
 		xmlns:local="clr-namespace:dz6"
         x:Class="dz6.MainWindow"
         Title="dz6"
-		Height="600"
-		Width="400"
+		Height="250"
+		Width="450"
 		CanResize="False"
 		x:DataType="local:DataContextMainWindow">
 	
@@ -15,59 +15,65 @@
 		<local:DataContextMainWindow/>
 	</Window.DataContext>
 
-	<Window.DataTemplates>
-		<DataTemplate DataType="{x:Type local:model.List}">
-			<Grid ColumnDefinitions="*, *">
-				<TextBlock Grid.Column="0" Text="{Binding Dt_txt}" />
-				<TextBlock Grid.Column="1" Text="{Binding Main.Temp}" />
-			</Grid>
-		</DataTemplate>
-	</Window.DataTemplates>
-
-	<Grid RowDefinitions="25,*,*,5*">
-		<TextBlock Grid.Row="0" Text="{Binding CurrentWeatherInfo.List[0].Dt_txt}"/>
-		<Grid Grid.Row="1" ColumnDefinitions="*,2*,2*,2*">
-			<TextBlock Grid.Column="0" Text="Город:"/>
-			<TextBlock Grid.Column="1" Text="{Binding CurrentWeatherInfo.City.Name}"/>
-			<Grid Grid.Column="2" RowDefinitions="*,*">
-				<TextBlock Grid.Row="0" Text="Широта:"/>
-				<TextBlock Grid.Row="1" Text="Долгота:"/>
-			</Grid>
-			<Grid Grid.Column="3" RowDefinitions="*,*">
-				<TextBlock Grid.Row="0" Text="{Binding CurrentWeatherInfo.City.Coord.Lat}"/>
-				<TextBlock Grid.Row="1" Text="{Binding CurrentWeatherInfo.City.Coord.Lon}"/>
-			</Grid>
-		</Grid>
-		<Grid Grid.Row="2" ColumnDefinitions="2*,*">
-			<StackPanel Grid.Column="0">
-				<WrapPanel>
-					<TextBlock Text="Температура:"/>
-					<TextBlock Text="{Binding CurrentWeatherInfo.List[0].Main.Temp}" FontSize="50"/>				
-				</WrapPanel>
-				<WrapPanel>
-					<TextBlock Text="{Binding CurrentWeatherInfo.List[0].Weather[0].Main}"/>
-				</WrapPanel>
+	<Grid RowDefinitions="25,100,*, *, *" Background="LightBlue">
+		<WrapPanel Grid.Row="0" HorizontalAlignment="Center">			
+			<TextBlock Text="{Binding CurrentWeatherInfo.City.Name}" Margin="5"/>
+			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lat}" Margin="5"/>
+			<TextBlock Text="с.ш." Margin="5"/>
+			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lon}" Margin="5"/>
+			<TextBlock Text="в.д." Margin="5"/>
+		</WrapPanel>			
+		<Grid Grid.Row="1" ColumnDefinitions="*,*">
+			<StackPanel Grid.Column="0" Margin="7">
+				<TextBlock 
+					Text="{Binding CurrentWeatherInfo.List[0].Main.Temp}" 
+					FontSize="50" 
+					HorizontalAlignment="Center"
+					VerticalAlignment="Center"/>
+				<TextBlock 
+					Text="{Binding CurrentWeatherInfo.List[0].Weather[0].Main}"
+					HorizontalAlignment="Center"/>
 			</StackPanel>
 			<StackPanel Grid.Column="1">
+				<TextBlock Text=" "></TextBlock>
 				<WrapPanel>
-					<TextBlock Text="Ветер:"/>
+					<TextBlock Text="Ветер:         "/>
 					<TextBlock Text="{Binding CurrentWeatherInfo.List[0].Wind.Speed}"/>
+					<TextBlock Text=" м/с"/>
 				</WrapPanel>
+				<TextBlock Text=" "></TextBlock>
 				<WrapPanel>
-					<TextBlock Text="Давление:"/>
+					<TextBlock Text="Давление:  "/>
 					<TextBlock  Text="{Binding CurrentWeatherInfo.List[0].Main.Pressure}"/>
+					<TextBlock Text=" мм рт. ст."/>
 				</WrapPanel>
+				
 			</StackPanel>
-			</Grid>
-
-
-
-		<ListBox Grid.Row="3" ItemsSource="{Binding CurrentWeatherInfo.List}"> 
-			
+		</Grid>
+		<ListBox Grid.Row="2" ItemsSource="{Binding Days}" >
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>			
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Width="50" Text="{Binding}"/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
 		</ListBox>
-
-	
 		
-
+		<Grid Grid.Row="3" ColumnDefinitions="*,*">
+			<WrapPanel Grid.Column="0">
+				<TextBlock Text="c.ш. :"  VerticalAlignment="Center" Margin="10"/>
+				<TextBox Name="s_sh" Width="130" Margin="10"></TextBox>
+			</WrapPanel>
+			<WrapPanel Grid.Column="1">
+				<TextBlock Text="в.д. :" VerticalAlignment="Center" Margin="10"/>
+				<TextBox Name="v_d" Width="130" Margin="10"></TextBox>
+			</WrapPanel>
+		</Grid>
+		
+		<Button Grid.Row="4" Content="Установить новый город" HorizontalAlignment="Center" Width="440" HorizontalContentAlignment="Center" Background="LightBlue"></Button>
 	</Grid>
 </Window>

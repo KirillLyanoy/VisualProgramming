@@ -16,24 +16,17 @@ namespace dz6
             BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/forecast?q=Novosibirsk&units=metric&appid=65270a98c3dcac555ca95710dfd76dda"),
         };
         public static void NewUri(string url) { client.BaseAddress = new Uri(url); }    
-        static JsonSerializerOptions serializeOptions = new JsonSerializerOptions()
+        static JsonSerializerOptions serializeOptions = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
         //получение погоды с openweather//
         public static async Task<WeatherInfo> GetWeather()
         {
-            WebRequest request = WebRequest.Create(client.BaseAddress);
-            request.Method = "POST";
-            WebResponse response = await request.GetResponseAsync();
-            string answer = string.Empty;
-            using (Stream s = response.GetResponseStream())
-            {
-                using StreamReader reader = new(s);
-                answer = await reader.ReadToEndAsync();
-            }
-            response.Close();
-            WeatherInfo weatherResult = JsonSerializer.Deserialize<WeatherInfo>(answer, serializeOptions);
+            using HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
+            response.EnsureSuccessStatusCode();
+            var jsonResponse = await response.Content.ReadAsStringAsync();           
+            WeatherInfo weatherResult = JsonSerializer.Deserialize<WeatherInfo>(jsonResponse, serializeOptions);
             return weatherResult;
         }
     }
