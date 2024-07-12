@@ -5,26 +5,38 @@ using System.Threading.Tasks;
 using System.Text.Json;
 
 namespace dz6
-{ 
+{
     internal class WeatherService
     {
-        public static HttpClient client = new()
+        private static HttpClient client = new HttpClient();
+        private static string _url = "https://api.openweathermap.org/data/2.5/forecast?q=Novosibirsk&units=metric&appid=65270a98c3dcac555ca95710dfd76dda";
+        public static void SetUrl(string url)
         {
-            BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/forecast?q=Novosibirsk&units=metric&appid=65270a98c3dcac555ca95710dfd76dda"),
-        };
-        public static void NewUri(string url) { client.BaseAddress = new Uri(url); }    
+            _url = url;
+        }
+   
         static JsonSerializerOptions serializeOptions = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
+        public static WeatherInfo weatherResult = new WeatherInfo();
         //получение погоды с openweather//        
         public static async Task<WeatherInfo> GetWeather()
-        {
-            using HttpResponseMessage response = await client.GetAsync(client.BaseAddress);            
-            response.EnsureSuccessStatusCode();            
-            var jsonResponse = await response.Content.ReadAsStringAsync();            
-            WeatherInfo weatherResult = JsonSerializer.Deserialize<WeatherInfo>(jsonResponse, serializeOptions);            
-            return weatherResult;        
+        {            
+            try
+            {
+                using HttpResponseMessage response = await client.GetAsync(_url);
+                response.EnsureSuccessStatusCode();
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                weatherResult = JsonSerializer.Deserialize<WeatherInfo>(jsonResponse, serializeOptions);
+                return weatherResult;
+            }
+            catch (System.Net.Http.HttpRequestException)
+            {               
+                SetUrl("https://api.openweathermap.org/data/2.5/forecast?q=Novosibirsk&units=metric&appid=65270a98c3dcac555ca95710dfd76dda");
+                return weatherResult;
+            }
+           
         }
     }
 }

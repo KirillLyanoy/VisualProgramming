@@ -10,8 +10,8 @@ using System.Timers;
 namespace dz6
 {
     internal class DataContextMainWindow : INotifyPropertyChanged
-    {   
-        public DataContextMainWindow() 
+    {
+        public DataContextMainWindow()
         {
             CurrentWeatherInfo = new();
             WeatherUpdate();
@@ -22,7 +22,7 @@ namespace dz6
         }
         private static WeatherInfo? _currentWeatherInfo;
         public static System.Timers.Timer aTimer = new(6000);
-        public WeatherInfo CurrentWeatherInfo 
+        public WeatherInfo CurrentWeatherInfo
         {
             get { return _currentWeatherInfo; }
             set { _ = SetField(ref _currentWeatherInfo, value); }
@@ -39,17 +39,17 @@ namespace dz6
             OnPropertyChanged(propertyName);
             return true;
         }
-        //Запрос новой погоды //
         private async void WeatherUpdate()
         {
             CurrentWeatherInfo = await WeatherService.GetWeather();
             NextDays();
+            RoundWeather();
         }
-        
         private async void WeatherUpdate(Object source, ElapsedEventArgs e)
         {
             CurrentWeatherInfo = await WeatherService.GetWeather();
             NextDays();
+            RoundWeather();
         }
         private void NextDays()
         {
@@ -68,6 +68,16 @@ namespace dz6
         {
             get { return _days; }
             set { _ = SetField(ref _days, value); }
+        }
+        private static int _roundedWeather;
+        public int RoundedWeather
+        {
+            get { return _roundedWeather; }
+            set { _ = SetField(ref _roundedWeather, value); }
+        }
+        private void RoundWeather()
+        {
+            RoundedWeather = (int)Math.Round((decimal)_currentWeatherInfo.List[0].Main.Temp, 2);
         }
     }
 }
