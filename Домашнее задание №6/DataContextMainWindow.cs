@@ -20,8 +20,8 @@ namespace dz6
             aTimer.Enabled = true;
             aTimer.Start();
         }
-        private static WeatherInfo? _currentWeatherInfo;
-        public static System.Timers.Timer aTimer = new(6000);
+        private WeatherInfo? _currentWeatherInfo;
+        public System.Timers.Timer aTimer = new(6000);
         public WeatherInfo CurrentWeatherInfo
         {
             get { return _currentWeatherInfo; }
@@ -39,13 +39,13 @@ namespace dz6
             OnPropertyChanged(propertyName);
             return true;
         }
-        private async void WeatherUpdate()
+        public async void WeatherUpdate()
         {
             CurrentWeatherInfo = await WeatherService.GetWeather();
             NextDays();
             RoundWeather();
         }
-        private async void WeatherUpdate(Object source, ElapsedEventArgs e)
+        public async void WeatherUpdate(Object source, ElapsedEventArgs e)
         {
             CurrentWeatherInfo = await WeatherService.GetWeather();
             NextDays();
@@ -54,30 +54,38 @@ namespace dz6
         private void NextDays()
         {
             List<string> days = [];
+         
             foreach (var item in CurrentWeatherInfo.List)
             {
                 DateTime dateTime;
                 dateTime = Convert.ToDateTime(item.Dt_txt);
-                dateTime = dateTime.AddHours(4);
+                dateTime = dateTime.AddHours(4);            
                 days.Add(dateTime.Day + "." + dateTime.Month);
             }
             Days = days.Distinct().ToList();
         }
-        private static List<string>? _days;
+        private List<string>? _days;
         public List<string> Days
         {
             get { return _days; }
             set { _ = SetField(ref _days, value); }
         }
-        private static int _roundedWeather;
+        private int _roundedWeather;
         public int RoundedWeather
         {
             get { return _roundedWeather; }
             set { _ = SetField(ref _roundedWeather, value); }
         }
-        private void RoundWeather()
+        public void RoundWeather()
         {
-            RoundedWeather = (int)Math.Round((decimal)_currentWeatherInfo.List[0].Main.Temp, 2);
+            RoundedWeather = (int)Math.Round((decimal)_currentWeatherInfo.List[0].Main.Temp);
+        }
+        public void SetNewCity(string city)
+        {
+            aTimer.Stop();
+            WeatherService.SetUrl("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=65270a98c3dcac555ca95710dfd76dda");
+            WeatherUpdate();
+            aTimer.Start();
         }
     }
 }

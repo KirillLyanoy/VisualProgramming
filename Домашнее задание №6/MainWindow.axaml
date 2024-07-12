@@ -25,11 +25,17 @@
 		</WrapPanel>			
 		<Grid Grid.Row="1" ColumnDefinitions="*,*">
 			<StackPanel Grid.Column="0" Margin="7">
-				<TextBlock 
-					Text="{Binding RoundedWeather}" 
-					FontSize="50" 
+				<WrapPanel 
 					HorizontalAlignment="Center"
-					VerticalAlignment="Center"/>
+					VerticalAlignment="Center">
+					<TextBlock
+						Text="{Binding RoundedWeather}"
+						FontSize="50"/>
+					<TextBlock
+						Text="°C"
+						FontSize="50"/>
+				</WrapPanel>
+
 				<TextBlock 
 					Text="{Binding CurrentWeatherInfo.List[0].Weather[0].Main}"
 					HorizontalAlignment="Center"/>
@@ -74,7 +80,8 @@
 					HorizontalContentAlignment="Center" 
 					Background="LightBlue"
 					VerticalContentAlignment="Center"
-					Click="SetNewCity"/>
+					Command="{Binding SetNewCity}"
+					CommandParameter="{Binding Text, ElementName=NewCity}"/>
 		</Grid>				
 	</Grid>
 </Window>
