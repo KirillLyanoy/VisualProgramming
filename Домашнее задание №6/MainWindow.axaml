@@ -15,7 +15,7 @@
 		<local:DataContextMainWindow/>
 	</Window.DataContext>
 
-	<Grid RowDefinitions="25,100,*, *, *" Background="LightBlue">
+	<Grid RowDefinitions="25,100,*, *" Background="LightBlue">
 		<WrapPanel Grid.Row="0" HorizontalAlignment="Center">			
 			<TextBlock Text="{Binding CurrentWeatherInfo.City.Name}" Margin="5"/>
 			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lat}" Margin="5"/>
@@ -50,7 +50,7 @@
 				
 			</StackPanel>
 		</Grid>
-		<ListBox Grid.Row="2" ItemsSource="{Binding Days}" >
+		<ListBox Grid.Row="2" ItemsSource="{Binding Days}" VerticalAlignment="Center" HorizontalAlignment="Center" >
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<StackPanel Orientation="Horizontal"/>
@@ -63,17 +63,18 @@
 			</ListBox.ItemTemplate>
 		</ListBox>
 		
-		<Grid Grid.Row="3" ColumnDefinitions="*,*">
-			<WrapPanel Grid.Column="0">
-				<TextBlock Text="c.ш. :"  VerticalAlignment="Center" Margin="10"/>
-				<TextBox Name="s_sh" Width="130" Margin="10"></TextBox>
-			</WrapPanel>
-			<WrapPanel Grid.Column="1">
-				<TextBlock Text="в.д. :" VerticalAlignment="Center" Margin="10"/>
-				<TextBox Name="v_d" Width="130" Margin="10"></TextBox>
-			</WrapPanel>
-		</Grid>
-		
-		<Button Grid.Row="4" Content="Установить новый город" HorizontalAlignment="Center" Width="440" HorizontalContentAlignment="Center" Background="LightBlue"></Button>
+		<Grid Grid.Row="3" ColumnDefinitions="2*,*">
+			<TextBox Grid.Column="0" 
+					 Watermark="Введите новый город:"
+					 Name="NewCity" Margin="10"
+					 VerticalContentAlignment="Center"/>
+			<Button Grid.Column="1" 
+					Content="Установить" 
+					HorizontalAlignment="Center" 
+					HorizontalContentAlignment="Center" 
+					Background="LightBlue"
+					VerticalContentAlignment="Center"
+					Click="SetNewCity"/>
+		</Grid>				
 	</Grid>
 </Window>

@@ -1,17 +1,14 @@
 ﻿using System.Net.Http;
 using System;
-using System.Threading;
 using dz6.model;
 using System.Threading.Tasks;
-using System.Net;
-using System.IO;
 using System.Text.Json;
 
 namespace dz6
 { 
     internal class WeatherService
     {
-        private static HttpClient client = new()
+        public static HttpClient client = new()
         {
             BaseAddress = new Uri("https://api.openweathermap.org/data/2.5/forecast?q=Novosibirsk&units=metric&appid=65270a98c3dcac555ca95710dfd76dda"),
         };
@@ -20,14 +17,14 @@ namespace dz6
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
-        //получение погоды с openweather//
+        //получение погоды с openweather//        
         public static async Task<WeatherInfo> GetWeather()
         {
-            using HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
-            response.EnsureSuccessStatusCode();
-            var jsonResponse = await response.Content.ReadAsStringAsync();           
-            WeatherInfo weatherResult = JsonSerializer.Deserialize<WeatherInfo>(jsonResponse, serializeOptions);
-            return weatherResult;
+            using HttpResponseMessage response = await client.GetAsync(client.BaseAddress);            
+            response.EnsureSuccessStatusCode();            
+            var jsonResponse = await response.Content.ReadAsStringAsync();            
+            WeatherInfo weatherResult = JsonSerializer.Deserialize<WeatherInfo>(jsonResponse, serializeOptions);            
+            return weatherResult;        
         }
     }
 }
