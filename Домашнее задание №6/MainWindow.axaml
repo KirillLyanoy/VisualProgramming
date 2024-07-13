@@ -9,54 +9,61 @@
 		Height="250"
 		Width="450"
 		CanResize="False"
-		x:DataType="local:DataContextMainWindow">
+		x:DataType="local:DataContextWithWeather">
+	
+	<Window.Resources>
+		<local:StringToImageConverter x:Key="StringToImageConverter" />	
+	</Window.Resources>
+	
+	<Window.Background>
+		<ImageBrush Source="{Binding BackgroundImage}"/>
+	</Window.Background>	
 	
 	<Window.DataContext>
-		<local:DataContextMainWindow/>
+		<local:DataContextWithWeather/>
 	</Window.DataContext>
+	
+	<Window.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="Foreground" Value="AliceBlue"/>
+		</Style>
+	</Window.Styles>	
 
-	<Grid RowDefinitions="25,100,*, *" Background="LightBlue">
+	<Grid RowDefinitions="25,100,*, *">
+		
 		<WrapPanel Grid.Row="0" HorizontalAlignment="Center">			
-			<TextBlock Text="{Binding CurrentWeatherInfo.City.Name}" Margin="5"/>
-			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lat}" Margin="5"/>
-			<TextBlock Text="с.ш." Margin="5"/>
-			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lon}" Margin="5"/>
-			<TextBlock Text="в.д." Margin="5"/>
-		</WrapPanel>			
+			<TextBlock LetterSpacing="1" Name="currentCity" Text="{Binding CurrentWeatherInfo.City.Name}" Margin="5" FontWeight="ExtraBold"/>
+			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lat, StringFormat={}{0} с.ш}" Margin="5" FontWeight="ExtraBold"/>
+			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lon, StringFormat={}{0} в.д.}" Margin="5" FontWeight="ExtraBold"/>
+		</WrapPanel>
+		
 		<Grid Grid.Row="1" ColumnDefinitions="*,*">
 			<StackPanel Grid.Column="0" Margin="7">
 				<WrapPanel 
 					HorizontalAlignment="Center"
 					VerticalAlignment="Center">
-					<TextBlock
-						Text="{Binding RoundedWeather}"
-						FontSize="50"/>
-					<TextBlock
-						Text="°C"
+					<Image Source="{Binding CurrentWeatherInfo.List[0], Converter={StaticResource StringToImageConverter}}" Width="70"/>		
+					<TextBlock 
+						Text="{Binding RoundedWeather, StringFormat={}{0}°C}"
 						FontSize="50"/>
 				</WrapPanel>
-
 				<TextBlock 
 					Text="{Binding CurrentWeatherInfo.List[0].Weather[0].Main}"
 					HorizontalAlignment="Center"/>
 			</StackPanel>
-			<StackPanel Grid.Column="1">
-				<TextBlock Text=" "></TextBlock>
-				<WrapPanel>
-					<TextBlock Text="Ветер:         "/>
-					<TextBlock Text="{Binding CurrentWeatherInfo.List[0].Wind.Speed}"/>
-					<TextBlock Text=" м/с"/>
-				</WrapPanel>
-				<TextBlock Text=" "></TextBlock>
-				<WrapPanel>
-					<TextBlock Text="Давление:  "/>
-					<TextBlock  Text="{Binding CurrentWeatherInfo.List[0].Main.Pressure}"/>
-					<TextBlock Text=" мм рт. ст."/>
-				</WrapPanel>
-				
+			<StackPanel Grid.Column="1" VerticalAlignment="Center">	
+					<TextBlock Text="{Binding CurrentWeatherInfo.List[0].Wind.Speed, StringFormat=Ветер: {0} м.с.}" Margin="5"/>			
+					<TextBlock  Text="{Binding CurrentWeatherInfo.List[0].Main.Pressure, StringFormat=Давление: {0} мм.рт.ст.}" Margin="5"/>				
 			</StackPanel>
 		</Grid>
-		<ListBox Grid.Row="2" ItemsSource="{Binding Days}" VerticalAlignment="Center" HorizontalAlignment="Center" >
+		
+		<ListBox Grid.Row="3" 
+			 	 ItemsSource="{Binding Days}" 
+		 		 VerticalAlignment="Center" 
+		 		 HorizontalAlignment="Center" 
+		 		 DoubleTapped="OpenInfo"
+			 	 Background="AliceBlue"
+				 Width="450">
 			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<StackPanel Orientation="Horizontal"/>
@@ -64,24 +71,41 @@
 			</ListBox.ItemsPanel>			
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<TextBlock Width="50" Text="{Binding}"/>
+					<TextBlock Foreground="Black" Width="50" Text="{Binding}"/>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
 		
-		<Grid Grid.Row="3" ColumnDefinitions="2*,*">
-			<TextBox Grid.Column="0" 
+		<Grid Grid.Row="2" ColumnDefinitions="2*,*">
+			
+			<TextBox Grid.Column="0"
 					 Watermark="Введите новый город:"
-					 Name="NewCity" Margin="10"
-					 VerticalContentAlignment="Center"/>
-			<Button Grid.Column="1" 
-					Content="Установить" 
-					HorizontalAlignment="Center" 
-					HorizontalContentAlignment="Center" 
-					Background="LightBlue"
+					 Name="NewCity"
+					 Margin="10"
+					 VerticalContentAlignment="Center"
+					 Foreground="Black">
+				<TextBox.Styles>
+					<Style Selector="TextBox /template/ TextBlock#PART_Watermark">
+						<Setter Property="Foreground" Value="Black" />
+						<Setter Property="IsVisible" Value="True" />
+					</Style>
+					<Style Selector="TextBox:pointerover /template/ TextBlock#PART_Watermark">
+						<Setter Property="Foreground" Value="Black" />
+					</Style>
+				</TextBox.Styles>
+			</TextBox>
+			
+			<Button Grid.Column="1"
+					Content="Установить"
+					HorizontalAlignment="Center"
+					HorizontalContentAlignment="Center"
 					VerticalContentAlignment="Center"
 					Command="{Binding SetNewCity}"
-					CommandParameter="{Binding Text, ElementName=NewCity}"/>
+					CommandParameter="{Binding Text, ElementName=NewCity}"
+					Width="140"
+					Height="40"
+					Foreground="LightCyan"	
+					Margin="5"/>
 		</Grid>				
 	</Grid>
 </Window>

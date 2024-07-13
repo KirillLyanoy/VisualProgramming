@@ -1,0 +1,68 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="dz6.WindowNextDays"
+		xmlns:local="clr-namespace:dz6"
+        Title="Full day"
+		Height="500"
+		Width="350"
+		CanResize="False"
+		x:DataType="local:DataContextNextDay">
+
+	<Window.Resources>	
+		<local:StringToImageConverter x:Key="StringToImageConverter" />
+	</Window.Resources>
+	
+	<Window.DataContext>
+		<local:DataContextNextDay/>
+	</Window.DataContext>
+	
+	<Window.DataTemplates>
+		<DataTemplate DataType="{x:Type local:model.List}">
+			<WrapPanel>
+				<StackPanel>
+					<Image Source="{Binding, Converter={StaticResource StringToImageConverter}}" Width="70"/>
+					<TextBlock Text="{Binding Weather[0].Main}" HorizontalAlignment="Center"/>
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Text="{Binding Dt_txt}" HorizontalAlignment="Center"/>
+					<TextBlock Text=" "/>
+					<Grid ColumnDefinitions="120, *">
+						<TextBlock Grid.Column="0" Text="  Температура:"/>
+						<TextBlock Grid.Column="1" Text="{Binding Main.Temp, StringFormat={}{0}°C}"/>
+					</Grid>
+					<Grid ColumnDefinitions="120, *">
+						<TextBlock Grid.Column="0" Text="  Давление:"/>
+						<TextBlock Grid.Column="1" Text="{Binding Main.Pressure, StringFormat={}{0} мм.рт.ст.}"/>
+					</Grid>
+					<Grid ColumnDefinitions="120, *">
+						<TextBlock Grid.Column="0" Text="  Ветер:"/>
+						<TextBlock Grid.Column="1" Text="{Binding Wind.Speed, StringFormat={}{0} м.с.}"/>
+					</Grid>
+				</StackPanel>			
+			</WrapPanel>
+		</DataTemplate>
+	</Window.DataTemplates>
+
+	<Grid RowDefinitions="*, 50" 
+		  HorizontalAlignment="Center"
+		  Margin="5" 
+		  Width="350"
+		  Background="LightSkyBlue">
+		<ListBox Grid.Row="0" 
+				 ItemsSource="{Binding DayInfo}"
+				 BorderThickness="1"
+				 BorderBrush="Black"
+				 Background="CornflowerBlue"
+				 Width="330"
+				 Margin="10"/>
+		<Button Grid.Row="1" 
+				Content="Закрыть" 
+				Click="CloseWindow" 
+				HorizontalContentAlignment="Center" 
+				HorizontalAlignment="Center"
+				Width="330"/>
+	</Grid>
+</Window>

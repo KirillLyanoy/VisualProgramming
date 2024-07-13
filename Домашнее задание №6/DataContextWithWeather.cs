@@ -1,17 +1,16 @@
 ﻿using dz6.model;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Threading;
 using System;
 using System.Linq;
 using System.Timers;
+using Avalonia.Media.Imaging;
+using Avalonia.Platform;
 
 namespace dz6
 {
-    internal class DataContextMainWindow : INotifyPropertyChanged
+    internal class DataContextWithWeather : DataContextMain
     {
-        public DataContextMainWindow()
+        public DataContextWithWeather()
         {
             CurrentWeatherInfo = new();
             WeatherUpdate();
@@ -20,49 +19,12 @@ namespace dz6
             aTimer.Enabled = true;
             aTimer.Start();
         }
-        private WeatherInfo? _currentWeatherInfo;
-        public System.Timers.Timer aTimer = new(6000);
+        public System.Timers.Timer aTimer = new(108000000);
+        private static WeatherInfo? _currentWeatherInfo;
         public WeatherInfo CurrentWeatherInfo
         {
             get { return _currentWeatherInfo; }
             set { _ = SetField(ref _currentWeatherInfo, value); }
-        }
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            OnPropertyChanged(propertyName);
-            return true;
-        }
-        public async void WeatherUpdate()
-        {
-            CurrentWeatherInfo = await WeatherService.GetWeather();
-            NextDays();
-            RoundWeather();
-        }
-        public async void WeatherUpdate(Object source, ElapsedEventArgs e)
-        {
-            CurrentWeatherInfo = await WeatherService.GetWeather();
-            NextDays();
-            RoundWeather();
-        }
-        private void NextDays()
-        {
-            List<string> days = [];
-         
-            foreach (var item in CurrentWeatherInfo.List)
-            {
-                DateTime dateTime;
-                dateTime = Convert.ToDateTime(item.Dt_txt);
-                dateTime = dateTime.AddHours(4);            
-                days.Add(dateTime.Day + "." + dateTime.Month);
-            }
-            Days = days.Distinct().ToList();
         }
         private List<string>? _days;
         public List<string> Days
@@ -76,6 +38,31 @@ namespace dz6
             get { return _roundedWeather; }
             set { _ = SetField(ref _roundedWeather, value); }
         }
+        public async void WeatherUpdate()
+        {
+            CurrentWeatherInfo = await WeatherService.GetWeather();
+            NextDays();
+            RoundWeather();
+            NewBackgroundImage();
+        }
+        public async void WeatherUpdate(Object source, ElapsedEventArgs e)
+        {
+            CurrentWeatherInfo = await WeatherService.GetWeather();
+            NextDays();
+            RoundWeather();
+            NewBackgroundImage();
+        }
+        private void NextDays()
+        {
+            List<string> days = [];
+            DateTime dateTime;
+            foreach (var item in CurrentWeatherInfo.List)
+            {               
+                dateTime = Convert.ToDateTime(item.Dt_txt);                          
+                days.Add(dateTime.Day + "." + dateTime.Month);
+            }
+            Days = days.Distinct().ToList();
+        }
         public void RoundWeather()
         {
             RoundedWeather = (int)Math.Round((decimal)_currentWeatherInfo.List[0].Main.Temp);
@@ -86,6 +73,27 @@ namespace dz6
             WeatherService.SetUrl("https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=metric&appid=65270a98c3dcac555ca95710dfd76dda");
             WeatherUpdate();
             aTimer.Start();
+        }
+        public static List<model.List> GetOneDayWeather(string day)
+        {
+            List<List> oneDayWeather = [];
+            DateTime dateTime;
+            foreach (var item in _currentWeatherInfo.List)
+            {
+                dateTime = Convert.ToDateTime(item.Dt_txt);           
+                if (day == dateTime.Day + "." + dateTime.Month) oneDayWeather.Add(item);
+            }
+            return oneDayWeather;
+        }        
+        public Bitmap BackgroundImage
+        {
+            get { return _backgroundImage; }
+            set { _ = SetField(ref _backgroundImage, value); }
+        }
+        private static Bitmap _backgroundImage;
+        private void NewBackgroundImage()
+        {
+            BackgroundImage = new Bitmap(AssetLoader.Open(new Uri("avares://dz6/Assets/" + _currentWeatherInfo.List[0].Weather[0].Icon + "Background.png")));
         }
     }
 }

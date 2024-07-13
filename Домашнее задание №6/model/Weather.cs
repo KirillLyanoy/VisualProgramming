@@ -9,5 +9,6 @@ namespace dz6.model
     internal class Weather
     {
         public string? Main { get; set; }
+        public string? Icon { get; set; }
     }
 }
