@@ -13,8 +13,8 @@ namespace dz7
         }
 
         private void AddUser(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
-            
+        {            
+
         }
         private void DeleteUser(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
