@@ -55,7 +55,7 @@
 				 ItemsSource="{Binding DayInfo}"
 				 BorderThickness="1"
 				 BorderBrush="Black"
-				 Background="CornflowerBlue"
+				 Background="LightBlue"
 				 Width="330"
 				 Margin="10"/>
 		<Button Grid.Row="1" 

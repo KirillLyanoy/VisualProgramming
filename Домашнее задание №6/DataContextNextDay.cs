@@ -1,12 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
-using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
+﻿using System.Collections.Generic;
 
 namespace dz6
 {

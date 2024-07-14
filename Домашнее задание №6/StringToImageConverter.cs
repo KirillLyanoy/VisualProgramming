@@ -2,11 +2,7 @@
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace dz6
 {

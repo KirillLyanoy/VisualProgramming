@@ -1,12 +1,32 @@
-﻿using System;
+﻿using dz7.model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+
 using System.Runtime.CompilerServices;
 
-namespace dz6
+namespace dz7
 {
-    abstract class DataContextMain : INotifyPropertyChanged
+    internal class DataContextWithUsers : INotifyPropertyChanged
     {
+        public DataContextWithUsers() 
+        {
+            if (usersList == null) GetUsers();
+        }
+
+        private async void GetUsers()
+        {
+            GetHttpUsersService users = new();
+            UsersList = new ObservableCollection<User> ( await users.GetJSONUsers() );
+        }
+        private static ObservableCollection<User>? usersList;
+        public ObservableCollection<User>? UsersList
+        {
+            get { return usersList; }
+            set { _ = SetField(ref usersList, value); }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {

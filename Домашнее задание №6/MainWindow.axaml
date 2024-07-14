@@ -27,16 +27,14 @@
 		<Style Selector="TextBlock">
 			<Setter Property="Foreground" Value="AliceBlue"/>
 		</Style>
-	</Window.Styles>	
+	</Window.Styles>
 
-	<Grid RowDefinitions="25,100,*, *">
-		
+	<Grid RowDefinitions="25,100,*, *">		
 		<WrapPanel Grid.Row="0" HorizontalAlignment="Center">			
 			<TextBlock LetterSpacing="1" Name="currentCity" Text="{Binding CurrentWeatherInfo.City.Name}" Margin="5" FontWeight="ExtraBold"/>
 			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lat, StringFormat={}{0} с.ш}" Margin="5" FontWeight="ExtraBold"/>
 			<TextBlock Text="{Binding CurrentWeatherInfo.City.Coord.Lon, StringFormat={}{0} в.д.}" Margin="5" FontWeight="ExtraBold"/>
-		</WrapPanel>
-		
+		</WrapPanel>		
 		<Grid Grid.Row="1" ColumnDefinitions="*,*">
 			<StackPanel Grid.Column="0" Margin="7">
 				<WrapPanel 
@@ -55,8 +53,7 @@
 					<TextBlock Text="{Binding CurrentWeatherInfo.List[0].Wind.Speed, StringFormat=Ветер: {0} м.с.}" Margin="5"/>			
 					<TextBlock  Text="{Binding CurrentWeatherInfo.List[0].Main.Pressure, StringFormat=Давление: {0} мм.рт.ст.}" Margin="5"/>				
 			</StackPanel>
-		</Grid>
-		
+		</Grid>		
 		<ListBox Grid.Row="3" 
 			 	 ItemsSource="{Binding Days}" 
 		 		 VerticalAlignment="Center" 
@@ -74,10 +71,8 @@
 					<TextBlock Foreground="Black" Width="50" Text="{Binding}"/>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
-		</ListBox>
-		
-		<Grid Grid.Row="2" ColumnDefinitions="2*,*">
-			
+		</ListBox>		
+		<Grid Grid.Row="2" ColumnDefinitions="2*,*">			
 			<TextBox Grid.Column="0"
 					 Watermark="Введите новый город:"
 					 Name="NewCity"
@@ -94,7 +89,6 @@
 					</Style>
 				</TextBox.Styles>
 			</TextBox>
-			
 			<Button Grid.Column="1"
 					Content="Установить"
 					HorizontalAlignment="Center"
