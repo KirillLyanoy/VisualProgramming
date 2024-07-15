@@ -16,13 +16,13 @@
 	<Grid RowDefinitions="30, *">
 		<WrapPanel Grid.Row="0" HorizontalAlignment="Right">
 			<Button Content="Add" Click="AddUser" Width="100"/>
-			<Button Content="Delete" Click="DeleteUser" Width="100"/>
-			<Button Content="Edit" Click="EditUser" Width="100"/>
+			<Button Content="Delete" Click="DeleteUser" Width="100"/>			
 		</WrapPanel>
 		<DataGrid Name="dataGrid" Grid.Row="1" ItemsSource="{Binding UsersList}"
-			  IsReadOnly="True"
+			  IsReadOnly="False"
 			  GridLinesVisibility="All"
-			  BorderThickness="1" BorderBrush="Gray">
+			  BorderThickness="1" 
+			  BorderBrush="Gray">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
 				<DataGridTextColumn Header="Name"  Binding="{Binding Name}"/>

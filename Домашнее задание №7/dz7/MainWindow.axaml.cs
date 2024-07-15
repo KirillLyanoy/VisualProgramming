@@ -13,23 +13,40 @@ namespace dz7
         }
 
         private void AddUser(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {            
-
+        {
+            DataContextWithUsers dataContextWithUsers = new();
+            dataContextWithUsers.UsersList.Add(new User()
+            {
+                Id = 0,
+                Name = "",
+                Username = "",
+                Email = "",
+                Phone = "",
+                Website = "",
+                Address = new Address()
+                {
+                    Street = "",
+                    Suite = "",
+                    City = "",
+                    Geo = new Geo()
+                    {
+                        Lat = "",
+                        Lng = ""
+                    }
+                },
+                Company = new Company()
+                {
+                    Name = "",
+                    CatchPhrase = "",
+                    Bs = ""
+                }
+            } );
         }
         private void DeleteUser(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             DataContextWithUsers dataContextWithUsers = new();
-            foreach (var item in dataContextWithUsers.UsersList)
-            {
-                if (item == dataGrid.SelectedItem)
-                {
-                    dataContextWithUsers.UsersList.Remove(item);
-                    return;
-                }
-            }         
-        }
-        private void EditUser(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
+            User user = dataGrid.SelectedItem as User;
+            dataContextWithUsers.UsersList.Remove(user);        
         }
     }
 }
