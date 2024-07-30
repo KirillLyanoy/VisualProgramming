@@ -10,14 +10,8 @@ namespace dz7
         public MainWindow()
         {
             InitializeComponent();
-            DataContextWithUsers dataContextWithUsers = new DataContextWithUsers(); 
-           
-
-
-            UserListTracker factory = new UserListTracker();
-            factory.Subscribe(dataContextWithUsers.UsersList);
         }
-
+       
         private void AddUser(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             DataContextWithUsers dataContextWithUsers = new();

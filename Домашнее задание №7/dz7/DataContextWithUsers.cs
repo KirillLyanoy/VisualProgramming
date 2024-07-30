@@ -1,7 +1,9 @@
 ﻿using dz7.model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 
 namespace dz7
@@ -10,13 +12,18 @@ namespace dz7
     {
         public DataContextWithUsers() 
         {
-            if (usersList == null) GetUsers();
+            if (usersList == null)
+            {
+                GetUsers();
+            }            
         }
 
         private async void GetUsers()
         {
             GetHttpUsersService users = new();
-            UsersList = new ObservableCollection<User> ( await users.GetJSONUsers() );
+            UsersList = new ObservableCollection<User> ( await users.GetJSONUsers());
+            UserListTracker userListTracker = new UserListTracker();
+            userListTracker.FactoryMethod(usersList);
         }
         private static ObservableCollection<User>? usersList;
         public ObservableCollection<User>? UsersList
