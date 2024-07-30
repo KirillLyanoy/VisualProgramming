@@ -7,7 +7,7 @@ using dz7.model;
 
 namespace dz7
 {
-      internal class UserListTracker
+      internal class Factory
       {
         public IObservable<NotifyCollectionChangedEventArgs> FactoryMethod<T>(ObservableCollection<T> collection)
         {
@@ -25,6 +25,10 @@ namespace dz7
                         User oldUser = e.OldItems[0] as User;
                         SaveLog($"Удалён объект \"{oldUser.Name}\"");
                         break;
+                    case NotifyCollectionChangedAction.Replace:
+                        User editedUser = e.OldItems[0] as User;                        
+                        SaveLog($"Объект {editedUser.Name} отредактирован");
+                        break;
                     default:
                         break;
                 }
@@ -39,7 +43,7 @@ namespace dz7
         }
         void SaveLog(string changes)
         {
-            StreamWriter fs = new StreamWriter("D://log.txt", true);        
+            StreamWriter fs = new StreamWriter("log.txt", true);        
             DateTime dateTime = DateTime.Now;
             fs.Write(dateTime + "\t");
             fs.WriteLine(changes);

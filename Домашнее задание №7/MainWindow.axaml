@@ -24,7 +24,8 @@
 			  IsReadOnly="False"
 			  GridLinesVisibility="All"
 			  BorderThickness="1" 
-			  BorderBrush="Gray">
+			  BorderBrush="Gray"
+			  RowEditEnded="DataGrid_RowEditEnded">
 			<DataGrid.Columns>
 				<DataGridTextColumn Header="Id"  Binding="{Binding Id}"/>
 				<DataGridTextColumn Header="Name"  Binding="{Binding Name}"/>

@@ -20,7 +20,13 @@ namespace dz7
         {
             DataContextWithUsers dataContextWithUsers = new();
             User user = dataGrid.SelectedItem as User;
-            dataContextWithUsers.UsersList.Remove(user);        
+            dataContextWithUsers.UsersList.Remove(user);            
+        }
+        private void DataGrid_RowEditEnded(object? sender, Avalonia.Controls.DataGridRowEditEndedEventArgs e)
+        {
+            DataGrid dataGrid = sender as DataGrid;     
+            DataContextWithUsers dataContextWithUsers = new();
+            dataContextWithUsers.UsersList[dataGrid.SelectedIndex] = dataContextWithUsers.UsersList[dataGrid.SelectedIndex];
         }
     }
 }

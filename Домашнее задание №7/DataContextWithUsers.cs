@@ -21,7 +21,7 @@ namespace dz7
         {
             GetHttpUsersService users = new();
             UsersList = new ObservableCollection<User> ( await users.GetJSONUsers());
-            UserListTracker userListTracker = new UserListTracker();
+            Factory userListTracker = new Factory();
             userListTracker.FactoryMethod(usersList);
         }
         private static ObservableCollection<User>? usersList;
