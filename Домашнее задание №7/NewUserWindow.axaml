@@ -1,0 +1,104 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="dz7.NewUserWindow"
+		Height="360"
+		Width="550"
+		CanResize="False"
+        Title="Добавление пользователя"
+		Background="WhiteSmoke">
+
+	<Window.Styles>
+		<Style Selector="TextBox">
+			<Setter Property="Width" Value="120"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Height" Value="15"/>		
+		</Style>
+		<Style Selector="TextBlock">
+			<Setter Property="Width" Value="130"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Margin" Value="5"/>		
+		</Style>
+		<Style Selector="Button">
+			<Setter Property="Width" Value="110"/>
+			<Setter Property="Height" Value="50"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
+			<Setter Property="Margin" Value="10"/>
+		</Style>
+	</Window.Styles>
+	
+	<Grid ColumnDefinitions="*, *" Margin="5">
+		<StackPanel Grid.Column="0">
+			<WrapPanel>
+				<TextBlock Text="ID: "/>
+				<TextBox Name="id" KeyDown="TextBox_KeyDown"/>
+			</WrapPanel>
+			<WrapPanel>
+				<TextBlock Text="Имя: "/>
+				<TextBox Name="name"/>
+			</WrapPanel>
+			<WrapPanel>
+				<TextBlock Text="Логин: "/>
+				<TextBox Name="userName"/>
+			</WrapPanel>
+			<WrapPanel>
+				<TextBlock Text="Email: "/>
+				<TextBox Name="email"/>
+			</WrapPanel>
+			<WrapPanel>
+				<TextBlock Text="Телефон: "/>
+				<TextBox Name="phone"/>
+			</WrapPanel>
+			<WrapPanel>
+				<TextBlock Text="Сайт: "/>
+				<TextBox Name="website"/>
+			</WrapPanel>
+			<WrapPanel>
+				<TextBlock Text="Слоган компании: "/>
+				<TextBox Name="catchPhrase"/>
+			</WrapPanel>
+			<WrapPanel>
+				<TextBlock Text="Крылатая фраза: "/>
+				<TextBox Name="bs"/>
+			</WrapPanel>
+		</StackPanel>
+		<StackPanel Grid.Column="1">
+			<Grid RowDefinitions="*, *">
+				<StackPanel Grid.Row="0">
+					<WrapPanel>
+						<TextBlock Text="Имя компании: "/>
+						<TextBox Name="companyName"/>
+					</WrapPanel>
+					<WrapPanel>
+						<TextBlock Text="Улица: "/>
+						<TextBox Name="street"/>
+					</WrapPanel>
+					<WrapPanel>
+						<TextBlock Text="Номер офиса: "/>
+						<TextBox Name="suite"/>
+					</WrapPanel>
+					<WrapPanel>
+						<TextBlock Text="Город: "/>
+						<TextBox Name="city"/>
+					</WrapPanel>
+					<WrapPanel>
+						<TextBlock Text="Широта: "/>
+						<TextBox Name="lat"/>
+					</WrapPanel>
+					<WrapPanel>
+						<TextBlock Text="Долгота: "/>
+						<TextBox Name="lng"/>
+					</WrapPanel>
+				</StackPanel>
+				<WrapPanel Grid.Row="1">
+						<Button Content="Подтвердить" Click="ConfirmButton"/>
+						<Button Content="Отменить" Click="CancelButton"/>
+				</WrapPanel>				
+			</Grid>
+		</StackPanel>
+	</Grid>
+</Window>

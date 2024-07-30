@@ -19,7 +19,7 @@ namespace dz7
                 {
                     case NotifyCollectionChangedAction.Add:
                         User newUser = e.NewItems[0] as User;
-                        SaveLog($"Добавлен объект {newUser.Name}");
+                        SaveLog($"Добавлен объект \"{newUser.Name}\"");
                         break;
                     case NotifyCollectionChangedAction.Remove:
                         User oldUser = e.OldItems[0] as User;
@@ -39,7 +39,9 @@ namespace dz7
         }
         void SaveLog(string changes)
         {
-            StreamWriter fs = new StreamWriter("D://log.txt", true);            
+            StreamWriter fs = new StreamWriter("D://log.txt", true);        
+            DateTime dateTime = DateTime.Now;
+            fs.Write(dateTime + "\t");
             fs.WriteLine(changes);
             fs.Close();
         }

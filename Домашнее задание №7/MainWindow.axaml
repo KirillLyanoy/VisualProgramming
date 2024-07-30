@@ -18,7 +18,9 @@
 			<Button Content="Add" Click="AddUser" Width="100"/>
 			<Button Content="Delete" Click="DeleteUser" Width="100"/>			
 		</WrapPanel>
-		<DataGrid Name="dataGrid" Grid.Row="1" ItemsSource="{Binding UsersList}"
+		<DataGrid Name="dataGrid" 
+			  Grid.Row="1" 
+			  ItemsSource="{Binding UsersList}"
 			  IsReadOnly="False"
 			  GridLinesVisibility="All"
 			  BorderThickness="1" 

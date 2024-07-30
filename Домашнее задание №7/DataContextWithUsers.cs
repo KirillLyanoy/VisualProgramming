@@ -17,7 +17,6 @@ namespace dz7
                 GetUsers();
             }            
         }
-
         private async void GetUsers()
         {
             GetHttpUsersService users = new();
