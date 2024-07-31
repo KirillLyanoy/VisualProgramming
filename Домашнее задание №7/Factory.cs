@@ -19,15 +19,15 @@ namespace dz7
                 {
                     case NotifyCollectionChangedAction.Add:
                         User newUser = e.NewItems[0] as User;
-                        SaveLog($"Добавлен объект \"{newUser.Name}\"");
+                        SaveLog($"Добавлен объект \"{newUser.Name}\".");
                         break;
                     case NotifyCollectionChangedAction.Remove:
                         User oldUser = e.OldItems[0] as User;
-                        SaveLog($"Удалён объект \"{oldUser.Name}\"");
+                        SaveLog($"Удалён объект \"{oldUser.Name}\".");
                         break;
                     case NotifyCollectionChangedAction.Replace:
                         User editedUser = e.OldItems[0] as User;                        
-                        SaveLog($"Объект {editedUser.Name} отредактирован");
+                        SaveLog($"Объект \"{editedUser.Name}\" отредактирован.");
                         break;
                     default:
                         break;

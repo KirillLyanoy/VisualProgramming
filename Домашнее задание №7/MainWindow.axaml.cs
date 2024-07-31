@@ -1,7 +1,5 @@
 using Avalonia.Controls;
 using dz7.model;
-using System.Collections.Generic;
-using System.Data;
 
 namespace dz7
 {
