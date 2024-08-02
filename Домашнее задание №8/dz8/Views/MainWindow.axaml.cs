@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using dz8.ViewModels;
 
 namespace dz8.Views
 {
