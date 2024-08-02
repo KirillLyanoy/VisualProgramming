@@ -3,25 +3,23 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace dz8.ViewModels
+namespace dz8.ViewModels.Pages
 {
-    public class DataGridViewModel : INotifyPropertyChanged
+    public abstract class BasePageViewModel : ViewModelBase
     {
-        public DataGridViewModel()
-        {
-            GetUsers();
-        }
+        public string Header => GetName();
+        public abstract string GetName();
         private ObservableCollection<User>? _usersList;
         public ObservableCollection<User>? UsersList
         {
             get { return _usersList; }
-            set 
+            set
             {
                 _usersList = value;
                 OnPropertyChanged(nameof(UsersList));
             }
         }
-        private async void GetUsers()
+        public async void GetUsers()
         {
             GetHttpUsersService users = new();
             UsersList = new ObservableCollection<User>(await users.GetJSONUsers());
