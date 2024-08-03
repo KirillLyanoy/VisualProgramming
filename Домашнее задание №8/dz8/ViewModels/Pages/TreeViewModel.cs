@@ -13,7 +13,7 @@ namespace dz8.ViewModels.Pages
         }
         public override string GetName()
         {
-            return "Data Grid";
+            return "Tree";
         }
     }
 }
