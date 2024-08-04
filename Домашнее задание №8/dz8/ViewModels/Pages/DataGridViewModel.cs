@@ -8,7 +8,6 @@ namespace dz8.ViewModels.Pages
         {
             GetUsers();
         }
-
         public override string GetName()
         {
             return "Data Grid";

@@ -19,10 +19,10 @@ namespace dz8.ViewModels.Pages
                 OnPropertyChanged(nameof(UsersList));
             }
         }
-        public async void GetUsers()
+        public async virtual void GetUsers()
         {
             GetHttpUsersService users = new();
-            UsersList = new ObservableCollection<User>(await users.GetJSONUsers());
+            UsersList = new ObservableCollection<User>(await users.GetUsersList());
         }
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)

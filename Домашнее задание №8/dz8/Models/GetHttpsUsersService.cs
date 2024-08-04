@@ -13,12 +13,11 @@ namespace dz8
         {
             BaseAddress = new Uri("https://jsonplaceholder.typicode.com/users"),
         };
-
         private readonly JsonSerializerOptions serializeOptions = new()
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
-        public async Task<List<User>> GetJSONUsers()
+        public async Task<List<User>> GetUsersList()
         {
             using HttpResponseMessage response = await client.GetAsync(client.BaseAddress);
             response.EnsureSuccessStatusCode();
