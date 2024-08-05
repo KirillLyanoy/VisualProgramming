@@ -10,7 +10,7 @@ namespace dz8.Models
     abstract class Component
     {
         protected string name;
-        public string Name { get { return name; } }
+        public string Name { get { return name; } set { name = value; } }
         public ObservableCollection<Component> children = new ObservableCollection<Component>();
         public ObservableCollection<Component> Children { get { return children; } }
         public Component(string name)

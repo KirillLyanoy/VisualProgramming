@@ -10,13 +10,14 @@
 	<Design.DataContext>
 		<vm:TreeViewModel/>
 	</Design.DataContext>
-
-	<TreeView ItemsSource="{Binding Components}">
-		<TreeView.ItemTemplate>
-			<TreeDataTemplate ItemsSource="{Binding Children}">
-				<TreeViewItem Header="{Binding Name}"></TreeViewItem>
-			</TreeDataTemplate>
-		</TreeView.ItemTemplate>
-	</TreeView>
-	
+	<StackPanel>
+		<TextBlock Margin="5" Text=" Users: "/>
+		<TreeView ItemsSource="{Binding Components}">
+			<TreeView.ItemTemplate>
+				<TreeDataTemplate ItemsSource="{Binding Children}">
+					<TreeViewItem Header="{Binding Name}"></TreeViewItem>
+				</TreeDataTemplate>
+			</TreeView.ItemTemplate>
+		</TreeView>
+	</StackPanel>
 </UserControl>

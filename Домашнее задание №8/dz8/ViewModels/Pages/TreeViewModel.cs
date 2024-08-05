@@ -1,6 +1,7 @@
 ﻿using dz8.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Reflection;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace dz8.ViewModels.Pages
@@ -20,7 +21,8 @@ namespace dz8.ViewModels.Pages
             foreach (var user in UsersList) 
             {
                 ConvertToTree(user, components);                
-            }          
+            }  
+            RenameTitle(components);
         }
         private void ConvertToTree<T>(T data, ObservableCollection<Component> collection)
         {      
@@ -40,6 +42,14 @@ namespace dz8.ViewModels.Pages
                 }
             }
             collection.Add(composite);  
+        }
+
+        private void RenameTitle(ObservableCollection<Component> components)
+        {
+            foreach (var component in components)
+            {
+                component.Name = Convert.ToString(component.Children[0].Name);
+            }
         }
         public override string GetName()
         {
