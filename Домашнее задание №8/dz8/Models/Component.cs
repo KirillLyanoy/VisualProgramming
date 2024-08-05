@@ -11,12 +11,11 @@ namespace dz8.Models
     {
         protected string name;
         public string Name { get { return name; } set { name = value; } }
-        public ObservableCollection<Component> children = new ObservableCollection<Component>();
-        public ObservableCollection<Component> Children { get { return children; } }
         public Component(string name)
         {
             this.name = name;
         }
+        public abstract ObservableCollection<Component> Children { get; set; } 
         public Component() { }
         public abstract void Add(Component c);
     }

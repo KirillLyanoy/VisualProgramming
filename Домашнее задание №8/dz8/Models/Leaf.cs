@@ -11,6 +11,7 @@ namespace dz8.Models
     {
         public Leaf(string name) : base(name) { }
         public Leaf() : base() { }
+        public override ObservableCollection<Component> Children { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override void Add(Component component)
         {
             throw new NotImplementedException();
