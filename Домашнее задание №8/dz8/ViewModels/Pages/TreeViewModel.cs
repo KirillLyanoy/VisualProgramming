@@ -19,29 +19,35 @@ namespace dz8.ViewModels.Pages
             UsersList = new ObservableCollection<User>(await users.GetUsersList());
             foreach (var user in UsersList) 
             {
-                ToTree(user, components);
+                ToTree(user, components);                
             }
           
         }
         private void ToTree<T>(T data, ObservableCollection<Component> collection)
-        {          
-            Type type = typeof(T);
+        {      
+            Composite composite = new Composite();
+
+
+            Type type = data.GetType();
             PropertyInfo[] propertyes = type.GetProperties();
             object[] arrObj = new object[propertyes.Length];
             foreach (PropertyInfo property in propertyes)
             {
                 if (property.GetValue(data) is int || property.GetValue(data) is string)
                 {
-                    collection.Add(new Leaf(Convert.ToString(property.GetValue(data))));
+                    composite.Add(new Leaf(Convert.ToString(property.GetValue(data))));
                 }
                 else
-                {
+                {                    
+                    ToTree(property.GetValue(data), composite.Children);
+
                     //collection.Add(new Composite(Convert.ToString(property.GetValue(data))));
-                    Component component = new Composite(Convert.ToString(property.GetValue(data)));
-                    ToTree(data, component.Children);
-                    collection.Add((Component)component);
+                    //Component component = new Composite(Convert.ToString(property.GetValue(data)));
+                    //ToTree(data, component.Children);
+                    //component.Add((Component)component);
                 }
-            }        
+            }
+            collection.Add(composite);  
         }
         public override string GetName()
         {

@@ -11,11 +11,7 @@ namespace dz8.Models
     {
         protected string name;
         public string Name { get { return name; } }
-        public ObservableCollection<Component> children = new ObservableCollection<Component>();
-        public ObservableCollection<Component> Children { get { return children; } }
-
-
-
+        public Component() { }
         public Component(string name)
         {
             this.name = name;
