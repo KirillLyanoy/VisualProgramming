@@ -1,5 +1,4 @@
-﻿
-using dz8.ViewModels.Pages;
+﻿using dz8.ViewModels.Pages;
 using ReactiveUI;
 using System.Collections.ObjectModel;
 

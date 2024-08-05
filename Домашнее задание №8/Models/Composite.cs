@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace dz8.Models
 {
@@ -11,9 +6,6 @@ namespace dz8.Models
     {
         public ObservableCollection<Component> children = new ObservableCollection<Component>();
         public override ObservableCollection<Component> Children { get { return children; } set { children = value; } }
-
-        
-
         public Composite(string name) : base(name) { }
         public Composite() : base() { }
         public override void Add(Component component)

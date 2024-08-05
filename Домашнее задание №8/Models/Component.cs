@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace dz8.Models
 {
@@ -11,10 +6,7 @@ namespace dz8.Models
     {
         protected string name;
         public string Name { get { return name; } set { name = value; } }
-        public Component(string name)
-        {
-            this.name = name;
-        }
+        public Component(string name) { this.name = name; }
         public abstract ObservableCollection<Component> Children { get; set; } 
         public Component() { }
         public abstract void Add(Component c);
