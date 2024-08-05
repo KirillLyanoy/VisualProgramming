@@ -19,32 +19,24 @@ namespace dz8.ViewModels.Pages
             UsersList = new ObservableCollection<User>(await users.GetUsersList());
             foreach (var user in UsersList) 
             {
-                ToTree(user, components);                
-            }
-          
+                ConvertToTree(user, components);                
+            }          
         }
-        private void ToTree<T>(T data, ObservableCollection<Component> collection)
+        private void ConvertToTree<T>(T data, ObservableCollection<Component> collection)
         {      
-            Composite composite = new Composite();
-
-
             Type type = data.GetType();
+            Composite composite = new Composite(Convert.ToString(type.Name));
             PropertyInfo[] propertyes = type.GetProperties();
             object[] arrObj = new object[propertyes.Length];
             foreach (PropertyInfo property in propertyes)
             {
                 if (property.GetValue(data) is int || property.GetValue(data) is string)
                 {
-                    composite.Add(new Leaf(Convert.ToString(property.GetValue(data))));
+                    composite.Add(new Leaf(Convert.ToString(property.Name) + ":\t" + Convert.ToString(property.GetValue(data))));
                 }
                 else
                 {                    
-                    ToTree(property.GetValue(data), composite.Children);
-
-                    //collection.Add(new Composite(Convert.ToString(property.GetValue(data))));
-                    //Component component = new Composite(Convert.ToString(property.GetValue(data)));
-                    //ToTree(data, component.Children);
-                    //component.Add((Component)component);
+                    ConvertToTree(property.GetValue(data), composite.Children);
                 }
             }
             collection.Add(composite);  

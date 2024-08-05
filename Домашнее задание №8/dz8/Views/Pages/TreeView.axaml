@@ -13,7 +13,7 @@
 
 	<TreeView ItemsSource="{Binding Components}">
 		<TreeView.ItemTemplate>
-			<TreeDataTemplate>
+			<TreeDataTemplate ItemsSource="{Binding Children}">
 				<TreeViewItem Header="{Binding Name}"></TreeViewItem>
 			</TreeDataTemplate>
 		</TreeView.ItemTemplate>

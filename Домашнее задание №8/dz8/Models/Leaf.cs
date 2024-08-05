@@ -9,8 +9,8 @@ namespace dz8.Models
 {
     internal class Leaf : Component
     {
-        public Leaf() { }
         public Leaf(string name) : base(name) { }
+        public Leaf() : base() { }
         public override void Add(Component component)
         {
             throw new NotImplementedException();
