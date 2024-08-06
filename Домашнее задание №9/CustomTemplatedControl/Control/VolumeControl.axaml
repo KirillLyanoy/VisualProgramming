@@ -1,0 +1,26 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dz9.Control">
+	
+  <Design.PreviewWith>
+	  <controls:VolumeControl />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|VolumeControl">
+    <Setter Property="Template">
+		<ControlTemplate>
+			<WrapPanel>
+				<Button Margin="5" Width="20" Height="20">
+					<Image Width="20" 
+						   Height="20" 
+						   Source="{TemplateBinding ImagePath}"/>					
+				</Button>
+				<Slider Width="100" 
+						Minimum="{TemplateBinding MinValue}" 
+						Maximum="{TemplateBinding MaxValue}"/>
+				<TextBlock Text="{TemplateBinding ImagePath}"/>
+			</WrapPanel>
+        </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

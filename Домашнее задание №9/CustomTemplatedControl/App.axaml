@@ -11,6 +11,6 @@
   
     <Application.Styles>
         <FluentTheme />
-		<StyleInclude Source="Control/VolumeControl.axaml"/>
+        <StyleInclude Source="Control/VolumeControl.axaml"/>
     </Application.Styles>
 </Application>

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.10.34916.146
+VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dz9", "dz9.csproj", "{666530D8-3751-4E2D-84E2-4B0440F6B24F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dz9", "CustomTemplatedControl\dz9.csproj", "{ADA46576-0139-4FA0-AB46-BF35CDFB0CEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{666530D8-3751-4E2D-84E2-4B0440F6B24F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{666530D8-3751-4E2D-84E2-4B0440F6B24F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{666530D8-3751-4E2D-84E2-4B0440F6B24F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{666530D8-3751-4E2D-84E2-4B0440F6B24F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADA46576-0139-4FA0-AB46-BF35CDFB0CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADA46576-0139-4FA0-AB46-BF35CDFB0CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADA46576-0139-4FA0-AB46-BF35CDFB0CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADA46576-0139-4FA0-AB46-BF35CDFB0CEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BF975664-5348-4A25-9814-157BF86F6491}
+		SolutionGuid = {C7680F91-9586-4CDF-A93C-6BEE940C767D}
 	EndGlobalSection
 EndGlobal

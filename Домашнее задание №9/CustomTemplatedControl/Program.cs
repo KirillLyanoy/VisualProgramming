@@ -2,7 +2,7 @@
 using Avalonia.ReactiveUI;
 using System;
 
-namespace dz9
+namespace dz9   
 {
     internal sealed class Program
     {

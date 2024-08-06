@@ -3,7 +3,7 @@
         xmlns:vm="using:dz9.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		xmlns:control="clr-namespace:dz9"
+        xmlns:control="clr-namespace:dz9.Control"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="dz9.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -11,6 +11,14 @@
         Title="dz9">
 
     <Design.DataContext>
-      <vm:MainWindowViewModel/>
-    </Design.DataContext>	
+         <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <StackPanel>
+		<TextBlock Text="{Binding TextArea}"/>
+		<control:VolumeControl ImagePath="avares://dz9/Assets/icon.png"
+							   MaxValue="100"
+							   MinValue="0"/>	
+    </StackPanel>
+
 </Window>
