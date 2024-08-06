@@ -1,20 +1,19 @@
 ﻿using ReactiveUI;
-using System.Reactive;
 
 namespace dz9.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public MainWindowViewModel()
+        private bool fullSizeIndex = false;
+        public bool FullSizeIndex 
         {
-            TextArea = "Hello";
+            get => fullSizeIndex;
+            set => this.RaiseAndSetIfChanged(ref fullSizeIndex, value);
         }
-
-        private string textArea;
-        public string TextArea
+        public void VolumeClick()
         {
-            get => textArea;
-            set => this.RaiseAndSetIfChanged(ref textArea, value);
+            if (!FullSizeIndex) FullSizeIndex = true;
+            else FullSizeIndex = false;
         }
     }
 }

@@ -15,10 +15,12 @@
     </Design.DataContext>
 
     <StackPanel>
-		<TextBlock Text="{Binding TextArea}"/>
-		<control:VolumeControl ImagePath="avares://dz9/Assets/icon.png"
+		<control:VolumeControl Name="volumeItem"
+			                   ImagePath="avares://dz9/Assets/icon.png"
 							   MaxValue="100"
-							   MinValue="0"/>	
+							   MinValue="0"
+							   FullSize="{Binding FullSizeIndex}"
+							   VolumeCommand="{Binding VolumeClick}"/>	
     </StackPanel>
 
 </Window>
