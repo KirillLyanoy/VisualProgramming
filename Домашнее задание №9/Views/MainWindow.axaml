@@ -12,10 +12,5 @@
 
     <Design.DataContext>
       <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-	<WrapPanel>
-		<control:VolumeControl/>
-	</WrapPanel>
-	
+    </Design.DataContext>	
 </Window>
