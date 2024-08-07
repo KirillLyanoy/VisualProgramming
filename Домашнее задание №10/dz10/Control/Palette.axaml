@@ -80,7 +80,7 @@
 												<TextBlock Text="Зелёный: "/>
 												<TextBox />								
 												<TextBlock Text="Синий: "/>
-												<TextBox Text="{TemplateBinding TextChange}"/>
+												<TextBox />
 											</StackPanel>
 											<Rectangle Width="100" 
 													   Height="135" 
@@ -100,8 +100,10 @@
 						</Grid>
 					</Grid>
 					<Grid ColumnDefinitions="300,50" Height="400">					
-						<ColorSpectrum Grid.Column="0"/>
-						<ColorSlider Grid.Column="1"
+						<ColorSpectrum Name="PART_MainColorSpectrum"
+									   Grid.Column="0"/>
+						<ColorSlider Name="PART_MainColorSlider"
+									 Grid.Column="1"
 									 Orientation="Vertical"
 									 Margin="10"
 									 HorizontalAlignment="Center"

@@ -6,7 +6,7 @@
         xmlns:control="clr-namespace:dz10.Control"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 		Width="635"
-		Height="370"
+		Height="900"
 		CanResize="False"
         x:Class="dz10.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -18,7 +18,9 @@
     </Design.DataContext>
 
     <StackPanel>
-		<control:Palette/>	
+		<control:Palette/>
+
+		<ColorSpectrum Height="30" ColorChanged="ColorSpectrum_ColorChanged" />
     </StackPanel>
 
 </Window>
