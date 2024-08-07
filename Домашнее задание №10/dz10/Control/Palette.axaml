@@ -1,0 +1,115 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dz10.Control">	
+  <Design.PreviewWith>
+	  <controls:Palette />
+  </Design.PreviewWith>
+	<Styles>
+		<Style Selector="Ellipse">
+			<Setter Property="Width" Value="20"/>
+			<Setter Property="Height" Value="20"/>
+			<Setter Property="Fill" Value="White"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="Stroke" Value="Black"/>
+			<Setter Property="StrokeThickness" Value="1"/>
+		</Style>
+		<Style Selector="TextBox">
+			<Setter Property="FontSize" Value="15"/>
+			<Setter Property="Width" Value="50"/>
+		</Style>
+	</Styles>	
+	<Style Selector="controls|Palette">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<WrapPanel Background="WhiteSmoke" Width="635" Height="370">
+					<Grid>
+						<Grid RowDefinitions="*, *, *" Margin="5">
+							<StackPanel Margin="5">
+								<TextBlock Text="Основные цвета"/>
+								<Grid Grid.Row="0" ColumnDefinitions="*, *, *, *, *, *, *, *" RowDefinitions="*, *" HorizontalAlignment="Center">
+									<Ellipse Grid.Row="0" Grid.Column="0"/>
+									<Ellipse Grid.Row="0" Grid.Column="1"/>
+									<Ellipse Grid.Row="0" Grid.Column="2"/>
+									<Ellipse Grid.Row="0" Grid.Column="3"/>
+									<Ellipse Grid.Row="0" Grid.Column="4"/>
+									<Ellipse Grid.Row="0" Grid.Column="5"/>
+									<Ellipse Grid.Row="0" Grid.Column="6"/>
+									<Ellipse Grid.Row="0" Grid.Column="7"/>
+									<Ellipse Grid.Row="1" Grid.Column="0"/>
+									<Ellipse Grid.Row="1" Grid.Column="1"/>
+									<Ellipse Grid.Row="1" Grid.Column="2"/>
+									<Ellipse Grid.Row="1" Grid.Column="3"/>
+									<Ellipse Grid.Row="1" Grid.Column="4"/>
+									<Ellipse Grid.Row="1" Grid.Column="5"/>
+									<Ellipse Grid.Row="1" Grid.Column="6"/>
+									<Ellipse Grid.Row="1" Grid.Column="7"/>
+								</Grid>
+								<TextBlock Text="Дополнительные цвета" />
+								<Grid Grid.Row="1" ColumnDefinitions="*, *, *, *, *, *, *, *" RowDefinitions="*, *" HorizontalAlignment="Center">
+									<Ellipse Grid.Row="0" Grid.Column="0"/>
+									<Ellipse Grid.Row="0" Grid.Column="1"/>
+									<Ellipse Grid.Row="0" Grid.Column="2"/>
+									<Ellipse Grid.Row="0" Grid.Column="3"/>
+									<Ellipse Grid.Row="0" Grid.Column="4"/>
+									<Ellipse Grid.Row="0" Grid.Column="5"/>
+									<Ellipse Grid.Row="0" Grid.Column="6"/>
+									<Ellipse Grid.Row="0" Grid.Column="7"/>
+									<Ellipse Grid.Row="1" Grid.Column="0"/>
+									<Ellipse Grid.Row="1" Grid.Column="1"/>
+									<Ellipse Grid.Row="1" Grid.Column="2"/>
+									<Ellipse Grid.Row="1" Grid.Column="3"/>
+									<Ellipse Grid.Row="1" Grid.Column="4"/>
+									<Ellipse Grid.Row="1" Grid.Column="5"/>
+									<Ellipse Grid.Row="1" Grid.Column="6"/>
+									<Ellipse Grid.Row="1" Grid.Column="7"/>								
+								</Grid>
+								<Grid Grid.Row="2">
+									<StackPanel>							
+										<WrapPanel>
+											<StackPanel>
+												<TextBlock Text="Оттенок: "/>
+												<TextBox  />							
+												<TextBlock Text="Контраст: "/>
+												<TextBox />								
+												<TextBlock Text="Яркость: "/>
+												<TextBox />
+											</StackPanel>
+											<StackPanel>
+												<TextBlock Text="Красный: "/>
+												<TextBox />									
+												<TextBlock Text="Зелёный: "/>
+												<TextBox />								
+												<TextBlock Text="Синий: "/>
+												<TextBox Text="{TemplateBinding TextChange}"/>
+											</StackPanel>
+											<Rectangle Width="100" 
+													   Height="135" 
+													   Fill="{TemplateBinding CurrentColor}"
+													   Stroke="Black"
+													   StrokeThickness="1"
+													   Margin="10"/>
+										</WrapPanel>								
+										<Button Content="Добавить в набор"
+											HorizontalAlignment="Center"
+											Width="250"
+											HorizontalContentAlignment="Center"
+											Margin="5"/>	
+									</StackPanel>
+								</Grid>
+							</StackPanel>
+						</Grid>
+					</Grid>
+					<Grid ColumnDefinitions="300,50" Height="400">					
+						<ColorSpectrum Grid.Column="0"/>
+						<ColorSlider Grid.Column="1"
+									 Orientation="Vertical"
+									 Margin="10"
+									 HorizontalAlignment="Center"
+									 Height="300"
+									 ColorModel="Rgba"/>	
+					</Grid>
+				</WrapPanel>
+			</ControlTemplate>
+		</Setter>
+	  </Style>
+	</Styles>
