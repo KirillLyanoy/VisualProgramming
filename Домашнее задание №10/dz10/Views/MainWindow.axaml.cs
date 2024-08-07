@@ -8,9 +8,5 @@ namespace dz10.Views
         {
             InitializeComponent();
         }
-
-        private void ColorSpectrum_ColorChanged(object? sender, Avalonia.Controls.ColorChangedEventArgs e)
-        {
-        }
     }
 }

@@ -19,8 +19,6 @@
 
     <StackPanel>
 		<control:Palette/>
-
-		<ColorSpectrum Height="30" ColorChanged="ColorSpectrum_ColorChanged" />
     </StackPanel>
 
 </Window>

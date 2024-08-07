@@ -1,8 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Controls.Shapes;
 using Avalonia.Media;
 using System;
+using System.Drawing;
 
 namespace dz10.Control
 {
@@ -22,6 +24,11 @@ namespace dz10.Control
             set => SetValue(CurrentColorProperty, value);
         }
 
+
+
+
+
+
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
@@ -32,6 +39,16 @@ namespace dz10.Control
             _mainColorSpectrum = e.NameScope.Find(name: PART_MainColorSpectrum) as ColorSpectrum
                 ?? throw new Exception($"{PART_MainColorSpectrum} does not exist.");
             _mainColorSpectrum.ColorChanged += _mainColorSpectrum_ColorChanged; ;
+
+            _mainColor1 = e.NameScope.Find(name: MainColor1) as Ellipse
+                ?? throw new Exception($"{MainColor1} does not exist.");
+            _mainColor1.Tapped += _mainColor1_Tapped;
+        }
+
+        private void _mainColor1_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            Ellipse tempEllipse = sender as Ellipse;
+      
         }
 
         private void _mainColorSpectrum_ColorChanged(object? sender, ColorChangedEventArgs e)
@@ -43,5 +60,12 @@ namespace dz10.Control
         {
             CurrentColor = e.NewColor;
         }
+
+
+
+
+
+        private const string MainColor1 = "MainColor1";
+        private Ellipse _mainColor1;
     }
 }
