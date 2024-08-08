@@ -8,6 +8,7 @@ using Avalonia.Media.Immutable;
 using ReactiveUI;
 using SkiaSharp;
 using System;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -124,24 +125,28 @@ namespace dz10.Control
             _currentRed.KeyDown += _currentRGB_KeyDown;
             _currentGreen.KeyDown += _currentRGB_KeyDown;
             _currentBlue.KeyDown += _currentRGB_KeyDown;
-            _currentSaturation.KeyDown += _currentSV_KeyDown;
-            _currentValue.KeyDown += _currentSV_KeyDown;
+            _currentHue.KeyDown += _currentHSV_KeyDown;
+            _currentSaturation.KeyDown += _currentHSV_KeyDown;
+            _currentValue.KeyDown += _currentHSV_KeyDown;
+            /*
+            for (int i = 0; i < 16; i++)
+            {
+                _additionalColors.Add(e.NameScope.Find(name: "AdditionalColor" + i) as Ellipse
+                ?? throw new Exception($"{"AdditionalColor" + i } does not exist."));              
+            }*/
+
         }
 
-        private void _currentSV_KeyDown(object? sender, Avalonia.Input.KeyEventArgs e)
+        private void _currentHSV_KeyDown(object? sender, Avalonia.Input.KeyEventArgs e)
         {
             TextBox textBox = sender as TextBox;
             try
-            {                
-                if (!Char.IsDigit(e.KeySymbol[0]))
+            {
+                if (!Char.IsDigit(e.KeySymbol[0]) && e.KeySymbol[0] != ',')
                 {
-                    if (e.KeySymbol != ",") e.Handled = true;
-                    else if (textBox.Text.Last() == ',') e.Handled = true;
+                    e.Handled = true;
                 }
-                else
-                {
-                    if (Convert.ToInt64(textBox.Text + e.KeySymbol[0]) > 1) e.Handled = true;
-                }
+                else if (textBox.Text != null) if (textBox.Text.Contains(',') && e.KeySymbol[0] == ',') e.Handled = true;
             }
             catch (System.NullReferenceException)
             {
@@ -174,7 +179,6 @@ namespace dz10.Control
         {
             TextBox textBox = sender as TextBox; 
             if (textBox.Text == "") return;
-            if (textBox.Text == "1." || textBox.Text == "0.") return;
             switch (textBox.Name)
             {
                 case ("CurrentRed"):                   
@@ -186,25 +190,34 @@ namespace dz10.Control
                 case ("CurrentBlue"):
                     CurrentRGBColor = new Avalonia.Media.Color(CurrentRGBColor.A, CurrentRGBColor.R, CurrentRGBColor.G, byte.Parse(textBox.Text));
                     break;
-                case ("CurrentHeu"):
+                case ("CurrentHue"):
                     {
-                        HsvColor currentHsvColor = CurrentRGBColor.ToHsv();
-                        HsvColor newHsvColor = new HsvColor(currentHsvColor.A, double.Parse(textBox.Text), currentHsvColor.S, currentHsvColor.V);
-                        CurrentRGBColor = newHsvColor.ToRgb();
+                        if (Convert.ToDouble(textBox.Text) < 360)
+                        {
+                            HsvColor currentHsvColor = CurrentRGBColor.ToHsv();
+                            HsvColor newHsvColor = new HsvColor(currentHsvColor.A, double.Parse(textBox.Text), currentHsvColor.S, currentHsvColor.V);
+                            CurrentRGBColor = newHsvColor.ToRgb();
+                        }
                         break;
                     }
                 case ("CurrentSaturation"):
                     {
-                        HsvColor currentHsvColor = CurrentRGBColor.ToHsv();
-                        HsvColor newHsvColor = new HsvColor(currentHsvColor.A, currentHsvColor.H, double.Parse(textBox.Text), currentHsvColor.V);
-                        CurrentRGBColor = newHsvColor.ToRgb();
+                        if (Convert.ToDouble(textBox.Text) <= 1)
+                        {
+                            HsvColor currentHsvColor = CurrentRGBColor.ToHsv();
+                            HsvColor newHsvColor = new HsvColor(currentHsvColor.A, currentHsvColor.H, double.Parse(textBox.Text), currentHsvColor.V);
+                            CurrentRGBColor = newHsvColor.ToRgb();                            
+                        }
                         break;
                     }
                 case ("CurrentValue"):
                     {
-                        HsvColor currentHsvColor = CurrentRGBColor.ToHsv();
-                        HsvColor newHsvColor = new HsvColor(currentHsvColor.A, currentHsvColor.H, currentHsvColor.S, double.Parse(textBox.Text));
-                        CurrentRGBColor = newHsvColor.ToRgb();
+                        if (Convert.ToDouble(textBox.Text) <= 1)
+                        {
+                            HsvColor currentHsvColor = CurrentRGBColor.ToHsv();
+                            HsvColor newHsvColor = new HsvColor(currentHsvColor.A, currentHsvColor.H, currentHsvColor.S, double.Parse(textBox.Text));
+                            CurrentRGBColor = newHsvColor.ToRgb();                            
+                        }
                         break;
                     }
                 default:
@@ -285,5 +298,10 @@ namespace dz10.Control
 
         private const string CurrentColorView = "CurrentColorView";
         private Avalonia.Controls.Shapes.Rectangle _currentColorView;
+        /*    private Avalonia.Controls.Shapes.Rectangle _currentColorView;
+
+            private ObservableCollection<Ellipse> _additionalColors;
+            */
+
     }
 }
