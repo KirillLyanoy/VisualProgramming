@@ -1,11 +1,6 @@
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using Avalonia.Media;
-using Avalonia.Platform;
-using System;
-using System.Drawing;
-using System.Runtime.InteropServices.ObjectiveC;
 using System.Windows.Input;
 
 namespace dz9.Control
