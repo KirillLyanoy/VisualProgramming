@@ -80,16 +80,13 @@ namespace dz10.Control
             get => GetValue(CurrentRGBColorProperty);
             set => SetValue(CurrentRGBColorProperty, value);
         }
-
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
             _mainColorSlider = e.NameScope.Find(name: MainColorSlider) as ColorSlider
-                ?? throw new Exception($"{MainColorSlider} does not exist.");
-            _mainColorSlider.ColorChanged += _mainColorSlider_ColorChanged;
+                ?? throw new Exception($"{MainColorSlider} does not exist.");        
             _mainColorSpectrum = e.NameScope.Find(name: MainColorSpectrum) as ColorSpectrum
                 ?? throw new Exception($"{MainColorSpectrum} does not exist.");
-            _mainColorSpectrum.ColorChanged += _mainColorSpectrum_ColorChanged; ;
             _currentColorView = e.NameScope.Find(name: CurrentColorView) as Avalonia.Controls.Shapes.Rectangle
                ?? throw new Exception($"{CurrentColorView} does not exist.");
             _currentRed = e.NameScope.Find(name: CurrentRed) as TextBox
@@ -119,6 +116,8 @@ namespace dz10.Control
                 _additionalColors[i].Tapped += _additionalColor_Tapped;
                 _additionalColors[i].DoubleTapped += _color_DoubleTapped;
             }
+            _mainColorSpectrum.ColorChanged += _mainColorSpectrum_ColorChanged;
+            _mainColorSlider.ColorChanged += _mainColorSlider_ColorChanged;
             _currentRed.TextChanged += _currentTextBlock_TextChanged;
             _currentGreen.TextChanged += _currentTextBlock_TextChanged;
             _currentBlue.TextChanged += _currentTextBlock_TextChanged;
