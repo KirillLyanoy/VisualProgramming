@@ -68,23 +68,24 @@
 										<WrapPanel>
 											<StackPanel>
 												<TextBlock Text="Оттенок: "/>
-												<TextBox  />							
+												<TextBox Name="CurrentHue"/>							
 												<TextBlock Text="Контраст: "/>
-												<TextBox />								
+												<TextBox Name="CurrentSaturation"/>								
 												<TextBlock Text="Яркость: "/>
-												<TextBox />
+												<TextBox  Name="CurrentValue"/>
 											</StackPanel>
 											<StackPanel>
 												<TextBlock Text="Красный: "/>
-												<TextBox />									
+												<TextBox Name="CurrentRed"/>									
 												<TextBlock Text="Зелёный: "/>
-												<TextBox />								
+												<TextBox Name="CurrentGreen" />
 												<TextBlock Text="Синий: "/>
-												<TextBox />
+												<TextBox Name="CurrentBlue" />
 											</StackPanel>
-											<Rectangle Width="100" 
+											<Rectangle Name="CurrentColorView"
+													   Width="100" 
 													   Height="135" 
-													   Fill="{TemplateBinding CurrentColor}"
+													   Fill="{TemplateBinding CurrentRGBColor}"
 													   Stroke="Black"
 													   StrokeThickness="1"
 													   Margin="10"/>
@@ -100,15 +101,16 @@
 						</Grid>
 					</Grid>
 					<Grid ColumnDefinitions="300,50" Height="400">					
-						<ColorSpectrum Name="PART_MainColorSpectrum"
+						<ColorSpectrum Name="MainColorSpectrum"
 									   Grid.Column="0"/>
-						<ColorSlider Name="PART_MainColorSlider"
+						<ColorSlider Name="MainColorSlider"
 									 Grid.Column="1"
 									 Orientation="Vertical"
 									 Margin="10"
 									 HorizontalAlignment="Center"
 									 Height="300"
-									 ColorModel="Rgba"/>	
+									 ColorModel="Hsva"
+									 ColorComponent="Component3"/>	
 					</Grid>
 				</WrapPanel>
 			</ControlTemplate>
