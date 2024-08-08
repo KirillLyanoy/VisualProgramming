@@ -51,38 +51,7 @@ namespace dz10.Control
             _mainColorSpectrum = e.NameScope.Find(name: MainColorSpectrum) as ColorSpectrum
                 ?? throw new Exception($"{MainColorSpectrum} does not exist.");
             _mainColorSpectrum.ColorChanged += _mainColorSpectrum_ColorChanged; ;
-            _mainColor1 = e.NameScope.Find(name: MainColor1) as Ellipse
-                ?? throw new Exception($"{MainColor1} does not exist.");
-            _mainColor2 = e.NameScope.Find(name: MainColor2) as Ellipse
-                ?? throw new Exception($"{MainColor2} does not exist.");
-            _mainColor3 = e.NameScope.Find(name: MainColor3) as Ellipse
-                ?? throw new Exception($"{MainColor3} does not exist.");
-            _mainColor4 = e.NameScope.Find(name: MainColor4) as Ellipse
-                ?? throw new Exception($"{MainColor4} does not exist.");
-            _mainColor5 = e.NameScope.Find(name: MainColor5) as Ellipse
-                ?? throw new Exception($"{MainColor5} does not exist.");
-            _mainColor6 = e.NameScope.Find(name: MainColor6) as Ellipse
-                ?? throw new Exception($"{MainColor6} does not exist.");
-            _mainColor7 = e.NameScope.Find(name: MainColor7) as Ellipse
-               ?? throw new Exception($"{MainColor7} does not exist.");
-            _mainColor8 = e.NameScope.Find(name: MainColor8) as Ellipse
-               ?? throw new Exception($"{MainColor8} does not exist.");
-            _mainColor9 = e.NameScope.Find(name: MainColor9) as Ellipse
-               ?? throw new Exception($"{MainColor9} does not exist.");
-            _mainColor10 = e.NameScope.Find(name: MainColor10) as Ellipse
-               ?? throw new Exception($"{MainColor10} does not exist.");
-            _mainColor11 = e.NameScope.Find(name: MainColor11) as Ellipse
-               ?? throw new Exception($"{MainColor11} does not exist.");
-            _mainColor12 = e.NameScope.Find(name: MainColor12) as Ellipse
-               ?? throw new Exception($"{MainColor12} does not exist.");
-            _mainColor13 = e.NameScope.Find(name: MainColor13) as Ellipse
-               ?? throw new Exception($"{MainColor13} does not exist.");
-            _mainColor14 = e.NameScope.Find(name: MainColor14) as Ellipse
-               ?? throw new Exception($"{MainColor14} does not exist.");
-            _mainColor15 = e.NameScope.Find(name: MainColor15) as Ellipse
-               ?? throw new Exception($"{MainColor15} does not exist.");
-            _mainColor16 = e.NameScope.Find(name: MainColor16) as Ellipse
-               ?? throw new Exception($"{MainColor16} does not exist.");
+
             _currentColorView = e.NameScope.Find(name: CurrentColorView) as Avalonia.Controls.Shapes.Rectangle
                ?? throw new Exception($"{CurrentColorView} does not exist.");
             _currentRed = e.NameScope.Find(name: CurrentRed) as TextBox
@@ -98,23 +67,6 @@ namespace dz10.Control
             _currentValue = e.NameScope.Find(name: CurrentValue) as TextBox
                ?? throw new Exception($"{CurrentValue} does not exist.");
 
-            _mainColor1.Tapped += _mainColor_Tapped;
-            _mainColor2.Tapped += _mainColor_Tapped;
-            _mainColor3.Tapped += _mainColor_Tapped;
-            _mainColor4.Tapped += _mainColor_Tapped;
-            _mainColor5.Tapped += _mainColor_Tapped;
-            _mainColor6.Tapped += _mainColor_Tapped;
-            _mainColor7.Tapped += _mainColor_Tapped;
-            _mainColor8.Tapped += _mainColor_Tapped;
-            _mainColor9.Tapped += _mainColor_Tapped;
-            _mainColor10.Tapped += _mainColor_Tapped;
-            _mainColor11.Tapped += _mainColor_Tapped;
-            _mainColor12.Tapped += _mainColor_Tapped;
-            _mainColor13.Tapped += _mainColor_Tapped;
-            _mainColor14.Tapped += _mainColor_Tapped;
-            _mainColor15.Tapped += _mainColor_Tapped;
-            _mainColor16.Tapped += _mainColor_Tapped;
-
             _currentRed.TextChanged += _currentTextBlock_TextChanged;
             _currentGreen.TextChanged += _currentTextBlock_TextChanged;
             _currentBlue.TextChanged += _currentTextBlock_TextChanged;
@@ -128,13 +80,30 @@ namespace dz10.Control
             _currentHue.KeyDown += _currentHSV_KeyDown;
             _currentSaturation.KeyDown += _currentHSV_KeyDown;
             _currentValue.KeyDown += _currentHSV_KeyDown;
-            /*
+
+            for (int i = 0; i < 16; i++)
+            {
+                _mainColors.Add(e.NameScope.Find(name: "MainColor" + i) as Ellipse
+                ?? throw new Exception($"{"MainColor" + i} does not exist."));
+                _mainColors[i].Tapped += _mainColor_Tapped;
+            }
+
             for (int i = 0; i < 16; i++)
             {
                 _additionalColors.Add(e.NameScope.Find(name: "AdditionalColor" + i) as Ellipse
-                ?? throw new Exception($"{"AdditionalColor" + i } does not exist."));              
-            }*/
+                ?? throw new Exception($"{"AdditionalColor" + i } does not exist."));
+                _additionalColors[i].Tapped += AdditionalColor_Tapped;
+            }
 
+
+
+          
+
+        }
+
+        private void AdditionalColor_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void _currentHSV_KeyDown(object? sender, Avalonia.Input.KeyEventArgs e)
@@ -262,46 +231,51 @@ namespace dz10.Control
         private void _mainColorSlider_ColorChanged(object? sender, ColorChangedEventArgs e)
         {
             CurrentRGBColor = e.NewColor;
-        }
-        private const string MainColor1 = "MainColor1";
-        private Ellipse _mainColor1;
-        private const string MainColor2 = "MainColor2";
-        private Ellipse _mainColor2;
-        private const string MainColor3 = "MainColor3";
-        private Ellipse _mainColor3;
-        private const string MainColor4 = "MainColor4";
-        private Ellipse _mainColor4;
-        private const string MainColor5 = "MainColor5";
-        private Ellipse _mainColor5;
-        private const string MainColor6 = "MainColor6";
-        private Ellipse _mainColor6;
-        private const string MainColor7 = "MainColor7";
-        private Ellipse _mainColor7;
-        private const string MainColor8 = "MainColor8";
-        private Ellipse _mainColor8;
-        private const string MainColor9 = "MainColor9";
-        private Ellipse _mainColor9;
-        private const string MainColor10 = "MainColor10";
-        private Ellipse _mainColor10;
-        private const string MainColor11 = "MainColor11";
-        private Ellipse _mainColor11;
-        private const string MainColor12 = "MainColor12";
-        private Ellipse _mainColor12;
-        private const string MainColor13 = "MainColor13";
-        private Ellipse _mainColor13;
-        private const string MainColor14 = "MainColor14";
-        private Ellipse _mainColor14;
-        private const string MainColor15 = "MainColor15";
-        private Ellipse _mainColor15;
-        private const string MainColor16 = "MainColor16";
-        private Ellipse _mainColor16;
+        }   
 
         private const string CurrentColorView = "CurrentColorView";
         private Avalonia.Controls.Shapes.Rectangle _currentColorView;
-        /*    private Avalonia.Controls.Shapes.Rectangle _currentColorView;
 
-            private ObservableCollection<Ellipse> _additionalColors;
-            */
-
+        private ObservableCollection<string> AdditionalColors = new ObservableCollection<string>()
+        {
+            "AdditionalColor0",
+            "AdditionalColor1",
+            "AdditionalColor2", 
+            "AdditionalColor3",
+            "AdditionalColor4",
+            "AdditionalColor5",
+            "AdditionalColor6",
+            "AdditionalColor7",
+            "AdditionalColor8",
+            "AdditionalColor9",
+            "AdditionalColor10",
+            "AdditionalColor11",
+            "AdditionalColor12",
+            "AdditionalColor13",
+            "AdditionalColor14",
+            "AdditionalColor15",
+        };
+        private ObservableCollection<Ellipse> _additionalColors = new();
+               
+        private ObservableCollection<string> MainColors = new ObservableCollection<string>()
+        {
+            "MainColor0",
+            "MainlColor1",
+            "MainColor2",
+            "MainColor3",
+            "MainColor4",
+            "MainColor5",
+            "MainColor6",
+            "MainColor7",
+            "MainColor8",
+            "MainColor9",
+            "MainColor10",
+            "MainColor11",
+            "MainColor12",
+            "MainColor13",
+            "MainColor14",
+            "MainColor15",
+        };
+        private ObservableCollection<Ellipse> _mainColors = new();
     }
 }

@@ -27,41 +27,41 @@
 							<StackPanel Margin="5">
 								<TextBlock Text="Основные цвета"/>
 								<Grid Grid.Row="0" ColumnDefinitions="*, *, *, *, *, *, *, *" RowDefinitions="*, *" HorizontalAlignment="Center">
-									<Ellipse Name="MainColor1" Grid.Row="0" Grid.Column="0" Fill="#FF0000"/>
-									<Ellipse Name="MainColor2" Grid.Row="0" Grid.Column="1" Fill="#FF9999"/>
-									<Ellipse Name="MainColor3" Grid.Row="0" Grid.Column="2" Fill="#FF8000"/>
-									<Ellipse Name="MainColor4" Grid.Row="0" Grid.Column="3" Fill="#FFFF00"/>
-									<Ellipse Name="MainColor5" Grid.Row="0" Grid.Column="4" Fill="#336600"/>
-									<Ellipse Name="MainColor6" Grid.Row="0" Grid.Column="5" Fill="#80FF00"/>
-									<Ellipse Name="MainColor7" Grid.Row="0" Grid.Column="6" Fill="#006666"/>
-									<Ellipse Name="MainColor8" Grid.Row="0" Grid.Column="7" Fill="#00FFFF"/>
-									<Ellipse Name="MainColor9" Grid.Row="1" Grid.Column="0" Fill="#004C99"/>
-									<Ellipse Name="MainColor10" Grid.Row="1" Grid.Column="1" Fill="#0000FF"/>
-									<Ellipse Name="MainColor11" Grid.Row="1" Grid.Column="2" Fill="#6600CC"/>
-									<Ellipse Name="MainColor12" Grid.Row="1" Grid.Column="3" Fill="#FF00FF"/>
-									<Ellipse Name="MainColor13" Grid.Row="1" Grid.Column="4" Fill="#FF007F"/>
-									<Ellipse Name="MainColor14" Grid.Row="1" Grid.Column="5" Fill="#660000"/>
-									<Ellipse Name="MainColor15" Grid.Row="1" Grid.Column="6" Fill="#000000"/>
-									<Ellipse Name="MainColor16" Grid.Row="1" Grid.Column="7" Fill="#FFFFFF"/>
+									<Ellipse Name="MainColor0" Grid.Row="0" Grid.Column="0" Fill="#FFFFFF"/>
+									<Ellipse Name="MainColor1" Grid.Row="0" Grid.Column="1" Fill="#FF0000"/>
+									<Ellipse Name="MainColor2" Grid.Row="0" Grid.Column="2" Fill="#FF9999"/>
+									<Ellipse Name="MainColor3" Grid.Row="0" Grid.Column="3" Fill="#FF8000"/>
+									<Ellipse Name="MainColor4" Grid.Row="0" Grid.Column="4" Fill="#FFFF00"/>
+									<Ellipse Name="MainColor5" Grid.Row="0" Grid.Column="5" Fill="#336600"/>
+									<Ellipse Name="MainColor6" Grid.Row="0" Grid.Column="6" Fill="#80FF00"/>
+									<Ellipse Name="MainColor7" Grid.Row="0" Grid.Column="7" Fill="#006666"/>
+									<Ellipse Name="MainColor8" Grid.Row="1" Grid.Column="0" Fill="#00FFFF"/>
+									<Ellipse Name="MainColor9" Grid.Row="1" Grid.Column="1" Fill="#004C99"/>
+									<Ellipse Name="MainColor10" Grid.Row="1" Grid.Column="2" Fill="#0000FF"/>
+									<Ellipse Name="MainColor11" Grid.Row="1" Grid.Column="3" Fill="#6600CC"/>
+									<Ellipse Name="MainColor12" Grid.Row="1" Grid.Column="4" Fill="#FF00FF"/>
+									<Ellipse Name="MainColor13" Grid.Row="1" Grid.Column="5" Fill="#FF007F"/>
+									<Ellipse Name="MainColor14" Grid.Row="1" Grid.Column="6" Fill="#660000"/>
+									<Ellipse Name="MainColor15" Grid.Row="1" Grid.Column="7" Fill="#000000"/>
 								</Grid>
 								<TextBlock Text="Дополнительные цвета" />
 								<Grid Grid.Row="1" ColumnDefinitions="*, *, *, *, *, *, *, *" RowDefinitions="*, *" HorizontalAlignment="Center">
-									<Ellipse Grid.Row="0" Grid.Column="0"/>
-									<Ellipse Grid.Row="0" Grid.Column="1"/>
-									<Ellipse Grid.Row="0" Grid.Column="2"/>
-									<Ellipse Grid.Row="0" Grid.Column="3"/>
-									<Ellipse Grid.Row="0" Grid.Column="4"/>
-									<Ellipse Grid.Row="0" Grid.Column="5"/>
-									<Ellipse Grid.Row="0" Grid.Column="6"/>
-									<Ellipse Grid.Row="0" Grid.Column="7"/>
-									<Ellipse Grid.Row="1" Grid.Column="0"/>
-									<Ellipse Grid.Row="1" Grid.Column="1"/>
-									<Ellipse Grid.Row="1" Grid.Column="2"/>
-									<Ellipse Grid.Row="1" Grid.Column="3"/>
-									<Ellipse Grid.Row="1" Grid.Column="4"/>
-									<Ellipse Grid.Row="1" Grid.Column="5"/>
-									<Ellipse Grid.Row="1" Grid.Column="6"/>
-									<Ellipse Grid.Row="1" Grid.Column="7"/>								
+									<Ellipse Name="AdditionalColor0" Grid.Row="0" Grid.Column="0"/>
+									<Ellipse Name="AdditionalColor1" Grid.Row="0" Grid.Column="1"/>
+									<Ellipse Name="AdditionalColor2" Grid.Row="0" Grid.Column="2"/>
+									<Ellipse Name="AdditionalColor3" Grid.Row="0" Grid.Column="3"/>
+									<Ellipse Name="AdditionalColor4" Grid.Row="0" Grid.Column="4"/>
+									<Ellipse Name="AdditionalColor5" Grid.Row="0" Grid.Column="5"/>
+									<Ellipse Name="AdditionalColor6" Grid.Row="0" Grid.Column="6"/>
+									<Ellipse Name="AdditionalColor7" Grid.Row="0" Grid.Column="7"/>
+									<Ellipse Name="AdditionalColor8" Grid.Row="1" Grid.Column="0"/>
+									<Ellipse Name="AdditionalColor9" Grid.Row="1" Grid.Column="1"/>
+									<Ellipse Name="AdditionalColor10" Grid.Row="1" Grid.Column="2"/>
+									<Ellipse Name="AdditionalColor11" Grid.Row="1" Grid.Column="3"/>
+									<Ellipse Name="AdditionalColor12" Grid.Row="1" Grid.Column="4"/>
+									<Ellipse Name="AdditionalColor13" Grid.Row="1" Grid.Column="5"/>
+									<Ellipse Name="AdditionalColor14" Grid.Row="1" Grid.Column="6"/>
+									<Ellipse Name="AdditionalColor15" Grid.Row="1" Grid.Column="7"/>								
 								</Grid>
 								<Grid Grid.Row="2">
 									<StackPanel>							
