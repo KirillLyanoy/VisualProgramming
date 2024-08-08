@@ -21,11 +21,11 @@
 	<Style Selector="controls|Palette">
 		<Setter Property="Template">
 			<ControlTemplate>
-				<WrapPanel Background="WhiteSmoke" Width="635" Height="370">
+				<WrapPanel Background="WhiteSmoke" Width="635" Height="400">
 					<Grid>
 						<Grid RowDefinitions="*, *, *" Margin="5">
 							<StackPanel Margin="5">
-								<TextBlock Text="Основные цвета"/>
+								<TextBlock Text="Основные цвета (двойной клик)"/>
 								<Grid Grid.Row="0" ColumnDefinitions="*, *, *, *, *, *, *, *" RowDefinitions="*, *" HorizontalAlignment="Center">
 									<Ellipse Name="MainColor0" Grid.Row="0" Grid.Column="0" Fill="#FFFFFF"/>
 									<Ellipse Name="MainColor1" Grid.Row="0" Grid.Column="1" Fill="#FF0000"/>
@@ -46,7 +46,7 @@
 								</Grid>
 								<TextBlock Text="Дополнительные цвета" />
 								<Grid Grid.Row="1" ColumnDefinitions="*, *, *, *, *, *, *, *" RowDefinitions="*, *" HorizontalAlignment="Center">
-									<Ellipse Name="AdditionalColor0" Grid.Row="0" Grid.Column="0"/>
+									<Ellipse Name="AdditionalColor0" Grid.Row="0" Grid.Column="0" StrokeThickness="3"/>
 									<Ellipse Name="AdditionalColor1" Grid.Row="0" Grid.Column="1"/>
 									<Ellipse Name="AdditionalColor2" Grid.Row="0" Grid.Column="2"/>
 									<Ellipse Name="AdditionalColor3" Grid.Row="0" Grid.Column="3"/>
@@ -90,7 +90,8 @@
 													   StrokeThickness="1"
 													   Margin="10"/>
 										</WrapPanel>								
-										<Button Content="Добавить в набор"
+										<Button Name="AddButton"
+											Content="Добавить в набор"
 											HorizontalAlignment="Center"
 											Width="250"
 											HorizontalContentAlignment="Center"
