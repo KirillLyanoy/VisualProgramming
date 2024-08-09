@@ -1,0 +1,25 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:dz11.Control">
+  
+  <Design.PreviewWith>
+        <controls:ObjectTreeControl />
+  </Design.PreviewWith>
+
+
+	<Style Selector="controls|ObjectTreeControl">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<TreeView Name="TreeViewMain">
+					<TreeView.ItemTemplate>
+						<TreeDataTemplate>
+							<TreeViewItem></TreeViewItem>
+						</TreeDataTemplate>
+					</TreeView.ItemTemplate>
+				</TreeView>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+	
+	
+</Styles>
