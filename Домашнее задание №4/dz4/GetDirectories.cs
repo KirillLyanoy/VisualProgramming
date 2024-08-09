@@ -23,29 +23,45 @@ namespace dz4
         }
         //получить массив папок//
         static public FolderWithImage[] GetCurrentDirectories()
-        {           
-            FolderWithImage[] folders = new FolderWithImage[Directory.GetDirectories(_path).Length + 1];
-            //первый элемент является будет переходить на родительскую директорию//
-            folders[0] = new FolderWithImage("..");
-            int i = 1;
-            foreach (string path in Directory.GetDirectories(_path))
+        {
+            try
             {
-                folders[i] = new FolderWithImage(path);
-                i++;
+                FolderWithImage[] folders = new FolderWithImage[Directory.GetDirectories(_path).Length + 1];
+                //первый элемент является будет переходить на родительскую директорию//
+                folders[0] = new FolderWithImage("..");
+                int i = 1;
+                foreach (string path in Directory.GetDirectories(_path))
+                {
+                    folders[i] = new FolderWithImage(path);
+                    i++;
+                }
+                return folders;
             }
-            return folders;
+            catch (System.UnauthorizedAccessException)
+            {
+                FolderWithImage[] folders = [new FolderWithImage("..")];
+                return folders;
+            }
         }
         //получить массив файлов//
         static public FileWithImage[] GetCurrentFiles()
-        {            
-            FileWithImage[] files = new FileWithImage[Directory.GetFiles(_path).Length];
-            int i = 0;
-            foreach (string path in Directory.GetFiles(_path))
+        {
+            try
             {
-                files[i] = new FileWithImage(path);
-                i++;
+                FileWithImage[] files = new FileWithImage[Directory.GetFiles(_path).Length];
+                int i = 0;
+                foreach (string path in Directory.GetFiles(_path))
+                {
+                    files[i] = new FileWithImage(path);
+                    i++;
+                }
+                return files;
             }
-            return files;
+            catch (System.UnauthorizedAccessException)
+            {
+                FileWithImage[] files = [];
+                return files;
+            }
         }
     }
 }
