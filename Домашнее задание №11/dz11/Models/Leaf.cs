@@ -9,7 +9,7 @@ namespace dz11.Models
 {
     internal class Leaf : Component
     {
-        public Leaf(string name) : base(name) { }
+        public Leaf(string propertyName, object value) : base(propertyName, value) { }
         public Leaf() : base() { }
         public override ObservableCollection<Component> Children { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override void Add(Component component)

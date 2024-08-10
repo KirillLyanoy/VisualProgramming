@@ -9,9 +9,18 @@ namespace dz11.Models
 {
     abstract class Component
     {
-        private string name;
-        public string Name { get { return name; } set { name = value; } }
-        public Component(string name) { this.name = name; }
+        private object value;
+        public object Value { get { return value; } set { this.value = value; } }
+
+        private string propertyName;
+        public string PropertyName { get { return propertyName; } set { propertyName = value; } }
+
+
+        public Component(string propertyName, object value) 
+        {
+            this.value = value;
+            this.propertyName = propertyName;
+        }
         public abstract ObservableCollection<Component> Children { get; set; }
         public Component() { }
         public abstract void Add(Component c);

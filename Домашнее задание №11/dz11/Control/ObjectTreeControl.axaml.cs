@@ -19,55 +19,29 @@ public class ObjectTreeControl : TemplatedControl
         set => SetValue(CurrentObjectProperty, value);
     }
 
-    private static readonly StyledProperty<ObservableCollection<Component>> objectTree =
-    AvaloniaProperty.Register<ObjectTreeControl, ObservableCollection<Component>>("ObjectTreeItem");
-    private ObservableCollection<Component> ObjectTreeItem
-    {
-        get => GetValue(ObjectTree);
-        set => SetValue(ObjectTree, value);
-    }
-
-    private const string TreeViewMain = "TreeViewMain";
-    private TreeView _treeViewMain;
-
-    internal static StyledProperty<ObservableCollection<Component>> ObjectTree => objectTree;
-
-    protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
-    {
-        base.OnApplyTemplate(e);
-        ConvertToTree(CurrentObject, ObjectTreeItem);
-
-        _treeViewMain = e.NameScope.Find(name: TreeViewMain) as TreeView
-               ?? throw new Exception($"{TreeViewMain} does not exist.");
-    }
-
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
-    {
-        base.OnPropertyChanged(change);
-        if (change.Property == ObjectTree)
-        {
-            _treeViewMain.ItemsSource = ObjectTreeItem;
-        }
-    }
-
-            private void ConvertToTree<T>(T data, ObservableCollection<Component> collection)
-    {
-        Type type = data.GetType();
-        Composite composite = new Composite(Convert.ToString(type.Name));
-        PropertyInfo[] propertyes = type.GetProperties();
-        object[] arrObj = new object[propertyes.Length];
-        foreach (PropertyInfo property in propertyes)
-        {
-            if (property.GetValue(data) is int || property.GetValue(data) is string)
-            {
-                composite.Add(new Leaf(Convert.ToString(property.Name) + ":\t" + Convert.ToString(property.GetValue(data))));
-            }
-            else
-            {
-                ConvertToTree(property.GetValue(data), composite.Children);
-            }
-        }
-        collection.Add(composite);
-    }
+   
 }
-
+/*
+	<Window.DataTemplates>
+		<DataTemplate DataType="{x:Type con:Leaf}">
+			<Grid ColumnDefinitions="*,*">
+				<TextBox Grid.Column="1" Text="{Binding Value}" IsReadOnly="True"/>
+				<TextBox Grid.Column="0" Text="{Binding PropertyName}" IsReadOnly="True"/>
+			</Grid>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type con:Component}">
+			<Expander Header="{Binding PropertyName}">
+				<ListBox ItemsSource="{Binding Children}">
+				</ListBox>
+			</Expander>
+		</DataTemplate>		
+	</Window.DataTemplates>
+	
+	
+	<StackPanel Margin="30">
+		<Expander Header="Object Expander">
+			<ListBox ItemsSource="{Binding CurrentUser, Converter={StaticResource ObjectConverter}}" />
+		</Expander>
+	</StackPanel>
+	
+ */

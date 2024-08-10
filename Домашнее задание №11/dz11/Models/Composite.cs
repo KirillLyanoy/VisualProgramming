@@ -9,10 +9,14 @@ namespace dz11.Models
 {
     internal class Composite : Component
     {
-        public ObservableCollection<Component> children = new ObservableCollection<Component>();
+        public ObservableCollection<Component> children = [];
         public override ObservableCollection<Component> Children { get { return children; } set { children = value; } }
-        public Composite(string name) : base(name) { }
+
+   
+
+        public Composite(string propertyName, object value) : base(propertyName, value) { }
         public Composite() : base() { }
+
         public override void Add(Component component)
         {
             children.Add(component);

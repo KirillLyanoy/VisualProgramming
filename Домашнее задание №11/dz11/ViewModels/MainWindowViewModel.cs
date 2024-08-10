@@ -9,6 +9,8 @@ namespace dz11.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         public User CurrentUser { get; set; }
+        public string CurrentString { get; set; }
+        public Company CurrentCompany { get; set; }
         public MainWindowViewModel() 
         {
             CurrentUser = new User()
@@ -38,25 +40,15 @@ namespace dz11.ViewModels
                     Bs = "generate enterprise e-trailers"
                 }
             };
-        }
-        private void ConvertToTree<T>(T data, ObservableCollection<Component> collection)
-        {
-            Type type = data.GetType();
-            Composite composite = new Composite(Convert.ToString(type.Name));
-            PropertyInfo[] propertyes = type.GetProperties();
-            object[] arrObj = new object[propertyes.Length];
-            foreach (PropertyInfo property in propertyes)
+            CurrentString = "HelloKitty";
+
+
+            CurrentCompany = new Company()
             {
-                if (property.GetValue(data) is int || property.GetValue(data) is string)
-                {
-                    composite.Add(new Leaf(Convert.ToString(property.Name) + ":\t" + Convert.ToString(property.GetValue(data))));
-                }
-                else
-                {
-                    ConvertToTree(property.GetValue(data), composite.Children);
-                }
-            }
-            collection.Add(composite);
+                Name = "Johns Group",
+                CatchPhrase = "Configurable multimedia task-force",
+                Bs = "generate enterprise e-trailers"
+            };
         }
     }
 }

@@ -1,25 +1,32 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:controls="using:dz11.Control">
+        xmlns:con="using:dz11.Control"
+		xmlns:models="using:dz11.Models">
   
   <Design.PreviewWith>
-        <controls:ObjectTreeControl />
+        <con:ObjectTreeControl />
   </Design.PreviewWith>
 
-
-	<Style Selector="controls|ObjectTreeControl">
+	<Style Selector="con|ObjectTreeControl">		
 		<Setter Property="Template">
 			<ControlTemplate>
-				<TreeView Name="TreeViewMain">
-					<TreeView.ItemTemplate>
-						<TreeDataTemplate>
-							<TreeViewItem></TreeViewItem>
-						</TreeDataTemplate>
-					</TreeView.ItemTemplate>
-				</TreeView>
+				<ListBox ItemsSource="{TemplateBinding CurrentObject}">
+					<ListBox.DataTemplates>
+						<DataTemplate DataType="{x:Type models:Leaf}">
+							<Grid ColumnDefinitions="*,*">
+								<TextBox Grid.Column="1" Text="{Binding Value}" IsReadOnly="True"/>
+								<TextBox Grid.Column="0" Text="{Binding PropertyName}" IsReadOnly="True"/>
+							</Grid>
+						</DataTemplate>
+						<DataTemplate DataType="{x:Type models:Composite}">
+							<Expander Header="{Binding PropertyName}">
+								<ListBox ItemsSource="{Binding Children}">
+								</ListBox>
+							</Expander>
+						</DataTemplate>
+					</ListBox.DataTemplates>
+				</ListBox>
 			</ControlTemplate>
 		</Setter>
-	</Style>
-	
-	
+	</Style>	
 </Styles>

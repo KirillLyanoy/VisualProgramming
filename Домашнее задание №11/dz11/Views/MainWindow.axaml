@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:control="clr-namespace:dz11.Control"
+		xmlns:con="clr-namespace:dz11.Models"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		Width="635"
-		Height="370"
-		CanResize="False"
+		Width="700"
+		Height="500"
         x:Class="dz11.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
@@ -17,8 +17,12 @@
          <vm:MainWindowViewModel/>
     </Design.DataContext>
 
+	<Window.Resources>
+		<con:ObjectConverter x:Key="ObjectConverter"/>
+	</Window.Resources>
+
 	<StackPanel>
-		<control:ObjectTreeControl CurrentObject="{Binding CurrentUser}"/>
+		<control:ObjectTreeControl CurrentObject="{Binding CurrentUser, Converter={StaticResource ObjectConverter}}" Margin="20"/> 
 	</StackPanel>
 	
 </Window>
