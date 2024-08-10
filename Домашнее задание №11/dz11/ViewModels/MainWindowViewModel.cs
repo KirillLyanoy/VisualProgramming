@@ -1,8 +1,4 @@
-﻿using dz11.Models;
-using dz8.Models;
-using System.Collections.ObjectModel;
-using System.Reflection;
-using System;
+﻿using dz8.Models;
 
 namespace dz11.ViewModels
 {
