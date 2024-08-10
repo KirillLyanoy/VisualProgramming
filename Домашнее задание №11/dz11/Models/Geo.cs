@@ -1,4 +1,6 @@
-﻿namespace dz8.Models
+﻿using System;
+
+namespace dz8.Models
 {
     public class Geo
     {

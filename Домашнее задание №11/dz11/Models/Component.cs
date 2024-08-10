@@ -16,7 +16,7 @@ namespace dz11.Models
         public string PropertyName { get { return propertyName; } set { propertyName = value; } }
 
 
-        public Component(string propertyName, object value) 
+        public Component(object value, string propertyName) 
         {
             this.value = value;
             this.propertyName = propertyName;

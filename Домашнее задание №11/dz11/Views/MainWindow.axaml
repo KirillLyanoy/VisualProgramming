@@ -6,7 +6,7 @@
         xmlns:control="clr-namespace:dz11.Control"
 		xmlns:con="clr-namespace:dz11.Models"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		Width="700"
+		Width="800"
 		Height="500"
         x:Class="dz11.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -21,8 +21,15 @@
 		<con:ObjectConverter x:Key="ObjectConverter"/>
 	</Window.Resources>
 
-	<StackPanel>
-		<control:ObjectTreeControl CurrentObject="{Binding CurrentUser, Converter={StaticResource ObjectConverter}}" Margin="20"/> 
-	</StackPanel>
+	<ScrollViewer>
+	    <StackPanel>
+		    <control:ObjectTreeControl CurrentObject="{Binding UserExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
+			<control:ObjectTreeControl CurrentObject="{Binding StringExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
+			<control:ObjectTreeControl CurrentObject="{Binding IntExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
+			<control:ObjectTreeControl CurrentObject="{Binding BoolExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
+			<control:ObjectTreeControl CurrentObject="{Binding DoubleExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
+			<control:ObjectTreeControl CurrentObject="{Binding GeoExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
+		</StackPanel>
+	</ScrollViewer>
 	
 </Window>
