@@ -12,7 +12,6 @@ namespace dz11.ViewModels
         public Geo GeoExample { get; set; }
         public MainWindowViewModel() 
         {
-
             StringExample = "String Example";
 
             IntExample = 1234567890;

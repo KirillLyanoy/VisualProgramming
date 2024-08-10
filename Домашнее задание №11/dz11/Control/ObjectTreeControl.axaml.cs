@@ -1,11 +1,5 @@
 using Avalonia.Controls.Primitives;
 using Avalonia;
-using dz11.Models;
-using System.Collections.ObjectModel;
-using System.Reflection;
-using System;
-using Avalonia.Controls;
-
 
 namespace dz11.Control;
 
@@ -18,7 +12,6 @@ public class ObjectTreeControl : TemplatedControl
         get => GetValue(ObjectProperty);
         set => SetValue(ObjectProperty, value);
     }
-
     public static readonly StyledProperty<object> HeaderProperty =
     AvaloniaProperty.Register<ObjectTreeControl, object>("Header", defaultValue: "Expander");
     public object Header
