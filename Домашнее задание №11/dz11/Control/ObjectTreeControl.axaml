@@ -10,8 +10,8 @@
 	<Style Selector="con|ObjectTreeControl">		
 		<Setter Property="Template">
 			<ControlTemplate>
-				<Expander Header="Object Expander">
-					<ListBox ItemsSource="{TemplateBinding CurrentObject}">
+				<Expander Header="{TemplateBinding Header}">
+					<ListBox ItemsSource="{TemplateBinding Object}">
 						<ListBox.DataTemplates>
 							<DataTemplate DataType="{x:Type models:Leaf}">
 								<Grid ColumnDefinitions="*,2*">

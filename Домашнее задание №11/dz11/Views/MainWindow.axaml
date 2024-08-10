@@ -23,12 +23,18 @@
 
 	<ScrollViewer>
 	    <StackPanel>
-		    <control:ObjectTreeControl CurrentObject="{Binding UserExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
-			<control:ObjectTreeControl CurrentObject="{Binding StringExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
-			<control:ObjectTreeControl CurrentObject="{Binding IntExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
-			<control:ObjectTreeControl CurrentObject="{Binding BoolExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
-			<control:ObjectTreeControl CurrentObject="{Binding DoubleExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
-			<control:ObjectTreeControl CurrentObject="{Binding GeoExample, Converter={StaticResource ObjectConverter}}" Margin="10"/>
+		    <control:ObjectTreeControl Object="{Binding UserExample, Converter={StaticResource ObjectConverter}}" 
+									   Header="Expander with User" Margin="10"/>
+			<control:ObjectTreeControl Object="{Binding StringExample, Converter={StaticResource ObjectConverter}}" 
+									   Header="Expander with String" Margin="10"/>
+			<control:ObjectTreeControl Object="{Binding IntExample, Converter={StaticResource ObjectConverter}}"
+									   Header="Expander with Int" Margin="10"/>
+			<control:ObjectTreeControl Object="{Binding BoolExample, Converter={StaticResource ObjectConverter}}"
+									   Header="Expander with Bool" Margin="10"/>
+			<control:ObjectTreeControl Object="{Binding DoubleExample, Converter={StaticResource ObjectConverter}}"
+									   Header="Expander with Double" Margin="10"/>
+			<control:ObjectTreeControl Object="{Binding GeoExample, Converter={StaticResource ObjectConverter}}"
+									   Header="Expander with Geo" Margin="10"/>
 		</StackPanel>
 	</ScrollViewer>
 	
