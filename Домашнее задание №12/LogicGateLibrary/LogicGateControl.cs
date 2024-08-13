@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using Avalonia.Media;
 
-namespace LogicGateLibrary.Controls
+namespace LogicGateLibrary
 {
     public enum Standart
     {
@@ -17,6 +17,5 @@ namespace LogicGateLibrary.Controls
         public string Label { get; set; }
         public FontFamily LabelFont { get; set; } = FontFamily.Default;
         public bool IsSelected { get; set; } = false;
-
     }
 }

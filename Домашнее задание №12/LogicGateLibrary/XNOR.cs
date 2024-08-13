@@ -1,8 +1,8 @@
-﻿using System.Drawing.Drawing2D;
-using System.Globalization;
+﻿using System.Globalization;
 using Avalonia;
 using Avalonia.Media;
-namespace LogicGateLibrary.Controls
+
+namespace LogicGateLibrary
 {
     internal class XNOR : LogicGateControl
     {

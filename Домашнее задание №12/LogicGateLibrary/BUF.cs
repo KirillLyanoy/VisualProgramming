@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using Avalonia;
 using Avalonia.Media;
-namespace LogicGateLibrary.Controls
+namespace LogicGateLibrary
 {
     internal class BUF : LogicGateControl
     {

@@ -1,10 +1,7 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
+﻿using System.Globalization;
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia.Platform;
-namespace LogicGateLibrary.Controls
+namespace LogicGateLibrary
 {
     internal class NAND : LogicGateControl
     {
