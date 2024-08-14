@@ -8,14 +8,12 @@ namespace LogicGateLibrary
 {
     public class OR : LogicGateControl
     {
-
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
             Point startPoint = new Point(100, 100);
             if (IsSelected)
                 context.DrawRectangle(Brushes.White, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(startPoint.X - 60, startPoint.Y - 10), new Size(180, 120)));
-
             switch (Standart)
             {
                 case (Standart.GOST):

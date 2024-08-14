@@ -12,7 +12,6 @@ namespace LogicGateLibrary
             Point startPoint = new Point(100, 100);
             if (IsSelected)
                 context.DrawRectangle(Brushes.White, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(startPoint.X - 60, startPoint.Y - 10), new Size(180, 120)));
-
             switch (Standart)
             {
                 case (Standart.GOST):
@@ -31,7 +30,6 @@ namespace LogicGateLibrary
                     context.DrawLine(new Pen(Brushes.Black, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Point(startPoint.X - 50, startPoint.Y + 25), new Point(startPoint.X, startPoint.Y + 25));
                     context.DrawLine(new Pen(Brushes.Black, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Point(startPoint.X - 50, startPoint.Y + 75), new Point(startPoint.X, startPoint.Y + 75));
                     context.DrawLine(new Pen(Brushes.Black, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Point(startPoint.X + 50, startPoint.Y + 50), new Point(startPoint.X + 100, startPoint.Y + 50));
-
                     var figure = new PathFigure
                     {
                         StartPoint = startPoint,
