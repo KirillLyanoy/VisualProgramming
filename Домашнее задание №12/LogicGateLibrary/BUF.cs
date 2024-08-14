@@ -1,14 +1,17 @@
 ﻿using System.Globalization;
 using Avalonia;
 using Avalonia.Media;
+
 namespace LogicGateLibrary
 {
-    internal class BUF : LogicGateControl
+    public class BUF : LogicGateControl
     {
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
             Point startPoint = new Point(100, 100);
+            if (IsSelected)
+                context.DrawRectangle(Brushes.White, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(startPoint.X - 60, startPoint.Y - 10), new Size(180, 120)));
             switch (Standart)
             {
                 case (Standart.GOST):
@@ -24,8 +27,6 @@ namespace LogicGateLibrary
                     context.DrawLine(new Pen(Brushes.Black, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Point(startPoint.X - 50, startPoint.Y + 50), new Point(startPoint.X, startPoint.Y + 50));
                     context.DrawLine(new Pen(Brushes.Black, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Point(startPoint.X + 50, startPoint.Y + 50), new Point(startPoint.X + 100, startPoint.Y + 50));
 
-                    Point point_2 = new Point(startPoint.X, startPoint.Y + 100);
-                    Point point_3 = new Point(startPoint.X + 30, startPoint.Y);
                     context.DrawLine(new Pen(Brushes.Black, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Point(startPoint.X, startPoint.Y), new Point(startPoint.X, startPoint.Y + 100));
                     context.DrawLine(new Pen(Brushes.Black, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Point(startPoint.X, startPoint.Y + 100), new Point(startPoint.X + 50, startPoint.Y + 50));
                     context.DrawLine(new Pen(Brushes.Black, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Point(startPoint.X + 50, startPoint.Y + 50), new Point(startPoint.X, startPoint.Y));
