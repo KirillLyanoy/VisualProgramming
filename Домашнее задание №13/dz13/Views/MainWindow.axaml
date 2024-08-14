@@ -4,7 +4,8 @@
         xmlns:cc="clr-namespace:LogicGateLibrary;assembly=LogicGateLibrary"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+		CanResize="False"	     
         x:Class="dz13.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"		
         Icon="/Assets/avalonia-logo.ico"
@@ -14,6 +15,23 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-		<cc:AND Label="label" LabelFont="Times New Roman" Standart="GOST"/>
-	
+	<Grid ColumnDefinitions="*,*,*,*,*,*,*,*" RowDefinitions="*,*">
+		<cc:AND Grid.Column="0" Grid.Row="0" Label="AND" LabelFont="Times New Roman" Standart="GOST" IsSelected="True"/>
+		<cc:AND Grid.Column="0" Grid.Row="1" Label="AND" LabelFont="Times New Roman" Standart="ANSI" IsSelected="False"/>
+		<cc:BUF Grid.Column="1" Grid.Row="0" Label="BUF" LabelFont="Times New Roman" Standart="GOST" IsSelected="False"/>
+		<cc:BUF Grid.Column="1" Grid.Row="1" Label="BUF" LabelFont="Times New Roman" Standart="ANSI" IsSelected="False"/>
+		<cc:INV Grid.Column="2" Grid.Row="0" Label="INV" LabelFont="Times New Roman" Standart="GOST" IsSelected="False"/>
+		<cc:INV Grid.Column="2" Grid.Row="1" Label="INV" LabelFont="Times New Roman" Standart="ANSI" IsSelected="False"/>
+		<cc:NAND Grid.Column="3" Grid.Row="0" Label="NAND" LabelFont="Times New Roman" Standart="GOST" IsSelected="False"/>
+		<cc:NAND Grid.Column="3" Grid.Row="1" Label="NAND" LabelFont="Times New Roman" Standart="ANSI" IsSelected="False"/>
+		<cc:NOR Grid.Column="4" Grid.Row="0" Label="NOR" LabelFont="Times New Roman" Standart="GOST" IsSelected="False"/>
+		<cc:NOR Grid.Column="4" Grid.Row="1" Label="NOR" LabelFont="Times New Roman" Standart="ANSI" IsSelected="False"/>
+		<cc:OR Grid.Column="5" Grid.Row="0" Label="OR" LabelFont="Times New Roman" Standart="GOST" IsSelected="False"/>
+		<cc:OR Grid.Column="5" Grid.Row="1" Label="OR" LabelFont="Times New Roman" Standart="ANSI" IsSelected="False"/>
+		<cc:XNOR Grid.Column="6" Grid.Row="0" Label="XNOR" LabelFont="Times New Roman" Standart="GOST" IsSelected="False"/>
+		<cc:XNOR Grid.Column="6" Grid.Row="1" Label="XNOR" LabelFont="Times New Roman" Standart="ANSI" IsSelected="False"/>
+		<cc:XOR Grid.Column="7" Grid.Row="0" Label="XOR" LabelFont="Times New Roman" Standart="GOST" IsSelected="False"/>
+		<cc:XOR Grid.Column="7" Grid.Row="1" Label="XOR" LabelFont="Times New Roman" Standart="ANSI" IsSelected="False"/>	
+	</Grid>
+
 </Window>
