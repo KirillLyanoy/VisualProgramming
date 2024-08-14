@@ -4,7 +4,7 @@ using Avalonia.Media;
 
 namespace LogicGateLibrary
 {
-    internal class XOR : LogicGateControl
+    public class XOR : LogicGateControl
     {
         public sealed override void Render(DrawingContext context)
         {

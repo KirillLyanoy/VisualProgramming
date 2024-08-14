@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dz13", "dz13\dz13.csproj", "{DE760D0D-5391-4D76-BB37-62EB390B1D12}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B92F3A9A-37F3-449E-BA59-28805A9C7CA6} = {B92F3A9A-37F3-449E-BA59-28805A9C7CA6}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicGateLibrary", "LogicGateLibrary\LogicGateLibrary.csproj", "{B92F3A9A-37F3-449E-BA59-28805A9C7CA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicGateLibrary", "LogicGateLibrary\LogicGateLibrary.csproj", "{B92F3A9A-37F3-449E-BA59-28805A9C7CA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

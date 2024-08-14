@@ -9,7 +9,7 @@ namespace LogicGateLibrary
         GOST,
         ANSI
     }  
-    internal class LogicGateControl : Control
+    public class LogicGateControl : Control
     {
         public Collection<short> ValueIn = new Collection<short>();
         public short ValueOut { get; }
