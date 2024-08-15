@@ -5,8 +5,6 @@ using Avalonia.Metadata;
 using LogicGateLibrary;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
 
 namespace dz13.Control;
 
@@ -27,7 +25,6 @@ public class LogicDiagramEditor : TemplatedControl
         get => GetValue(YProperty);
         set => SetValue(YProperty, value);
     }
-
     public static StyledProperty<ObservableCollection<LogicGate>> ItemsOnCanvasProperty = Avalonia.AvaloniaProperty.Register<LogicDiagramEditor, ObservableCollection<LogicGate>>(nameof(Items));
     [Content]
     public ObservableCollection<LogicGate> ItemsOnCanvas
@@ -35,7 +32,6 @@ public class LogicDiagramEditor : TemplatedControl
         get => GetValue(ItemsProperty);
         set => SetValue(ItemsProperty, value);
     }
-
     public static StyledProperty<ObservableCollection<LogicGate>> ItemsProperty = Avalonia.AvaloniaProperty.Register<LogicDiagramEditor, ObservableCollection<LogicGate>>(nameof(Items));
     [Content]
     public ObservableCollection<LogicGate> Items
@@ -46,16 +42,10 @@ public class LogicDiagramEditor : TemplatedControl
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-
-
         _mainCanvas = e.NameScope.Find(name: MainCanvas) as Canvas
             ?? throw new Exception($"{MainCanvas} not finded");
-        _mainCanvas.PointerMoved += MainCanvasPointerMoved;
-        
+        _mainCanvas.PointerMoved += MainCanvasPointerMoved;        
     }
-
-
-
     private void MainCanvasPointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)
     {
         var position = e.GetPosition(_mainCanvas);

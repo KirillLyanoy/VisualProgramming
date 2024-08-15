@@ -1,5 +1,5 @@
-﻿using dz13.Control;
-using LogicGateLibrary;
+﻿using LogicGateLibrary;
+using dz13.Views;
 
 namespace dz13.ViewModels
 {

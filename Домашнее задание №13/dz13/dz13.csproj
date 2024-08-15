@@ -29,4 +29,8 @@
       <DependentUpon>LogicDiagramEditor.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Control\GateList.axaml" />
+  </ItemGroup>
 </Project>

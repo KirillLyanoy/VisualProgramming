@@ -3,13 +3,13 @@
         xmlns:con="using:dz13.Control">
 
 	<Design.PreviewWith>
-		<con:LogicDiagramEditor />
+		<con:GateList />
 	</Design.PreviewWith>
 
-	<Style Selector="con|LogicDiagramEditor">
+	<Style Selector="con|GateList">
 		<Setter Property="Template">
 			<ControlTemplate>
-
+				
 			</ControlTemplate>
 		</Setter>
 	</Style>
