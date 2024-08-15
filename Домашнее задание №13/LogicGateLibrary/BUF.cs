@@ -1,11 +1,13 @@
-﻿using System.Globalization;
+﻿using System.Collections.ObjectModel;
+using System.Globalization;
 using Avalonia;
 using Avalonia.Media;
 
 namespace LogicGateLibrary
 {
-    public class BUF : LogicGateControl
+    public class BUF : LogicGate
     {
+        public short ValueIn { get; set; }
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);

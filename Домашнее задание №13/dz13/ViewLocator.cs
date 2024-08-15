@@ -7,7 +7,7 @@ namespace dz13
 {
     public class ViewLocator : IDataTemplate
     {
-        public Control? Build(object? data)
+        public Avalonia.Controls.Control? Build(object? data)
         {
             if (data is null)
                 return null;
@@ -17,7 +17,7 @@ namespace dz13
 
             if (type != null)
             {
-                var control = (Control)Activator.CreateInstance(type)!;
+                var control = (Avalonia.Controls.Control)Activator.CreateInstance(type)!;
                 control.DataContext = data;
                 return control;
             }

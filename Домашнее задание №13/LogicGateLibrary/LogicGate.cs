@@ -9,10 +9,9 @@ namespace LogicGateLibrary
         GOST,
         ANSI
     }  
-    public abstract class LogicGateControl : Control
+    public abstract class LogicGate : Control
     {
-        public Collection<short> ValueIn = new Collection<short>();
-        public short ValueOut { get; }
+        public bool ValueOut { get; }
         public Standart Standart { get; set; } = Standart.GOST;
         public string Label { get; set; }
         public FontFamily LabelFont { get; set; } = FontFamily.Default;

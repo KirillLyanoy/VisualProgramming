@@ -4,8 +4,9 @@ using Avalonia.Media;
 
 namespace LogicGateLibrary
 {
-    public class INV : LogicGateControl
+    public class INV : LogicGate
     {
+        public bool ValueIn { get; set; }
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);

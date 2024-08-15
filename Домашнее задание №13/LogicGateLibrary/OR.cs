@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.ObjectModel;
+using System.Globalization;
 using Avalonia;
 using Avalonia.Controls.Shapes;
 using Avalonia.Media;
@@ -6,9 +7,9 @@ using Avalonia.Platform;
 
 namespace LogicGateLibrary
 {
-    public class OR : LogicGateControl
+    public class OR : LogicGate
     {
-
+        public Collection<bool> ValueIn = new Collection<bool>();
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);

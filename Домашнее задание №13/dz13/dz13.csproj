@@ -23,4 +23,10 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.6" />
 	<ProjectReference Include="..\LogicGateLibrary\LogicGateLibrary.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Control\LogicDiagramEditor.axaml.cs">
+      <DependentUpon>LogicDiagramEditor.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

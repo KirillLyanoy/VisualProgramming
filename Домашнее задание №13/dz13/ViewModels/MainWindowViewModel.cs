@@ -1,9 +1,15 @@
-﻿namespace dz13.ViewModels
+﻿using dz13.Control;
+using LogicGateLibrary;
+
+namespace dz13.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-#pragma warning disable CA1822 // Mark members as static
-        public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+        public MainWindowViewModel() 
+        {
+            
+
+
+        }    
     }
 }

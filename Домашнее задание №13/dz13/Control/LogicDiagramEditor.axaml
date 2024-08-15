@@ -1,0 +1,19 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:con="using:dz13.Control">
+
+	<Design.PreviewWith>
+		<con:LogicDiagramEditor />
+	</Design.PreviewWith>
+
+	<Style Selector="con|LogicDiagramEditor">
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid ColumnDefinitions="5*, *">
+					<Canvas Grid.Column="0" Name="MainCanvas"/>
+				</Grid>
+			</ControlTemplate>
+		</Setter>
+	</Style>
+
+</Styles>
