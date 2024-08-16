@@ -124,34 +124,34 @@ public class GateList : TemplatedControl
                 Item = new BUF(Standart.ANSI);
                 break;
             case ("INV"):
-                Item = new BUF(Standart.ANSI);
+                Item = new INV(Standart.ANSI);
                 break;
             case ("AND"):
-                Item = new BUF(Standart.ANSI);
+                Item = new AND(Standart.ANSI);
                 break;
             case ("NAND"):
-                Item = new BUF(Standart.ANSI);
+                Item = new NAND(Standart.ANSI);
                 break;
             case ("OR"):
-                Item = new BUF(Standart.GOST);
+                Item = new OR(Standart.ANSI);
                 break;
             case ("NOR"):
-                Item = new BUF(Standart.GOST);
+                Item = new NOR(Standart.ANSI);
                 break;
             case ("XOR"):
-                Item = new BUF(Standart.GOST);
+                Item = new XOR(Standart.ANSI);
                 break;
             case ("XNOR"):
-                Item = new BUF(Standart.GOST);
+                Item = new XNOR(Standart.ANSI);
                 break;
             case ("IN"):
-                Item = new BUF(Standart.GOST);
+                Item = new BUF();
                 break;
             case ("OUT"):
-                Item = new BUF(Standart.GOST);
+                Item = new BUF();
                 break;
             case ("Connector"):
-                Item = new BUF(Standart.GOST);
+                Item = new BUF();
                 break;
         }
     }
