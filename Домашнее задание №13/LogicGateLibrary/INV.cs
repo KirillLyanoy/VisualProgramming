@@ -6,6 +6,7 @@ namespace LogicGateLibrary
 {
     public class INV : LogicGate
     {
+        public INV(Standart standart) : base(standart) { }
         public bool ValueIn { get; set; }
         public sealed override void Render(DrawingContext context)
         {

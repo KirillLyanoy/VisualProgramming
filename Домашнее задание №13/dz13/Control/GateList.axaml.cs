@@ -12,7 +12,6 @@ public class GateList : TemplatedControl
 {
     private const string ItemsList = "ItemsList";
     private ListBox _itemsList;
-
     public ObservableCollection<string> LogicGatesGOST { get; set; }
     public ObservableCollection<string> LogicGatesANSI { get; set; }
 
@@ -83,52 +82,76 @@ public class GateList : TemplatedControl
     }
     private void ItemsList_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
     {
+        
         ContentPresenter contentPresenter = e.Source as ContentPresenter;
+        LogicGate Item;
         switch (contentPresenter.Content)
         {
             case ("Буфер"):
+                Item = new BUF(Standart.GOST);
                 break;
             case ("Инвертор"):
+                Item = new INV(Standart.GOST);
                 break;
             case ("И"):
+                Item = new AND(Standart.GOST);
                 break;
             case ("И-НЕ"):
+                Item = new NAND(Standart.GOST);
                 break;
             case ("ИЛИ"):
+                Item = new OR(Standart.GOST);
                 break;
             case ("ИЛИ-НЕ"):
+                Item = new NOR(Standart.GOST);
                 break;
             case ("Исключающее ИЛИ"):
+                Item = new XOR(Standart.GOST);
                 break;
             case ("Исключающее ИЛИ-НЕ"):
+                Item = new XNOR(Standart.GOST);
                 break;
             case ("Вход"):
+                Item = new IN();
                 break;
             case ("Выход"):
+                Item = new OUT();
                 break;
             case ("Коннектор"):
+                Item = new Connector();
                 break;
             case ("BUF"):
+                Item = new BUF(Standart.ANSI);
                 break;
             case ("INV"):
+                Item = new BUF(Standart.ANSI);
                 break;
             case ("AND"):
+                Item = new BUF(Standart.ANSI);
                 break;
             case ("NAND"):
+                Item = new BUF(Standart.ANSI);
                 break;
             case ("OR"):
+                Item = new BUF(Standart.GOST);
                 break;
             case ("NOR"):
+                Item = new BUF(Standart.GOST);
                 break;
             case ("XOR"):
+                Item = new BUF(Standart.GOST);
                 break;
             case ("XNOR"):
+                Item = new BUF(Standart.GOST);
                 break;
             case ("IN"):
+                Item = new BUF(Standart.GOST);
                 break;
             case ("OUT"):
+                Item = new BUF(Standart.GOST);
                 break;
             case ("Connector"):
+                Item = new BUF(Standart.GOST);
                 break;
         }
     }

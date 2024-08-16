@@ -7,6 +7,7 @@ namespace LogicGateLibrary
 {
     public class NAND : LogicGate
     {
+        public NAND(Standart standart) : base(standart) { }
         public Collection<bool> ValueIn = new Collection<bool>();
         public sealed override void Render(DrawingContext context)
         {

@@ -7,6 +7,8 @@ namespace LogicGateLibrary
 {
     public class NOR : LogicGate
     {
+        public NOR(Standart standart) : base(standart) { }
+
         public Collection<bool> ValueIn = new Collection<bool>();
         public sealed override void Render(DrawingContext context)
         {

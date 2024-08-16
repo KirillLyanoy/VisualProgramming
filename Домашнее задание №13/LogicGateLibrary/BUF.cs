@@ -7,6 +7,7 @@ namespace LogicGateLibrary
 {
     public class BUF : LogicGate
     {
+        public BUF(Standart standart) : base(standart) {}
         public short ValueIn { get; set; }
         public sealed override void Render(DrawingContext context)
         {

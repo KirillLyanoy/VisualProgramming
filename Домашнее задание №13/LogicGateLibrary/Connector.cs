@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace LogicGateLibrary
 {
     public class Connector : LogicGate
-    {
+    {        
         public bool ValueIn { get; set; }
         public sealed override void Render(DrawingContext context)
         {

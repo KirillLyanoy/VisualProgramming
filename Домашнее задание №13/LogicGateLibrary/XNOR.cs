@@ -7,6 +7,7 @@ namespace LogicGateLibrary
 {
     public class XNOR : LogicGate
     {
+        public XNOR(Standart standart) : base(standart) { }
         public Collection<bool> ValueIn = new Collection<bool>();
         public sealed override void Render(DrawingContext context)
         {

@@ -15,6 +15,10 @@ namespace LogicGateLibrary
         public Standart Standart { get; set; } = Standart.GOST;
         public string Label { get; set; }
         public FontFamily LabelFont { get; set; } = FontFamily.Default;
-        public bool IsSelected { get; set; } = false;
+        public bool IsSelected { get; set; } = false;        
+        public LogicGate(Standart standart)
+        {
+            Standart = standart;
+        }
     }
 }

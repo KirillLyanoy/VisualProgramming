@@ -9,6 +9,7 @@ namespace LogicGateLibrary
 {
     public class OR : LogicGate
     {
+        public OR(Standart standart) : base(standart) { }
         public Collection<bool> ValueIn = new Collection<bool>();
         public sealed override void Render(DrawingContext context)
         {

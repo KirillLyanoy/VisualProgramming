@@ -7,7 +7,8 @@ namespace LogicGateLibrary
 {
     public class AND : LogicGate
     {
-        public Collection<bool> ValueIn = new Collection<bool>();
+        public AND(Standart standart) : base(standart) {}
+        public Collection<bool> ValueIn = new Collection<bool>();        
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
