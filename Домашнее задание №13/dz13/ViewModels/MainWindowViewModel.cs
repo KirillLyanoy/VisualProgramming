@@ -9,7 +9,11 @@ namespace dz13.ViewModels
         {
             
 
+            
+        }   
+        public void GetGate()
+        {
 
-        }    
+        }
     }
 }

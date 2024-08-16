@@ -14,7 +14,7 @@
 						<RadioButton Name="RadioButton1" GroupName="main" Content="ГОСТ" Margin="20 4 0 0"/>
 						<RadioButton Name="RadioButton2" GroupName="main" Content="ANSI" Margin="20 4 0 0"/>
 					</WrapPanel>
-					<ListBox Grid.Row="1" ItemsSource="{TemplateBinding Items}" Background="LightSalmon"/>
+					<ListBox Name="ItemsList" Grid.Row="1" ItemsSource="{TemplateBinding Items}" Background="LightSalmon"/>
 				</Grid>
 			</ControlTemplate>
 		</Setter>
