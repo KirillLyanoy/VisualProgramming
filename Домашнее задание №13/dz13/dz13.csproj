@@ -28,9 +28,10 @@
     <Compile Update="Control\LogicDiagramEditor.axaml.cs">
       <DependentUpon>LogicDiagramEditor.axaml</DependentUpon>
     </Compile>
+	  <Compile Update="Control\GateList.axaml.cs">
+		  <DependentUpon>GateList.axaml</DependentUpon>
+	  </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Control\GateList.axaml" />
-  </ItemGroup>
+
 </Project>

@@ -6,7 +6,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
-		CanResize="False"	     
+		CanResize="True"	     
         x:Class="dz13.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"		
         Icon="/Assets/avalonia-logo.ico"
@@ -16,7 +16,7 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	<Grid ColumnDefinitions="5*, *">
+	<Grid ColumnDefinitions="*, 200">
 		<control:LogicDiagramEditor Grid.Column="0"/>
 		<control:GateList Grid.Column="1"/>
 	</Grid>

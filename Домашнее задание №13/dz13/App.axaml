@@ -11,5 +11,7 @@
   
     <Application.Styles>
         <FluentTheme />
+		<StyleInclude Source="Control/GateList.axaml"/>
+		<StyleInclude Source="Control/LogicDiagramEditor.axaml"/>		
     </Application.Styles>
 </Application>

@@ -9,7 +9,7 @@ using System.Collections.ObjectModel;
 namespace dz13.Control;
 
 public class LogicDiagramEditor : TemplatedControl
-{
+{    
     private const string MainCanvas = "MainCanvas";
     private Canvas _mainCanvas;
 
@@ -51,5 +51,5 @@ public class LogicDiagramEditor : TemplatedControl
         var position = e.GetPosition(_mainCanvas);
         X = position.X;
         Y = position.Y;
-    }
+    }    
 }
