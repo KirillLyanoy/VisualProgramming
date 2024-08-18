@@ -14,6 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaXaml Remove="Control\1.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Control\1.axaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.6" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.6" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.6" />
@@ -25,11 +33,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Control\LogicDiagramEditor.axaml.cs">
-      <DependentUpon>LogicDiagramEditor.axaml</DependentUpon>
-    </Compile>
-	  <Compile Update="Control\GateList.axaml.cs">
-		  <DependentUpon>GateList.axaml</DependentUpon>
+	  <Compile Update="Control\LogicDiagramEditor.axaml.cs">
+		  <DependentUpon>LogicDiagramEditor.axaml</DependentUpon>
 	  </Compile>
   </ItemGroup>
 

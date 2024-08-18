@@ -9,7 +9,17 @@
 	<Style Selector="con|LogicDiagramEditor">
 		<Setter Property="Template">
 			<ControlTemplate>
-				<Canvas Name="MainCanvas" Width="800" Height="600"/>
+				<Grid ColumnDefinitions="*, 200">
+					<Canvas Name="MainCanvas" Grid.Column="0" Width="800" Height="600"/>
+					<Grid RowDefinitions="40, *" Background="Coral" Grid.Column="1">
+						<WrapPanel Grid.Row="0" >
+							<RadioButton Name="RadioButton1" GroupName="main" Content="ГОСТ" Margin="20 4 0 0"/>
+							<RadioButton Name="RadioButton2" GroupName="main" Content="ANSI" Margin="20 4 0 0"/>
+						</WrapPanel>
+						<ListBox Name="ItemsList" Grid.Row="1" ItemsSource="{TemplateBinding Items}" Background="LightSalmon"/>
+
+					</Grid>
+				</Grid>
 			</ControlTemplate>
 		</Setter>
 	</Style>

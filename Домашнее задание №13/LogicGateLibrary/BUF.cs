@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Globalization;
 using Avalonia;
+using Avalonia.Controls.Primitives;
 using Avalonia.Media;
 
 namespace LogicGateLibrary
@@ -41,5 +42,14 @@ namespace LogicGateLibrary
                     break;
             }
         }
+
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+        {
+            base.OnApplyTemplate(e);
+
+            
+
+        }
+
     }
 }

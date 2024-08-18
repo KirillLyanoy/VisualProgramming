@@ -16,9 +16,8 @@
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-	<Grid ColumnDefinitions="*, 200">
-		<control:LogicDiagramEditor Grid.Column="0"/>
-		<control:GateList Grid.Column="1"/>
-	</Grid>
+	
+		<control:LogicDiagramEditor/>
+
 	
 </Window>

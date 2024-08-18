@@ -11,7 +11,7 @@ namespace LogicGateLibrary
 {
     public class OUT : LogicGate
     {
-        public OUT(Standart standart) : base(standart) { }
+        public OUT() { }
         public bool ValueIn { get; set; }
         public sealed override void Render(DrawingContext context)
         {
