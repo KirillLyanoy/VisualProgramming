@@ -36,7 +36,6 @@ namespace LogicGateLibrary
                     }
                     context.DrawEllipse(valueBrushIn, null, new Rect(StartPoint.X - 9, StartPoint.Y + 46, 8, 8));
                     context.DrawEllipse(valueBrushOut, null, new Rect(StartPoint.X + 51, StartPoint.Y + 46, 8, 8));
-
                     break;
                 case (Standart.ANSI):
 

@@ -80,13 +80,22 @@ namespace dz13.Control
                     break;
             }
         }
-
         public static void Move(LogicGate logicGate, double X, double Y)
         {
-            var transform = new TransformGroup();
-            transform.Children.Add(new TranslateTransform(X, Y));
-            logicGate.RenderTransform = transform;
-            logicGate.StartPoint = new Avalonia.Point(logicGate.StartPoint.X + X, logicGate.StartPoint.Y + Y);
+            if (logicGate is not Connector)
+            {
+                var transform = new TransformGroup();
+                transform.Children.Add(new TranslateTransform(X, Y));
+                logicGate.RenderTransform = transform;
+                logicGate.StartPoint = new Avalonia.Point(logicGate.StartPoint.X + X, logicGate.StartPoint.Y + Y);
+            }
+            else
+            {
+                Connector connector = logicGate as Connector;
+                connector.StartPoint = new Avalonia.Point(logicGate.StartPoint.X + X, logicGate.StartPoint.Y + Y);
+                connector.EndPoint = new Avalonia.Point(connector.EndPoint.X + X, connector.EndPoint.Y + Y);
+                connector.RenderTransform = new TransformGroup();
+            }
         }
         public static void Delete(Canvas canvas) 
         {
@@ -102,17 +111,31 @@ namespace dz13.Control
             logicGate.IsSelected = !logicGate.IsSelected;         
             logicGate.RenderTransform = new TransformGroup();
         }
-
         public static void ChangeIn(IN logicGate)
         {
             logicGate.ValueOut = !logicGate.ValueOut;
             logicGate.IsSelected = false;
             logicGate.RenderTransform = new TransformGroup();
         }
-
-        public static void ChangeConnectorSize()
+        public static void ChangeConnectorSize(LogicGate logicGate, Avalonia.Point startPoint, Avalonia.Point endPoint)
         {
-
+            Connector connector = logicGate as Connector;
+            connector.StartPoint = startPoint;
+            connector.EndPoint = endPoint;
+            connector.RenderTransform = new TransformGroup();
+        }
+        public static void RemoveAllSelections(Canvas canvas)
+        {
+            LogicGate logicGate;
+            foreach (var item in canvas.Children.ToList())
+            {
+                logicGate = item as LogicGate;
+                if (logicGate.IsSelected)
+                {
+                    logicGate.IsSelected = !logicGate.IsSelected;
+                    logicGate.RenderTransform = new TransformGroup();
+                }
+            }
         }
     }
 }
