@@ -126,15 +126,22 @@ namespace dz13.Control
         }
         public static void RemoveAllSelections(Canvas canvas)
         {
-            LogicGate logicGate;
-            foreach (var item in canvas.Children.ToList())
+            try
             {
-                logicGate = item as LogicGate;
-                if (logicGate.IsSelected)
+                LogicGate logicGate;
+                foreach (var item in canvas.Children.ToList())
                 {
-                    logicGate.IsSelected = !logicGate.IsSelected;
-                    logicGate.RenderTransform = new TransformGroup();
+                    logicGate = item as LogicGate;
+                    if (logicGate.IsSelected)
+                    {
+                        logicGate.IsSelected = !logicGate.IsSelected;
+                        logicGate.RenderTransform = new TransformGroup();
+                    }
                 }
+            }
+            catch (System.NullReferenceException)
+            { 
+                return; 
             }
         }
         public static void LinkElements(LogicGate parentLogicGate, Connector childLogicGate)
