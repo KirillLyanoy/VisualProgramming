@@ -10,6 +10,7 @@ namespace LogicGateLibrary
         public AND(Standart standart) : base(standart) { }
         public Collection<bool> ValueIn = new Collection<bool>() { false, false };
         public bool ValueOut { get; set; } = false;
+
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -41,6 +42,11 @@ namespace LogicGateLibrary
                     context.DrawEllipse(valueBrush0, null, new Rect(StartPoint.X - 9, StartPoint.Y + 21, 8, 8));
                     context.DrawEllipse(valueBrush1, null, new Rect(StartPoint.X - 9, StartPoint.Y + 71, 8, 8));
                     context.DrawEllipse(valueBrushOut, null, new Rect(StartPoint.X + 51, StartPoint.Y + 46, 8, 8));
+
+                    FirstInPoint = new(StartPoint.X - 5, StartPoint.Y + 25);
+                    SecondInPoint = new(StartPoint.X - 5, StartPoint.Y + 75);
+                    OutPoint = new(StartPoint.X + 55, StartPoint.Y + 50);
+
                     break;
                 case (Standart.ANSI):
                     if (IsSelected)
@@ -62,6 +68,10 @@ namespace LogicGateLibrary
                     context.DrawEllipse(valueBrush0, null, new Rect(StartPoint.X - 9, StartPoint.Y + 21, 8, 8));
                     context.DrawEllipse(valueBrush1, null, new Rect(StartPoint.X - 9, StartPoint.Y + 71, 8, 8));
                     context.DrawEllipse(valueBrushOut, null, new Rect(StartPoint.X + 81, StartPoint.Y + 46, 8, 8));
+
+                    FirstInPoint = new(StartPoint.X - 5, StartPoint.Y + 25);
+                    SecondInPoint = new(StartPoint.X - 5, StartPoint.Y + 75);
+                    OutPoint = new(StartPoint.X + 90, StartPoint.Y + 50);
                     break;
                 default:
                     break;

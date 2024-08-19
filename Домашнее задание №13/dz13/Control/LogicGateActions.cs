@@ -137,5 +137,10 @@ namespace dz13.Control
                 }
             }
         }
+        public static void LinkElements(LogicGate parentLogicGate, Connector childLogicGate)
+        {
+            parentLogicGate = childLogicGate;
+            childLogicGate.Connections.Add(parentLogicGate);
+        }
     }
 }

@@ -33,6 +33,8 @@ public class LogicDiagramEditor : TemplatedControl
     private RadioButton _radioButton2;
     private const string DeleteButton = "DeleteButton";
     private Button _deleteButton;
+    private const string ClearButton = "ClearButton";
+    private Button _clearButton;
 
     private const string MainCanvas = "MainCanvas";
     private Canvas _mainCanvas;
@@ -87,6 +89,8 @@ public class LogicDiagramEditor : TemplatedControl
             ?? throw new Exception($"{MainCanvas} does not exist.");
         _deleteButton = e.NameScope.Find(name: DeleteButton) as Button
             ?? throw new Exception($"{DeleteButton} does not exist.");
+        _clearButton = e.NameScope.Find(name: ClearButton) as Button
+            ?? throw new Exception($"{ClearButton} does not exist.");
 
         _itemsList.DoubleTapped += ItemsList_DoubleTapped;
         _radioButton1.Click += RadioButton_Click;
@@ -94,12 +98,19 @@ public class LogicDiagramEditor : TemplatedControl
         _mainCanvas.Tapped += MainCanvas_Tapped;
         _deleteButton.Click += DeleteButton_Click;
         _mainCanvas.DoubleTapped += MainCanvas_DoubleTapped;
+        _clearButton.Click += ClearButton_Click;
 
         _mainCanvas.PointerMoved += MainCanvas_PointerMoved;
         _mainCanvas.PointerMoved += MainCanvas_SetCurrentPosition;
         _mainCanvas.PointerPressed += MainCanvas_PointerPressed;
         _mainCanvas.PointerReleased += MainCanvas_PointerReleased;        
     }
+
+    private void ClearButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        _mainCanvas.Children.Clear();
+    }
+
     private void MainCanvas_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
     {
         if (e.Source is IN)
@@ -141,14 +152,23 @@ public class LogicDiagramEditor : TemplatedControl
         {
             if (e.Source is LogicGate && !connectorCreating)
             {
-                var logicGate = e.Source as LogicGate;
-                if (logicGate.IsSelected) LogicGateActions.Move(logicGate, current.X - X, current.Y - Y);
+                var logicGate = e.Source as LogicGate;                    
+                    if (logicGate.IsSelected) LogicGateActions.Move(logicGate, current.X - X,current.Y - Y);
             }
             else
-            {
-                if (Math.Abs(current.X - temp.StartPoint.X) >= Math.Abs(current.Y - temp.StartPoint.Y)) //отрисовка горизонтальной или вертикальной линии в зависимости от курсора//
-                    LogicGateActions.ChangeConnectorSize(temp, startConnectorCreatingPoint, new Point(current.X, temp.StartPoint.Y));
-                else LogicGateActions.ChangeConnectorSize(temp, startConnectorCreatingPoint, new Point(temp.StartPoint.X, current.Y));
+            {/*
+                if (e.Source is LogicGate && startConnectorCreatingPoint != new Point(current.X, temp.StartPoint.Y) && startConnectorCreatingPoint != new Point(temp.StartPoint.X, current.Y))
+                {
+                    LogicGate logicGate = e.Source as LogicGate;
+
+
+                }
+                else
+                {*/
+                    if (Math.Abs(current.X - temp.StartPoint.X) >= Math.Abs(current.Y - temp.StartPoint.Y)) //отрисовка горизонтальной или вертикальной линии в зависимости от курсора//
+                        LogicGateActions.ChangeConnectorSize(temp, startConnectorCreatingPoint, new Point(current.X, temp.StartPoint.Y));
+                    else LogicGateActions.ChangeConnectorSize(temp, startConnectorCreatingPoint, new Point(temp.StartPoint.X, current.Y));
+           //     }
             }
         }
     }    
@@ -156,14 +176,54 @@ public class LogicDiagramEditor : TemplatedControl
     {
         moving = true;
         startConnectorCreatingPoint = e.GetPosition(_mainCanvas);
-
+        
         if (e.Source is not LogicGate)
         {
             temp = new Connector(startConnectorCreatingPoint);
             _mainCanvas.Children.Add(temp);
             connectorCreating = true;
             LogicGateActions.RemoveAllSelections(_mainCanvas);
-        }                    
+        }   
+        else
+        {
+            LogicGate logicGate = e.Source as LogicGate;
+            if (!logicGate.IsSelected)
+            {
+                if (logicGate.FirstInPoint != null)
+                {
+                    if (Math.Sqrt(Math.Pow((startConnectorCreatingPoint.X - (logicGate.FirstInPoint.X)), 2) + Math.Pow((startConnectorCreatingPoint.Y - (logicGate.FirstInPoint.Y)), 2)) <= 15)
+                    {
+                        temp = new Connector(startConnectorCreatingPoint);
+                        _mainCanvas.Children.Add(temp);
+                        connectorCreating = true;
+                        LogicGateActions.LinkElements(logicGate.FirstIn, temp);
+                        startConnectorCreatingPoint = new Point(logicGate.FirstInPoint.X, logicGate.FirstInPoint.Y);
+                    }
+                }
+                if (logicGate.SecondInPoint != null)
+                {
+                    if (Math.Sqrt(Math.Pow((startConnectorCreatingPoint.X - (logicGate.SecondInPoint.X)), 2) + Math.Pow((startConnectorCreatingPoint.Y - (logicGate.SecondInPoint.Y)), 2)) <= 15)
+                    {
+                        temp = new Connector(startConnectorCreatingPoint);
+                        _mainCanvas.Children.Add(temp);
+                        connectorCreating = true;
+                        LogicGateActions.LinkElements(logicGate.SecondIn, temp);
+                        startConnectorCreatingPoint = new Point(logicGate.SecondInPoint.X, logicGate.SecondInPoint.Y);
+                    }
+                }
+                if (logicGate.OutPoint != null)
+                {
+                    if (Math.Sqrt(Math.Pow((startConnectorCreatingPoint.X - (logicGate.OutPoint.X)), 2) + Math.Pow((startConnectorCreatingPoint.Y - (logicGate.OutPoint.Y)), 2)) <= 15)
+                    {
+                        temp = new Connector(startConnectorCreatingPoint);
+                        _mainCanvas.Children.Add(temp);
+                        connectorCreating = true;
+                        LogicGateActions.LinkElements(logicGate.Out, temp);
+                        startConnectorCreatingPoint = new Point(logicGate.OutPoint.X, logicGate.OutPoint.Y);
+                    }
+                }
+            }
+        }
     }
     private void MainCanvas_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
     {

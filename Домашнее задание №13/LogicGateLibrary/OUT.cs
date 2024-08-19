@@ -61,6 +61,7 @@ namespace LogicGateLibrary
             }
 
             context.DrawEllipse(currentBrush, null, new Rect(StartPoint.X - 9, StartPoint.Y + 11, 8, 8));
+            FirstInPoint = new(StartPoint.X - 5, StartPoint.Y + 15);
         }
     }
 }

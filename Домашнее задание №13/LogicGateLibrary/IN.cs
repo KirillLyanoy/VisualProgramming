@@ -13,6 +13,7 @@ namespace LogicGateLibrary
     {
         public IN() { }
         public bool ValueOut { get; set; } = false;
+
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -63,6 +64,8 @@ namespace LogicGateLibrary
             }
 
             context.DrawEllipse(currentBrush, null, new Rect(StartPoint.X + 76, StartPoint.Y + 11, 8, 8));
+
+            OutPoint = new(StartPoint.X + 80, StartPoint.Y + 15);
         }        
     }
 }

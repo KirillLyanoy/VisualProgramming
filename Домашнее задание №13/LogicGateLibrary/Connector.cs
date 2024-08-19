@@ -6,17 +6,19 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace LogicGateLibrary
 {
     public class Connector : LogicGate
     {
         public Connector() { }
-        public Connector(Point point) 
+        public Connector(Point point)
         {
             StartPoint = point;
             EndPoint = point;
-        }
+        }    
+        public ObservableCollection<LogicGate> Connections { get; set; } = new();
         public bool ValueIn { get; set; } = false;
         public bool ValueOut { get; set; } = false;
         public Avalonia.Point EndPoint { get; set; } = new Point(100, 50);

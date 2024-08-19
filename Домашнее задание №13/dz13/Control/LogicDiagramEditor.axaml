@@ -13,7 +13,7 @@
 					<Canvas Name="MainCanvas" 
 							Grid.Column="0" 
 							Background="WhiteSmoke"/>	
-					<Grid RowDefinitions="40, *, 80" 
+					<Grid RowDefinitions="40, *, 60, 70" 
 						  Background="Coral" 
 						  Grid.Column="1">
 						<WrapPanel Grid.Row="0" >
@@ -34,7 +34,7 @@
 						<Button
 								HorizontalAlignment="Center"
 								HorizontalContentAlignment="Center"
-								VerticalAlignment="Center"
+								VerticalAlignment="Bottom"
 								VerticalContentAlignment="Center"
 								Height="50"
 								Width="180"
@@ -44,6 +44,16 @@
 								<TextBlock Text="Удалить выбранные элементы" TextWrapping="Wrap" TextAlignment="Center"/>								
 							</Button.Content>
 						</Button>
+						<Button
+							HorizontalAlignment="Center"
+							HorizontalContentAlignment="Center"
+							VerticalAlignment="Center"
+							VerticalContentAlignment="Center"
+							Height="50"
+							Width="180"
+							Name="ClearButton"
+							Content="Очистить всё" 
+							Grid.Row="3" />
 					</Grid>
 				</Grid>				
 			</ControlTemplate>

@@ -35,6 +35,9 @@ namespace LogicGateLibrary
                     }
                     context.DrawEllipse(valueBrushIn, null, new Rect(StartPoint.X - 9, StartPoint.Y + 46, 8, 8));
                     context.DrawEllipse(valueBrushOut, null, new Rect(StartPoint.X + 59, StartPoint.Y + 46, 8, 8));
+
+                    FirstInPoint = new(StartPoint.X - 5, StartPoint.Y + 50);
+                    OutPoint = new(StartPoint.X + 63, StartPoint.Y + 50);
                     break;
                 case (Standart.ANSI):
                     if (IsSelected)
@@ -67,6 +70,10 @@ namespace LogicGateLibrary
                     }
                     context.DrawEllipse(valueBrushIn, null, new Rect(StartPoint.X - 9, StartPoint.Y + 46, 8, 8));
                     context.DrawEllipse(valueBrushOut, null, new Rect(StartPoint.X + 59, StartPoint.Y + 46, 8, 8));
+
+                    FirstInPoint = new(StartPoint.X - 5, StartPoint.Y + 50);
+                    OutPoint = new(StartPoint.X + 63, StartPoint.Y + 50);
+
                     break;
                 default:
                     break;
