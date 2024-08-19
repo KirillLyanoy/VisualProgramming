@@ -14,10 +14,8 @@
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
+    </Design.DataContext>	
 	
-		<control:LogicDiagramEditor/>
-
+	<control:LogicDiagramEditor/>
 	
 </Window>

@@ -2,7 +2,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
-
 using LogicGateLibrary;
 using System;
 using System.Collections.ObjectModel;
@@ -143,7 +142,7 @@ public class LogicDiagramEditor : TemplatedControl
             if (e.Source is LogicGate && !connectorCreating)
             {
                 var logicGate = e.Source as LogicGate;
-                LogicGateActions.Move(logicGate, current.X - X, current.Y - Y);
+                if (logicGate.IsSelected) LogicGateActions.Move(logicGate, current.X - X, current.Y - Y);
             }
             else
             {

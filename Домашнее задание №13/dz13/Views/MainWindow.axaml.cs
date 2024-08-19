@@ -8,9 +8,5 @@ namespace dz13.Views
         {
             InitializeComponent();
         }
-
-        private void Binding(object? sender, Avalonia.Input.TappedEventArgs e)
-        {
-        }
     }
 }
