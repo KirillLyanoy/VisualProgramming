@@ -30,7 +30,7 @@ namespace LogicGateLibrary
             if (IsSelected) currentBrush = Brushes.Red;
             IBrush? brush;
 
-            context.DrawLine(new Pen(currentBrush, 4, null, PenLineCap.Round, PenLineJoin.Round, 10), StartPoint, EndPoint);
+            context.DrawLine(new Pen(currentBrush, 3, null, PenLineCap.Round, PenLineJoin.Round, 10), StartPoint, EndPoint);
         }
     }
 }
