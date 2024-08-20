@@ -144,6 +144,7 @@ namespace dz13.Control
         {
             Connector newConnector = new Connector(currentPoint, currentPoint);
             canvas.Children.Add(newConnector);
+            LinkItems(connector, newConnector);
             return newConnector;
         }
         public static Connector CreateConnector(Canvas canvas, LogicGate logicGate, Avalonia.Point currentPoint)

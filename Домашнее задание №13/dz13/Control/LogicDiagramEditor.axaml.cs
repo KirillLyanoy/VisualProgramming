@@ -199,7 +199,6 @@ public class LogicDiagramEditor : TemplatedControl
                 break;            
         }
     }
-
     private void MainCanvas_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)
     {
         switch (e.Source)
