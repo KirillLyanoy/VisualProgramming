@@ -39,13 +39,11 @@ namespace LogicGateLibrary
                     OutPoint = new(StartPoint.X + 50, StartPoint.Y + 50);
                     context.DrawEllipse(valueBrushIn, null, FirstInPoint, 4, 4);
                     context.DrawEllipse(valueBrushIn, null, OutPoint, 4, 4);
-
                     break;
                 case (Standart.ANSI):
 
                     if (IsSelected)
                         context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 10, StartPoint.Y - 10), new Size(80, 120)));
-
 
                     var figure = new PathFigure
                     {
@@ -71,7 +69,6 @@ namespace LogicGateLibrary
                     {
                         context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 110));
                     }
-
                     FirstInPoint = new(StartPoint.X, StartPoint.Y + 50);
                     OutPoint = new(StartPoint.X + 60, StartPoint.Y + 50);
                     context.DrawEllipse(valueBrushIn, null, FirstInPoint, 4, 4);
