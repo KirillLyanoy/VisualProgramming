@@ -21,7 +21,7 @@ namespace LogicGateLibrary
             if (ValueIn) currentBrush = Brushes.Lime;
             else currentBrush = Brushes.Green;
             if (IsSelected)
-                context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 15, StartPoint.Y - 10), new Size(100, 50)));
+                context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 10, StartPoint.Y - 10), new Size(100, 60)));
 
             var figure = new PathFigure
             {
@@ -34,15 +34,15 @@ namespace LogicGateLibrary
             });
             figure.Segments.Add(new LineSegment
             {
-                Point = new Point(StartPoint.X + 75, StartPoint.Y + 15)
+                Point = new Point(StartPoint.X + 78, StartPoint.Y + 20)
             });
             figure.Segments.Add(new LineSegment
             {
-                Point = new Point(StartPoint.X + 50, StartPoint.Y + 30)
+                Point = new Point(StartPoint.X + 50, StartPoint.Y + 40)
             });
             figure.Segments.Add(new LineSegment
             {
-                Point = new Point(StartPoint.X, StartPoint.Y + 30)
+                Point = new Point(StartPoint.X, StartPoint.Y + 40)
             });
             figure.Segments.Add(new LineSegment
             {
@@ -52,16 +52,16 @@ namespace LogicGateLibrary
             geometry.Figures.Add(figure);
             context.DrawGeometry(Brushes.White, pen, geometry);
 
-            if (ValueIn) context.DrawText(new FormattedText("1", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 26, StartPoint.Y + 5));
-            else context.DrawText(new FormattedText("0", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 26, StartPoint.Y + 5));
-            context.DrawText(new FormattedText("b", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Blue), new Point(StartPoint.X + 42, StartPoint.Y + 12));
+            if (ValueIn) context.DrawText(new FormattedText("1", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 26, StartPoint.Y + 10));
+            else context.DrawText(new FormattedText("0", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 26, StartPoint.Y + 10));
+            context.DrawText(new FormattedText("b", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Blue), new Point(StartPoint.X + 42, StartPoint.Y + 17));
             if (Label != null)
             {
                 context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 44));
             }
 
-            context.DrawEllipse(currentBrush, null, new Rect(StartPoint.X - 9, StartPoint.Y + 11, 8, 8));
-            FirstInPoint = new(StartPoint.X - 5, StartPoint.Y + 15);
+            OutPoint = new(StartPoint.X, StartPoint.Y + 20);
+            context.DrawEllipse(currentBrush, null, OutPoint, 4, 4);
         }
     }
 }

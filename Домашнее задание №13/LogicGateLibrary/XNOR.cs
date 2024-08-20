@@ -31,24 +31,24 @@ namespace LogicGateLibrary
 
 
                     context.DrawRectangle(Brushes.White, pen, new Rect(new Point(StartPoint.X, StartPoint.Y), new Size(50, 100)));
-                    context.DrawEllipse(Brushes.White, pen, new Rect(new Point(StartPoint.X + 50, StartPoint.Y + 46), new Size(8, 8)));
+                    context.DrawEllipse(Brushes.White, pen, new Rect(new Point(StartPoint.X + 44, StartPoint.Y + 44), new Size(12, 12)));
                     context.DrawText(new FormattedText("=1", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, Typeface.Default, 15, Brushes.Black), new Point(StartPoint.X + 17, StartPoint.Y + 20));
                     if (Label != null)
                     {
                         context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 110));
                     }
-                    context.DrawEllipse(valueBrush0, null, new Rect(StartPoint.X - 9, StartPoint.Y + 21, 8, 8));
-                    context.DrawEllipse(valueBrush1, null, new Rect(StartPoint.X - 9, StartPoint.Y + 71, 8, 8));
-                    context.DrawEllipse(valueBrushOut, null, new Rect(StartPoint.X + 59, StartPoint.Y + 46, 8, 8));
 
-                    FirstInPoint = new(StartPoint.X - 5, StartPoint.Y + 25);
-                    SecondInPoint = new(StartPoint.X - 5, StartPoint.Y + 75);
-                    OutPoint = new(StartPoint.X + 63, StartPoint.Y + 50);
+                    FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
+                    SecondInPoint = new(StartPoint.X, StartPoint.Y + 80);
+                    OutPoint = new(StartPoint.X + 60, StartPoint.Y + 50);
+                    context.DrawEllipse(valueBrush0, null, FirstInPoint, 4, 4);
+                    context.DrawEllipse(valueBrush1, null, SecondInPoint, 4, 4);
+                    context.DrawEllipse(valueBrushOut, null, OutPoint, 4, 4);
+
                     break;
                 case (Standart.ANSI):
                     if (IsSelected)
-                        context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 35, StartPoint.Y - 10), new Size(128, 120)));
-
+                        context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 35, StartPoint.Y - 10), new Size(120, 120)));
                     var figure = new PathFigure
                     {
                         StartPoint = StartPoint,
@@ -56,7 +56,7 @@ namespace LogicGateLibrary
                     };
                     figure.Segments.Add(new ArcSegment
                     {
-                        Point = new Point(StartPoint.X + 75, StartPoint.Y + 50),
+                        Point = new Point(StartPoint.X + 80, StartPoint.Y + 50),
                         Size = new Size(80, 80),
                     });
                     figure.Segments.Add(new ArcSegment
@@ -83,28 +83,29 @@ namespace LogicGateLibrary
                     context.DrawGeometry(Brushes.White, pen, geometry);
                     figure = new PathFigure
                     {
-                        StartPoint = new Point(StartPoint.X - 30, StartPoint.Y),
+                        StartPoint = new Point(StartPoint.X - 29, StartPoint.Y),
                         IsClosed = false
                     };
                     figure.Segments.Add(new ArcSegment
                     {
-                        Point = new Point(StartPoint.X - 30, StartPoint.Y + 100),
+                        Point = new Point(StartPoint.X - 29, StartPoint.Y + 100),
                         Size = new Size(100, 100),
                     });
                     geometry = new PathGeometry();
                     geometry.Figures.Add(figure);
                     context.DrawGeometry(null, pen, geometry);
-                    context.DrawEllipse(Brushes.White, pen, new Rect(new Point(StartPoint.X + 75, StartPoint.Y + 46), new Size(8, 8)));
+                    context.DrawEllipse(Brushes.White, pen, new Rect(new Point(StartPoint.X + 75, StartPoint.Y + 44), new Size(12, 12)));
                     if (Label != null)
                     {
                         context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 110));
                     }
-                    context.DrawEllipse(valueBrush0, null, new Rect(StartPoint.X - 30, StartPoint.Y + 21, 8, 8));
-                    context.DrawEllipse(valueBrush1, null, new Rect(StartPoint.X - 30, StartPoint.Y + 71, 8, 8));
-                    context.DrawEllipse(valueBrushOut, null, new Rect(StartPoint.X + 84, StartPoint.Y + 46, 8, 8));
-                    FirstInPoint = new(StartPoint.X - 26, StartPoint.Y + 25);
-                    SecondInPoint = new(StartPoint.X - 26, StartPoint.Y + 75);
-                    OutPoint = new(StartPoint.X + 88, StartPoint.Y + 50);
+
+                    FirstInPoint = new(StartPoint.X - 20, StartPoint.Y + 20);
+                    SecondInPoint = new(StartPoint.X - 20, StartPoint.Y + 80);
+                    OutPoint = new(StartPoint.X + 90, StartPoint.Y + 50);
+                    context.DrawEllipse(valueBrush0, null, FirstInPoint, 4, 4);
+                    context.DrawEllipse(valueBrush1, null, SecondInPoint, 4, 4);
+                    context.DrawEllipse(valueBrushOut, null, OutPoint, 4, 4);
                     break;
                 default:
                     break;
