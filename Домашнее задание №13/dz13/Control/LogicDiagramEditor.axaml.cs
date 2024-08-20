@@ -17,7 +17,6 @@ public class LogicDiagramEditor : TemplatedControl
     private ListBox _itemsList;
     public ObservableCollection<string> LogicGatesGOST { get; set; }
     public ObservableCollection<string> LogicGatesANSI { get; set; }
-
     private const string RadioButton1 = "RadioButton1";
     private RadioButton _radioButton1;
     private const string RadioButton2 = "RadioButton2";
@@ -26,10 +25,8 @@ public class LogicDiagramEditor : TemplatedControl
     private Button _deleteButton;
     private const string ClearButton = "ClearButton";
     private Button _clearButton;
-
     private const string MainCanvas = "MainCanvas";
     private Canvas _mainCanvas;
-
     public static StyledProperty<ObservableCollection<string>> ItemsProperty = Avalonia.AvaloniaProperty.Register<LogicDiagramEditor, ObservableCollection<string>>(nameof(Items));
     public ObservableCollection<string> Items
     {
@@ -98,7 +95,6 @@ public class LogicDiagramEditor : TemplatedControl
         _mainCanvas.PointerPressed += MainCanvas_PointerPressed;
         _mainCanvas.PointerReleased += MainCanvas_PointerReleased;        
     }
-
     private void MainCanvas_SizeChanged(object? sender, SizeChangedEventArgs e)
     {
         foreach (var item in _mainCanvas.Children.ToList())
@@ -109,12 +105,10 @@ public class LogicDiagramEditor : TemplatedControl
         canvasLayout.ZIndex = -1;
         _mainCanvas.Children.Add(canvasLayout);                      
     }
-
     private void ClearButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         LogicGateActions.ClearCanvas(_mainCanvas);
     }
-
     private void MainCanvas_DoubleTapped(object? sender, Avalonia.Input.TappedEventArgs e)
     {
         if (e.Source is IN)
@@ -127,56 +121,9 @@ public class LogicDiagramEditor : TemplatedControl
     {
         LogicGateActions.Delete(_mainCanvas);
     }
-    /*
-        private void MainCanvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)
-        {
-            Point currentPosition = e.GetPosition(_mainCanvas);
-
-            if (moving)
-            {
-                if (e.Source is LogicGate && !connectorCreating && e.Source is not Connector)
-                else
-                {
-                    if (connectorCreating)
-                    {
-                        if (e.Source is Connector)
-                        {
-                            if (Math.Abs(currentPosition.X - temp.StartPoint.X) >= Math.Abs(currentPosition.Y - temp.StartPoint.Y)) //отрисовка горизонтальной или вертикальной линии в зависимости от курсора//
-                                LogicGateActions.ChangeConnectorSize(temp, startConnectorCreatingPoint, new Point(Math.Round(currentPosition.X / 10) * 10, temp.StartPoint.Y));
-                            else LogicGateActions.ChangeConnectorSize(temp, startConnectorCreatingPoint, new Point(temp.StartPoint.X, Math.Round(currentPosition.Y / 10) * 10));
-                        }
-                        else LogicGateActions.ChangeConnectorSize(temp, startConnectorCreatingPoint, new Point(Math.Round(currentPosition.X / 10) * 10, temp.StartPoint.Y));
-                    }
-                }
-            }
-        }    
-        private void MainCanvas_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
-        {
-          
-            startConnectorCreatingPoint = new Point(Math.Round(e.GetPosition(_mainCanvas).X / 10) * 10, Math.Round(e.GetPosition(_mainCanvas).Y / 10) * 10);
-               
-            else
-            {
-                if (e.Source is Connector)
-                {                
-                    Connector connector = e.Source as Connector;
-                    temp = new Connector(startConnectorCreatingPoint);
-                    _mainCanvas.Children.Add(temp);
-                    connectorCreating = true;
-                    LogicGateActions.LinkElements(connector, temp);                
-                }
-                else
-                {                        
-
-                }           
-            }
-        }
-        */
-
     private bool _gateMoving = false;
     private bool _connectorCreating = false;
     private Connector temporaryConnector;
-
     private void MainCanvas_PointerReleased(object? sender, Avalonia.Input.PointerReleasedEventArgs e)
     {
         _gateMoving = false;
@@ -191,13 +138,14 @@ public class LogicDiagramEditor : TemplatedControl
         if (_connectorCreating)
         {
             Avalonia.Point currentPosition = e.GetPosition(_mainCanvas);
-            if (temporaryConnector.Connections[0] is Connector)
+      
+            if (e.Source is Connector)
             {
-                if (Math.Abs(e.GetPosition(_mainCanvas).X - temporaryConnector.StartPoint.X) >= Math.Abs(currentPosition.Y - temporaryConnector.StartPoint.Y))
-                    LogicGateActions.EditConnectorX(temporaryConnector, new Point(Math.Round(currentPosition.X / 10) * 10, temporaryConnector.StartPoint.Y));
-                else LogicGateActions.EditConnectorX(temporaryConnector, new Point(temporaryConnector.StartPoint.X, Math.Round(e.GetPosition(_mainCanvas).X / 10) * 10));
+                if (Math.Abs(currentPosition.X - temporaryConnector.StartPoint.X) >= Math.Abs(currentPosition.Y - temporaryConnector.StartPoint.Y)) //отрисовка горизонтальной или вертикальной линии в зависимости от курсора//
+                    LogicGateActions.EditConnectorX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
+                else LogicGateActions.EditConnectorY(temporaryConnector, Math.Round(currentPosition.Y / 10) * 10);
             }
-            else LogicGateActions.EditConnectorX(temporaryConnector, new Point(Math.Round(currentPosition.X / 10) * 10, temporaryConnector.StartPoint.Y));
+            else LogicGateActions.EditConnectorX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
         }
         else
         {
@@ -246,7 +194,7 @@ public class LogicDiagramEditor : TemplatedControl
                 else
                 {
                     temporaryConnector = LogicGateActions.CreateConnector(_mainCanvas, logicGate, e.GetPosition(_mainCanvas));
-                    _connectorCreating = true;
+                    if (temporaryConnector != null) _connectorCreating = true;
                 }
                 break;            
         }

@@ -153,13 +153,15 @@ namespace dz13.Control
             {
                 Connector connector = new Connector(logicGate.FirstInPoint, logicGate.FirstInPoint);
                 canvas.Children.Add(connector);
+                LinkItems(logicGate, connector);
                 return connector;
             }
             if (logicGate.SecondInPoint != null && logicGate.SecondIn == null &&
                 Math.Sqrt(Math.Pow((currentPoint.X - (logicGate.SecondInPoint.X)), 2) + Math.Pow((currentPoint.Y - (logicGate.SecondInPoint.Y)), 2)) <= 15)
             {
                 Connector connector = new Connector(logicGate.SecondInPoint, logicGate.SecondInPoint);
-                canvas.Children.Add(connector);           
+                canvas.Children.Add(connector);
+                LinkItems(logicGate, connector);
                 return connector;
             }
             if (logicGate.OutPoint != null && logicGate.Out == null &&
@@ -167,45 +169,56 @@ namespace dz13.Control
             {
                 Connector connector = new Connector(logicGate.OutPoint, logicGate.OutPoint);
                 canvas.Children.Add(connector);
+                LinkItems(logicGate, connector);
                 return connector;
             }
             return null;
         }
-        public static void EditConnectorX(Connector connector, Avalonia.Point currentPoint)
+        public static void EditConnectorX(Connector connector, double value)
         {
-            connector.EndPoint = new Avalonia.Point(currentPoint.X, connector.EndPoint.Y);
+            connector.EndPoint = new Avalonia.Point(value, connector.StartPoint.Y);
             connector.RenderTransform = new TransformGroup();
         }
-        public static void EditConnectorY(Connector connector, Avalonia.Point currentPoint)
+        public static void EditConnectorY(Connector connector, double value)
         {
-            connector.EndPoint = new Avalonia.Point(connector.EndPoint.X, currentPoint.Y);
+            connector.EndPoint = new Avalonia.Point(connector.StartPoint.X, value);
             connector.RenderTransform = new TransformGroup();
         }
         public static void CheckConnectorSize(Canvas canvas, Connector connector)
         {
-            if (Math.Abs(connector.StartPoint.X - connector.EndPoint.X) < 10 &&
-                Math.Abs(connector.StartPoint.Y - connector.EndPoint.Y) < 10)                
+            if (Math.Abs(connector.StartPoint.X - connector.EndPoint.X) < 20 &&
+                Math.Abs(connector.StartPoint.Y - connector.EndPoint.Y) < 20)                
                 canvas.Children.Remove(connector);
         }
         public static void LinkItems(LogicGate parentLogicGate, Connector childLogicGate)
         {
-            parentLogicGate = childLogicGate;
-            childLogicGate.Connections.Add(parentLogicGate);
-        }
-        public static void LinkItems(Connector parentLogicGate, Connector childLogicGate)
-        {
-            parentLogicGate.Connections.Add(childLogicGate);
-            childLogicGate.Connections.Add(parentLogicGate);
-        }
+            switch (parentLogicGate)
+            {
+                case Connector:
+                    Connector connector = parentLogicGate as Connector;
+                    connector.Connections.Add(childLogicGate);
+                    childLogicGate.Connections.Add(parentLogicGate);
+                    break;
+                case LogicGate:
+                    parentLogicGate = childLogicGate;
+                    childLogicGate.Connections.Add(parentLogicGate);
+                    break;
+            }
+        }      
         public static void UnLinkItems(LogicGate parentLogicGate, Connector childLogicGate)
         {
-            parentLogicGate = childLogicGate;
-            childLogicGate.Connections.Add(parentLogicGate);
-        }
-        public static void UnLinkItems(Connector parentLogicGate, Connector childLogicGate)
-        {
-            parentLogicGate.Connections.Add(childLogicGate);
-            childLogicGate.Connections.Add(parentLogicGate);
+            switch (parentLogicGate)
+            {
+                case Connector:
+                    Connector connector = parentLogicGate as Connector;
+                    connector.Connections.Remove(childLogicGate);
+                    childLogicGate.Connections.Remove(parentLogicGate);
+                    break;
+                case LogicGate:
+                    parentLogicGate = null;
+                    childLogicGate.Connections.Remove(parentLogicGate);
+                    break;
+            }
         }
     }
 }
