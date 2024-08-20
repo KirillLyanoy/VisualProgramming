@@ -7,7 +7,6 @@ using LogicGateLibrary;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace dz13.Control;
 
@@ -181,7 +180,7 @@ public class LogicDiagramEditor : TemplatedControl
                 }
                 else
                 {
-                    temporaryConnector = LogicGateActions.CreateConnector(_mainCanvas, connector, e.GetPosition(_mainCanvas));
+                    temporaryConnector = LogicGateActions.CreateConnector(_mainCanvas, connector, new Point (Math.Round(e.GetPosition(_mainCanvas).X / 10) * 10, Math.Round(e.GetPosition(_mainCanvas).Y / 10) * 10));
                     _connectorCreating = true;
                 }
                 break;

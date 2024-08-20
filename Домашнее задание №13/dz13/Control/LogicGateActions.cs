@@ -1,12 +1,8 @@
 ﻿using Avalonia.Controls;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Avalonia.Media;
 using LogicGateLibrary;
-using Avalonia.Controls.Presenters;
-using System.Drawing;
 
 namespace dz13.Control
 {
@@ -82,17 +78,23 @@ namespace dz13.Control
         }
         public static void Move(LogicGate logicGate, Avalonia.Point current)
         {
-            if (logicGate is not Connector)
+            switch (logicGate)
             {
-                logicGate.StartPoint = new Avalonia.Point(Math.Round(current.X / 10) * 10, Math.Round(current.Y / 10) * 10);
-                logicGate.RenderTransform = new TranslateTransform();
-            }
-            else
-            {
-                Connector connector = logicGate as Connector;
-                connector.StartPoint = new Avalonia.Point(current.X, current.Y);
-                connector.EndPoint = new Avalonia.Point(current.X, current.Y);
-                connector.RenderTransform = new TransformGroup();
+                case Connector:
+                    Connector connector = logicGate as Connector;
+                    connector.StartPoint = new Avalonia.Point(current.X, current.Y);
+                    connector.EndPoint = new Avalonia.Point(current.X, current.Y);
+                    connector.RenderTransform = new TransformGroup();
+                    break;
+                case IN:
+                case OUT:
+                    logicGate.StartPoint = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 30, Math.Round(current.Y / 10) * 10 - 20);
+                    logicGate.RenderTransform = new TranslateTransform();
+                    break;
+                default:
+                    logicGate.StartPoint = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 20, Math.Round(current.Y / 10) * 10 - 50);
+                    logicGate.RenderTransform = new TranslateTransform();
+                    break;
             }
         }
         public static void Delete(Canvas canvas)
