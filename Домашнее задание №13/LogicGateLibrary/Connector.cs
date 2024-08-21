@@ -46,7 +46,8 @@ namespace LogicGateLibrary
                     if ((this.StartPoint.X - connector.StartPoint.X) * (connector.EndPoint.Y - connector.StartPoint.Y) ==
                         (connector.EndPoint.X - connector.StartPoint.X) * (this.StartPoint.Y - connector.StartPoint.Y))
                         context.DrawEllipse(currentBrush, null, StartPoint, 4, 4);
-                    if ((this.EndPoint.X - connector.StartPoint.X) * (connector.EndPoint.Y - connector.StartPoint.Y) ==
+
+                    else if ((this.EndPoint.X - connector.StartPoint.X) * (connector.EndPoint.Y - connector.StartPoint.Y) ==
                         (connector.EndPoint.X - connector.StartPoint.X) * (this.EndPoint.Y - connector.StartPoint.Y))
                         context.DrawEllipse(currentBrush, null, EndPoint, 4, 4);
                 }

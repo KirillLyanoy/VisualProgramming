@@ -24,7 +24,6 @@ namespace dz13
 
             return new TextBlock { Text = "Not Found: " + name };
         }
-
         public bool Match(object? data)
         {
             return data is ViewModelBase;
