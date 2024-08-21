@@ -68,7 +68,6 @@ namespace LogicGateLibrary
             {
                 context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 44));
             }
-
             FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
             context.DrawEllipse(currentBrush, null, FirstInPoint, 4, 4);
         }
