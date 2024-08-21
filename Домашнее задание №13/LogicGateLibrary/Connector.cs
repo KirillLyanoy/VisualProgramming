@@ -23,6 +23,7 @@ namespace LogicGateLibrary
                 UpdateConnectorsValue(_value);
             }
         }
+        private bool _error = false;
         private LogicGate temporaryParentItem;
         public Avalonia.Point EndPoint { get; set; } = new Point(100, 50);
         public sealed override void Render(DrawingContext context)
