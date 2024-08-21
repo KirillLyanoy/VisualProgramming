@@ -137,6 +137,7 @@ public class LogicDiagramEditor : TemplatedControl
             }
             _connectorCreating = false;
         }
+        LogicGateActions.UpdateDiagram(_mainCanvas);
     }
     private LogicGate temporaryLogicGate;
     private void MainCanvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)

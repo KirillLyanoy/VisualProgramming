@@ -73,7 +73,7 @@ namespace LogicGateLibrary
             OutPoint = new(StartPoint.X + 80, StartPoint.Y + 20);
             context.DrawEllipse(currentBrush, null, OutPoint, 4, 4);            
         }   
-        private void UpdateConnectorsValue()
+        public void UpdateConnectorsValue()
         {
             if (Out != null) Out.Value = ValueOut;
         }

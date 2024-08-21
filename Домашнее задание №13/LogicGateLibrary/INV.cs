@@ -93,6 +93,8 @@ namespace LogicGateLibrary
         {
             ValueOut = ValueIn;
             if (Out != null) Out.Value = !ValueOut;
+
+            RenderTransform = new TranslateTransform();
         }
     }
 }

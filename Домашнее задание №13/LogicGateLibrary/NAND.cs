@@ -7,8 +7,11 @@ namespace LogicGateLibrary
 {
     public class NAND : LogicGate
     {
-        public NAND(Standart standart) : base(standart) { }
-        public Collection<bool> ValueIn = new Collection<bool>() { false, false };
+        public NAND(Standart standart) : base(standart)
+        {
+            ValueIn.CollectionChanged += UpdateConnectorsValue;
+        }
+        public ObservableCollection<bool> ValueIn = new ObservableCollection<bool>() { false, false };
         public bool ValueOut { get; set; } = false;
         public sealed override void Render(DrawingContext context)
         {
@@ -75,6 +78,14 @@ namespace LogicGateLibrary
                 default:
                     break;
             }
+        }
+        private void UpdateConnectorsValue(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (ValueIn[0] && ValueIn[1]) ValueOut = false;
+            else ValueOut = true;
+            if (Out != null) Out.Value = ValueOut;
+
+            RenderTransform = new TranslateTransform();
         }
     }
 }

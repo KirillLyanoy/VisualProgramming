@@ -275,5 +275,16 @@ namespace dz13.Control
                 }
             }
         }
+        public static void UpdateDiagram(Canvas canvas)
+        {
+            foreach (var item in canvas.Children.ToList())
+            {
+                if (item is IN)
+                {
+                    var _in = item as IN;
+                    _in.UpdateConnectorsValue();
+                }
+            }
+        }
     }
 }

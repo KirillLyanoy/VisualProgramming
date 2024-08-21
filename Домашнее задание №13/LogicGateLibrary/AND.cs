@@ -7,18 +7,12 @@ namespace LogicGateLibrary
 {
     public class AND : LogicGate
     {
-        public AND(Standart standart) : base(standart) { }
-        private ObservableCollection<bool> valueIn = new ObservableCollection<bool>() { false, false };
-        public ObservableCollection<bool> ValueIn
+        public AND(Standart standart) : base(standart) 
         {
-            get { return valueIn; }
-            set 
-            { 
-                UpdateConnectorsValue();    
-            }
+            ValueIn.CollectionChanged += UpdateConnectorsValue;
         }
+        public ObservableCollection<bool> ValueIn = new ObservableCollection<bool>() { false, false };
         public bool ValueOut { get; set; } = false;
-
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -86,11 +80,13 @@ namespace LogicGateLibrary
                     break;
             }
         }
-        private void UpdateConnectorsValue()
+        private void UpdateConnectorsValue(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (ValueIn[0] && ValueIn[1]) ValueOut = true;
             else ValueOut = false;
-            if (Out != null) Out.Value = true;
+            if (Out != null) Out.Value = ValueOut;
+
+            RenderTransform = new TranslateTransform();
         }
     }
 }
