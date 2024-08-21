@@ -7,7 +7,16 @@ namespace LogicGateLibrary
     public class INV : LogicGate
     {
         public INV(Standart standart) : base(standart) { }
-        public bool ValueIn { get; set; } = false;
+        private bool _valueIn = false;
+        public bool ValueIn
+        {
+            get { return _valueIn; }
+            set
+            {
+                _valueIn = value;
+                UpdateConnectorValue();
+            }
+        }
         public bool ValueOut { get; set; } = false;
         public sealed override void Render(DrawingContext context)
         {
@@ -79,6 +88,11 @@ namespace LogicGateLibrary
                 default:
                     break;
             }
+        }
+        private void UpdateConnectorValue()
+        {
+            ValueOut = ValueIn;
+            if (Out != null) Out.Value = !ValueOut;
         }
     }
 }

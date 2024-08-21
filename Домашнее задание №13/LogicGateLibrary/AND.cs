@@ -8,7 +8,15 @@ namespace LogicGateLibrary
     public class AND : LogicGate
     {
         public AND(Standart standart) : base(standart) { }
-        public Collection<bool> ValueIn = new Collection<bool>() { false, false };
+        private ObservableCollection<bool> valueIn = new ObservableCollection<bool>() { false, false };
+        public ObservableCollection<bool> ValueIn
+        {
+            get { return valueIn; }
+            set 
+            { 
+                UpdateConnectorsValue();    
+            }
+        }
         public bool ValueOut { get; set; } = false;
 
         public sealed override void Render(DrawingContext context)
@@ -77,6 +85,12 @@ namespace LogicGateLibrary
                 default:
                     break;
             }
+        }
+        private void UpdateConnectorsValue()
+        {
+            if (ValueIn[0] && ValueIn[1]) ValueOut = true;
+            else ValueOut = false;
+            if (Out != null) Out.Value = true;
         }
     }
 }

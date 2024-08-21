@@ -11,8 +11,17 @@ namespace LogicGateLibrary
 {
     public class OUT : LogicGate
     {
-        public OUT() { }     
-        public bool ValueIn { get; set; } = false;
+        public OUT() { }
+        private bool _valueIn = false;
+        public bool ValueIn
+        {
+            get { return _valueIn; }
+            set
+            {
+                _valueIn = value;
+                RenderTransform = new TranslateTransform();
+            }
+        }
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -60,8 +69,8 @@ namespace LogicGateLibrary
                 context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 44));
             }
 
-            OutPoint = new(StartPoint.X, StartPoint.Y + 20);
-            context.DrawEllipse(currentBrush, null, OutPoint, 4, 4);
+            FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
+            context.DrawEllipse(currentBrush, null, FirstInPoint, 4, 4);
         }
     }
 }

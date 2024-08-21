@@ -93,6 +93,8 @@ public class LogicDiagramEditor : TemplatedControl
         _mainCanvas.PointerMoved += MainCanvas_PointerMoved;
         _mainCanvas.PointerPressed += MainCanvas_PointerPressed;
         _mainCanvas.PointerReleased += MainCanvas_PointerReleased;        
+
+        
     }
     private void MainCanvas_SizeChanged(object? sender, SizeChangedEventArgs e)
     {
@@ -128,23 +130,32 @@ public class LogicDiagramEditor : TemplatedControl
         _gateMoving = false;
         if (_connectorCreating)
         {
-            LogicGateActions.CheckConnectorSize(_mainCanvas, temporaryConnector);
+            if (!LogicGateActions.CheckConnectorSize(_mainCanvas, temporaryConnector)) _mainCanvas.Children.Remove(temporaryConnector); 
+            else
+            {
+                LogicGateActions.CheckConnectorEndOut(_mainCanvas, temporaryConnector); 
+            }
             _connectorCreating = false;
         }
     }
+    private LogicGate temporaryLogicGate;
     private void MainCanvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)
     {
         if (_connectorCreating)
         {
             Avalonia.Point currentPosition = e.GetPosition(_mainCanvas);
-      
+
             if (e.Source is Connector)
             {
+                var connector = e.Source as Connector;
                 if (Math.Abs(currentPosition.X - temporaryConnector.StartPoint.X) >= Math.Abs(currentPosition.Y - temporaryConnector.StartPoint.Y)) //отрисовка горизонтальной или вертикальной линии в зависимости от курсора//
                     LogicGateActions.EditConnectorX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
                 else LogicGateActions.EditConnectorY(temporaryConnector, Math.Round(currentPosition.Y / 10) * 10);
             }
-            else LogicGateActions.EditConnectorX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
+            else
+            {
+                LogicGateActions.EditConnectorX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
+            }
         }
         else
         {
@@ -160,6 +171,7 @@ public class LogicDiagramEditor : TemplatedControl
                         if (logicGate.IsSelected)
                         {
                             LogicGateActions.Move(logicGate, e.GetPosition(_mainCanvas));
+                            temporaryLogicGate = logicGate;
                         }
                     }
                     break;

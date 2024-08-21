@@ -84,7 +84,7 @@ namespace dz13.Control
                     Connector connector = logicGate as Connector;
                     connector.StartPoint = new Avalonia.Point(current.X, current.Y);
                     connector.EndPoint = new Avalonia.Point(current.X, current.Y);
-                    connector.RenderTransform = new TransformGroup();
+                    connector.RenderTransform = new TranslateTransform();
                     break;
                 case IN:
                 case OUT:
@@ -110,13 +110,13 @@ namespace dz13.Control
         public static void IsSelected(LogicGate logicGate)
         {
             logicGate.IsSelected = !logicGate.IsSelected;
-            logicGate.RenderTransform = new TransformGroup();
+            logicGate.RenderTransform = new TranslateTransform();
         }
         public static void ChangeIn(IN logicGate)
         {
             logicGate.ValueOut = !logicGate.ValueOut;
             logicGate.IsSelected = false;
-            logicGate.RenderTransform = new TransformGroup();
+            logicGate.RenderTransform = new TranslateTransform();
         }
         public static void RemoveAllSelections(Canvas canvas)
         {
@@ -130,7 +130,7 @@ namespace dz13.Control
                     if (logicGate.IsSelected)
                     {
                         logicGate.IsSelected = !logicGate.IsSelected;
-                        logicGate.RenderTransform = new TransformGroup();
+                        logicGate.RenderTransform = new TranslateTransform();
                     }
                 }
             }
@@ -156,7 +156,7 @@ namespace dz13.Control
             {
                 Connector connector = new Connector(logicGate.FirstInPoint, logicGate.FirstInPoint);
                 canvas.Children.Add(connector);
-                LinkItems(logicGate, connector);
+                LinkItems(logicGate, connector, 0);
                 return connector;
             }
             if (logicGate.SecondInPoint != null && logicGate.SecondIn == null &&
@@ -164,7 +164,7 @@ namespace dz13.Control
             {
                 Connector connector = new Connector(logicGate.SecondInPoint, logicGate.SecondInPoint);
                 canvas.Children.Add(connector);
-                LinkItems(logicGate, connector);
+                LinkItems(logicGate, connector, 1);
                 return connector;
             }
             if (logicGate.OutPoint != null && logicGate.Out == null &&
@@ -172,7 +172,7 @@ namespace dz13.Control
             {
                 Connector connector = new Connector(logicGate.OutPoint, logicGate.OutPoint);
                 canvas.Children.Add(connector);
-                LinkItems(logicGate, connector);
+                LinkItems(logicGate, connector, 2);
                 return connector;
             }
             return null;
@@ -180,34 +180,41 @@ namespace dz13.Control
         public static void EditConnectorX(Connector connector, double value)
         {
             connector.EndPoint = new Avalonia.Point(value, connector.StartPoint.Y);
-            connector.RenderTransform = new TransformGroup();
+            connector.RenderTransform = new TranslateTransform();
         }
         public static void EditConnectorY(Connector connector, double value)
         {
             connector.EndPoint = new Avalonia.Point(connector.StartPoint.X, value);
-            connector.RenderTransform = new TransformGroup();
+            connector.RenderTransform = new TranslateTransform();
         }
-        public static void CheckConnectorSize(Canvas canvas, Connector connector)
+        public static bool CheckConnectorSize(Canvas canvas, Connector connector)
         {
             if (Math.Abs(connector.StartPoint.X - connector.EndPoint.X) < 20 &&
-                Math.Abs(connector.StartPoint.Y - connector.EndPoint.Y) < 20)                
-                canvas.Children.Remove(connector);
+                Math.Abs(connector.StartPoint.Y - connector.EndPoint.Y) < 20) return false;
+            else return true;                
         }
-        public static void LinkItems(LogicGate parentLogicGate, Connector childLogicGate)
+        public static void LinkItems(LogicGate parentLogicGate, Connector childLogicGate, short connectIndex)
         {
-            switch (parentLogicGate)
+            childLogicGate.Connections.Add(parentLogicGate);
+            switch (connectIndex)
             {
-                case Connector:
-                    Connector connector = parentLogicGate as Connector;
-                    connector.Connections.Add(childLogicGate);
-                    childLogicGate.Connections.Add(parentLogicGate);
+                case 0:
+                    parentLogicGate.FirstIn = childLogicGate;
                     break;
-                case LogicGate:
-                    parentLogicGate = childLogicGate;
-                    childLogicGate.Connections.Add(parentLogicGate);
+                case 1:
+                    parentLogicGate.SecondIn = childLogicGate;
+                    break;
+                case 2:
+                    parentLogicGate.Out = childLogicGate;
                     break;
             }
-        }      
+        }
+        public static void LinkItems(Connector parentLogicGate, Connector childLogicGate)
+        {
+            Connector connector = parentLogicGate as Connector;
+            connector.Connections.Add(childLogicGate);
+            childLogicGate.Connections.Add(parentLogicGate);
+        }
         public static void UnLinkItems(LogicGate parentLogicGate, Connector childLogicGate)
         {
             switch (parentLogicGate)
@@ -221,6 +228,51 @@ namespace dz13.Control
                     parentLogicGate = null;
                     childLogicGate.Connections.Remove(parentLogicGate);
                     break;
+            }
+        }
+        public static void CheckConnectorEndOut(Canvas canvas, Connector connector)
+        {
+            foreach (var item in canvas.Children.ToList())
+            {
+                switch (item)
+                {
+                    case Connector:
+                        Connector oldConnector = item as Connector;
+                        if ((connector.EndPoint.X - oldConnector.StartPoint.X) * (oldConnector.EndPoint.Y - oldConnector.StartPoint.Y) ==
+                            (oldConnector.EndPoint.X - oldConnector.StartPoint.Y) * (connector.EndPoint.Y - oldConnector.StartPoint.Y))                            
+                        {
+                            LinkItems(oldConnector, connector);
+                            return;
+                        }
+                        else break;
+                    case LogicGate:
+                        LogicGate logicGate = item as LogicGate;
+                        if (logicGate.FirstIn == null && logicGate.FirstInPoint.X != 0 && logicGate.FirstInPoint.Y != 0)
+                        {
+                            if (Math.Sqrt(Math.Pow((connector.EndPoint.X - (logicGate.FirstInPoint.X)), 2) + Math.Pow((connector.EndPoint.Y - (logicGate.FirstInPoint.Y)), 2)) <= 10)
+                            {
+                                LinkItems(logicGate, connector, 0);
+                                return;
+                            }
+                        }
+                        if (logicGate.SecondIn == null && logicGate.SecondInPoint.X != 0 && logicGate.SecondInPoint.Y != 0)
+                        {
+                            if (Math.Sqrt(Math.Pow((connector.EndPoint.X - (logicGate.SecondInPoint.X)), 2) + Math.Pow((connector.EndPoint.Y - (logicGate.SecondInPoint.Y)), 2)) <= 10)
+                            {
+                                LinkItems(logicGate, connector, 1);
+                                return;
+                            }
+                        }
+                        if (logicGate.Out == null)
+                        {
+                            if (Math.Sqrt(Math.Pow((connector.EndPoint.X - (logicGate.OutPoint.X)), 2) + Math.Pow((connector.EndPoint.Y - (logicGate.OutPoint.Y)), 2)) <= 10)
+                            {
+                                LinkItems(logicGate, connector, 2);
+                                return;
+                            }
+                        }
+                        break;
+                }
             }
         }
     }

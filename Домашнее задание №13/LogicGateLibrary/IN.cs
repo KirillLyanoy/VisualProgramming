@@ -12,8 +12,16 @@ namespace LogicGateLibrary
     public class IN : LogicGate
     {
         public IN() { }
-        public bool ValueOut { get; set; } = false;
-
+        private bool _valueOut = false;
+        public bool ValueOut
+        {
+            get { return _valueOut; }
+            set
+            {
+                _valueOut = value;
+                UpdateConnectorsValue();
+            }
+        }
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -64,6 +72,10 @@ namespace LogicGateLibrary
             }
             OutPoint = new(StartPoint.X + 80, StartPoint.Y + 20);
             context.DrawEllipse(currentBrush, null, OutPoint, 4, 4);            
-        }        
+        }   
+        private void UpdateConnectorsValue()
+        {
+            if (Out != null) Out.Value = ValueOut;
+        }
     }
 }
