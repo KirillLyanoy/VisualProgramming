@@ -13,7 +13,7 @@ namespace LogicGateLibrary
     {
         public IN() { }
         private bool _valueOut = false;
-        public bool ValueOut
+        public override bool ValueOut
         {
             get { return _valueOut; }
             set
@@ -75,7 +75,11 @@ namespace LogicGateLibrary
         }   
         public void UpdateConnectorsValue()
         {
-            if (Out != null) Out.Value = ValueOut;
+            if (Out != null)
+            {
+                Connector connector = Out as Connector;
+                Out.SetNewValue(this, ValueOut);
+            }       
         }
     }
 }

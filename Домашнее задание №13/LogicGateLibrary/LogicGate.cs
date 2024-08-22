@@ -20,7 +20,8 @@ namespace LogicGateLibrary
         public FontFamily LabelFont { get; set; } = FontFamily.Default;
         public string Label { get; set; }
         public Standart Standart { get; set; } = Standart.GOST;
-        public bool IsSelected { get; set; } = false;  
+        public bool IsSelected { get; set; } = false;
+        public abstract bool ValueOut { get; set; }
         public Point StartPoint { get; set; } = new Point(100, 50);
         public Point FirstInPoint { get; set; }
         public Point SecondInPoint { get; set; }

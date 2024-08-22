@@ -17,7 +17,7 @@ namespace LogicGateLibrary
                 UpdateConnectorValue();
             }
         }
-        public bool ValueOut { get; set; } = false;
+        public override bool ValueOut { get; set; } = false;
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -91,8 +91,9 @@ namespace LogicGateLibrary
         }
         private void UpdateConnectorValue()
         {
-            ValueOut = ValueIn;
-            if (Out != null) Out.Value = !ValueOut;
+            Connector connector = Out as Connector;
+            ValueOut = !ValueIn;
+            if (Out != null) connector.SetNewValue(this, ValueOut);
 
             RenderTransform = new TranslateTransform();
         }

@@ -22,6 +22,7 @@ namespace LogicGateLibrary
                 RenderTransform = new TranslateTransform();
             }
         }
+        public override bool ValueOut { get => throw new NotImplementedException() ; set => throw new NotImplementedException(); }
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);

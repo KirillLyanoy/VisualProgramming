@@ -14,7 +14,7 @@ namespace LogicGateLibrary
             ValueIn.CollectionChanged += UpdateConnectorsValue;
         }
         public ObservableCollection<bool> ValueIn = new ObservableCollection<bool>() { false, false };
-        public bool ValueOut { get; set; } = false;
+        public override bool ValueOut { get; set; } = false;
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -103,9 +103,10 @@ namespace LogicGateLibrary
         }
         private void UpdateConnectorsValue(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            Connector connector = Out as Connector;
             if (!ValueIn[0] && !ValueIn[1]) ValueOut = false;
             else ValueOut = true;
-            if (Out != null) Out.Value = ValueOut;
+            if (Out != null) connector.SetNewValue(this, ValueOut);
 
             RenderTransform = new TranslateTransform();
         }

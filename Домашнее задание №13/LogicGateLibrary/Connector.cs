@@ -13,14 +13,14 @@ namespace LogicGateLibrary
             EndPoint = endPoint;
         }
         public ObservableCollection<LogicGate> Connections { get; set; } = new();
-        private bool _value = false;
-        public bool Value
+        private bool _valueOut = false;
+        public override bool ValueOut
         {
-            get { return _value; }
+            get { return _valueOut; }
             set
             {
-                _value = value;
-                UpdateConnectorsValue(_value);
+                _valueOut = value;
+                UpdateConnectorsValue(_valueOut);
             }
         }
         private bool _error = false;
@@ -31,7 +31,7 @@ namespace LogicGateLibrary
             base.Render(context);
 
             IBrush currentBrush;
-            if (Value) currentBrush = Brushes.Lime;
+            if (ValueOut) currentBrush = Brushes.Lime;
             else currentBrush = Brushes.Green;
             if (IsSelected) currentBrush = Brushes.Red;
             IBrush? brush;
@@ -117,7 +117,7 @@ namespace LogicGateLibrary
         public void SetNewValue(LogicGate parentItem, bool value)
         {
             temporaryParentItem = parentItem;
-            Value = value;
+            ValueOut = value;
         }
     }
 }
