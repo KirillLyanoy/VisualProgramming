@@ -6,7 +6,11 @@ namespace LogicGateLibrary
 {
     public class Connector : LogicGate
     {
-        public Connector() { }
+        public Connector() 
+        {
+            StartPoint = new Point(100, 50);
+            EndPoint = new Point(100, 50);
+        }
         public Connector(Point startPoint, Point endPoint)
         {
             StartPoint = startPoint;
@@ -23,9 +27,37 @@ namespace LogicGateLibrary
                 UpdateConnectorsValue(_valueOut);
             }
         }
-        private bool _error = false;
-        private LogicGate temporaryParentItem;
-        public Avalonia.Point EndPoint { get; set; } = new Point(100, 50);
+        public override Avalonia.Point StartPoint { get; set; }
+
+
+
+
+        //private bool _error = false;
+        //public bool Error { get 
+        //    { 
+        //        return _error; 
+        //    } 
+        //    set 
+        //    { 
+        //        _error = value;
+        //        RenderTransform = new TranslateTransform();
+        //        if (temporaryParentItem is Connector)
+        //        {
+        //            var parentConnector = temporaryParentItem as Connector;
+        //            parentConnector.Error = true;
+        //        }
+        //    } 
+    //}
+
+    //private bool _hasIn = false;
+    //public bool HasIn { get { return _hasIn; } set { _hasIn = value; } }
+
+
+
+    private bool _isPassed = false;
+    public bool IsPassed { get { return _isPassed; } set { _isPassed = value; } }
+    private LogicGate temporaryParentItem;
+        public Avalonia.Point EndPoint { get; set; }
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -36,7 +68,7 @@ namespace LogicGateLibrary
             if (IsSelected)
                 context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 5, StartPoint.Y - 5), new Point (EndPoint.X + 5, EndPoint.Y + 5)));
 
-            if (_error) currentBrush = Brushes.Red;
+            //if (_error) currentBrush = Brushes.Red;
 
             context.DrawLine(new Pen(currentBrush, 3, null, PenLineCap.Flat, PenLineJoin.Bevel, 10), StartPoint, EndPoint);
 
@@ -56,7 +88,7 @@ namespace LogicGateLibrary
             }
         }
         public void UpdateConnectorsValue(bool newValue)
-        {         
+        {          
             foreach (var item in Connections)
             {
                 if (temporaryParentItem != item)
@@ -65,11 +97,11 @@ namespace LogicGateLibrary
                     {
                         case (Connector):
                             Connector connector = item as Connector;
-                            connector.SetNewValue(this, newValue);
+                            if (connector.IsPassed == false) connector.SetNewValue(this, newValue);                            
                             break;
                         case (BUF):
                             BUF _buf = item as BUF;
-                            if (_buf.FirstIn == this) _buf.ValueIn = newValue;
+                            if (_buf.FirstIn == this) _buf.ValueIn = newValue;   
                             break;
                         case (INV):
                             INV _inv = item as INV;
@@ -111,13 +143,14 @@ namespace LogicGateLibrary
                             break;
                         default:
                             break;
-                    }
+                    }                    
                 }
-            }
+            }            
             RenderTransform = new TranslateTransform();
         }
         public void SetNewValue(LogicGate parentItem, bool value)
         {
+            IsPassed = true;
             temporaryParentItem = parentItem;
             ValueOut = value;
         }

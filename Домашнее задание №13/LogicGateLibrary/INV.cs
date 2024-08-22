@@ -6,7 +6,10 @@ namespace LogicGateLibrary
 {
     public class INV : LogicGate
     {
-        public INV(Standart standart) : base(standart) { }
+        public INV(Standart standart) : base(standart) 
+        {
+            StartPoint = new Point(100, 50);
+        }
         private bool _valueIn = false;
         public bool ValueIn
         {
@@ -15,6 +18,25 @@ namespace LogicGateLibrary
             {
                 _valueIn = value;
                 UpdateConnectorValue();
+            }
+        }
+        private Point _startPoint;
+        public override Point StartPoint
+        {
+            get { return _startPoint; }
+            set
+            {
+                _startPoint = value;
+                if (Standart == Standart.GOST)
+                {
+                    FirstInPoint = new(StartPoint.X, StartPoint.Y + 50);
+                    OutPoint = new(StartPoint.X + 60, StartPoint.Y + 50);
+                }
+                else if (Standart == Standart.ANSI)
+                {
+                    FirstInPoint = new(StartPoint.X, StartPoint.Y + 50);
+                    OutPoint = new(StartPoint.X + 70, StartPoint.Y + 50);
+                }
             }
         }
         public override bool ValueOut { get; set; } = false;
@@ -43,8 +65,6 @@ namespace LogicGateLibrary
                         context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 110));
                     }
 
-                    FirstInPoint = new(StartPoint.X, StartPoint.Y + 50);
-                    OutPoint = new(StartPoint.X + 60, StartPoint.Y + 50);
                     context.DrawEllipse(valueBrushIn, null, FirstInPoint, 4, 4);
                     context.DrawEllipse(valueBrushIn, null, OutPoint, 4, 4);
 
@@ -79,8 +99,6 @@ namespace LogicGateLibrary
                         context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 110));
                     }
 
-                    FirstInPoint = new(StartPoint.X, StartPoint.Y + 50);
-                    OutPoint = new(StartPoint.X + 70, StartPoint.Y + 50);
                     context.DrawEllipse(valueBrushIn, null, FirstInPoint, 4, 4);
                     context.DrawEllipse(valueBrushIn, null, OutPoint, 4, 4);
 

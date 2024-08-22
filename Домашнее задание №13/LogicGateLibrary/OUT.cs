@@ -11,7 +11,10 @@ namespace LogicGateLibrary
 {
     public class OUT : LogicGate
     {
-        public OUT() { }
+        public OUT() 
+        {
+            StartPoint = new Point(100, 50);
+        }
         private bool _valueIn = false;
         public bool ValueIn
         {
@@ -20,6 +23,16 @@ namespace LogicGateLibrary
             {
                 _valueIn = value;
                 RenderTransform = new TranslateTransform();
+            }
+        }
+        private Point _startPoint;
+        public override Point StartPoint
+        {
+            get { return _startPoint; }
+            set
+            {
+                _startPoint = value;
+                FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
             }
         }
         public override bool ValueOut { get => throw new NotImplementedException() ; set => throw new NotImplementedException(); }
@@ -68,8 +81,7 @@ namespace LogicGateLibrary
             if (Label != null)
             {
                 context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 44));
-            }
-            FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
+            }            
             context.DrawEllipse(currentBrush, null, FirstInPoint, 4, 4);
         }
     }

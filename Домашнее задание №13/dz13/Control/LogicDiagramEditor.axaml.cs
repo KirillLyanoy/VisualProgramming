@@ -121,6 +121,7 @@ public class LogicDiagramEditor : TemplatedControl
     private void DeleteButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         LogicGateActions.Delete(_mainCanvas);
+        LogicGateActions.UpdateDiagram(_mainCanvas);
     }
     private bool _gateMoving = false;
     private bool _connectorCreating = false;
@@ -130,10 +131,14 @@ public class LogicDiagramEditor : TemplatedControl
         _gateMoving = false;
         if (_connectorCreating)
         {
-            if (!LogicGateActions.CheckConnectorSize(_mainCanvas, temporaryConnector)) _mainCanvas.Children.Remove(temporaryConnector); 
+            if (!LogicGateActions.CheckConnectorSize(_mainCanvas, temporaryConnector))
+            {
+                LogicGateActions.UnLinkItems(temporaryConnector);
+                _mainCanvas.Children.Remove(temporaryConnector);
+            }
             else
             {
-                LogicGateActions.CheckConnectorEndOut(_mainCanvas, temporaryConnector); 
+                LogicGateActions.CheckConnectorEndOut(_mainCanvas, temporaryConnector);
             }
             _connectorCreating = false;
         }
@@ -150,12 +155,12 @@ public class LogicDiagramEditor : TemplatedControl
             {
                 var connector = e.Source as Connector;
                 if (Math.Abs(currentPosition.X - temporaryConnector.StartPoint.X) >= Math.Abs(currentPosition.Y - temporaryConnector.StartPoint.Y)) //отрисовка горизонтальной или вертикальной линии в зависимости от курсора//
-                    LogicGateActions.EditConnectorX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
-                else LogicGateActions.EditConnectorY(temporaryConnector, Math.Round(currentPosition.Y / 10) * 10);
+                    LogicGateActions.ChangeConnectorEndPointX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
+                else LogicGateActions.ChangeConnectorEndPointY(temporaryConnector, Math.Round(currentPosition.Y / 10) * 10);
             }
             else
             {
-                LogicGateActions.EditConnectorX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
+                LogicGateActions.ChangeConnectorEndPointX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
             }
         }
         else

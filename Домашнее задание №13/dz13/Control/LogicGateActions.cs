@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using Avalonia.Media;
 using LogicGateLibrary;
-
 namespace dz13.Control
 {
     public class LogicGateActions
@@ -78,21 +77,15 @@ namespace dz13.Control
         }
         public static void Move(LogicGate logicGate, Avalonia.Point current)
         {
-            switch (logicGate)
-            {
-                case Connector:
-                    break;
-                case IN:
-                case OUT:
-                    logicGate.StartPoint = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 30, Math.Round(current.Y / 10) * 10 - 20);
-                    logicGate.RenderTransform = new TranslateTransform();
-                    break;
-                default:
-                    logicGate.StartPoint = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 20, Math.Round(current.Y / 10) * 10 - 50);
-                    logicGate.RenderTransform = new TranslateTransform();
-                    break;
-            }
+            Avalonia.Point newCoord;
+
+            if (logicGate is IN || logicGate is OUT) newCoord = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 30, Math.Round(current.Y / 10) * 10 - 20);
+            else newCoord = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 20, Math.Round(current.Y / 10) * 10 - 50);
+
+            logicGate.StartPoint = newCoord;
+            logicGate.RenderTransform = new TranslateTransform();
         }
+
         public static void Delete(Canvas canvas)
         {
             foreach (var item in canvas.Children.ToList())
@@ -192,12 +185,22 @@ namespace dz13.Control
             }
             return null;
         }
-        public static void EditConnectorX(Connector connector, double value)
+        //public static void ChangeConnectorStartPointX(Connector connector, double value)
+        //{
+        //    connector.StartPoint = new Avalonia.Point(value, connector.EndPoint.Y);
+        //    connector.RenderTransform = new TranslateTransform();
+        //}
+        //public static void ChangeConnectorStartPointY(Connector connector, double value)
+        //{
+        //    connector.StartPoint = new Avalonia.Point(connector.EndPoint.X, value);
+        //    connector.RenderTransform = new TranslateTransform();
+        //}
+        public static void ChangeConnectorEndPointX(Connector connector, double value)
         {
             connector.EndPoint = new Avalonia.Point(value, connector.StartPoint.Y);
             connector.RenderTransform = new TranslateTransform();
         }
-        public static void EditConnectorY(Connector connector, double value)
+        public static void ChangeConnectorEndPointY(Connector connector, double value)
         {
             connector.EndPoint = new Avalonia.Point(connector.StartPoint.X, value);
             connector.RenderTransform = new TranslateTransform();
@@ -337,11 +340,20 @@ namespace dz13.Control
         {
             foreach (var item in canvas.Children.ToList())
             {
+                if (item is Connector)
+                {
+                    var connector = item as Connector;
+                    connector.IsPassed = false;
+                }
+            }
+            foreach (var item in canvas.Children.ToList())
+            {
                 if (item is IN)
                 {
                     var _in = item as IN;
                     _in.UpdateConnectorsValue();
                 }
+
             }
         }
     }

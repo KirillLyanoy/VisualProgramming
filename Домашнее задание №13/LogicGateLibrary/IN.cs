@@ -11,7 +11,10 @@ namespace LogicGateLibrary
 {
     public class IN : LogicGate
     {
-        public IN() { }
+        public IN() 
+        {
+            StartPoint = new Point(100, 50);
+        }
         private bool _valueOut = false;
         public override bool ValueOut
         {
@@ -20,6 +23,16 @@ namespace LogicGateLibrary
             {
                 _valueOut = value;
                 UpdateConnectorsValue();
+            }
+        }
+        private Point _startPoint;
+        public override Point StartPoint
+        {
+            get { return _startPoint; }
+            set
+            {
+                _startPoint = value;
+                OutPoint = new(StartPoint.X + 80, StartPoint.Y + 20);
             }
         }
         public sealed override void Render(DrawingContext context)
@@ -69,8 +82,7 @@ namespace LogicGateLibrary
             if (Label != null)
             {
                 context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 44));
-            }
-            OutPoint = new(StartPoint.X + 80, StartPoint.Y + 20);
+            }            
             context.DrawEllipse(currentBrush, null, OutPoint, 4, 4);            
         }   
         public void UpdateConnectorsValue()
@@ -78,7 +90,7 @@ namespace LogicGateLibrary
             if (Out != null)
             {
                 Connector connector = Out as Connector;
-                Out.SetNewValue(this, ValueOut);
+                if (connector.IsPassed == false) Out.SetNewValue(this, ValueOut);
             }       
         }
     }

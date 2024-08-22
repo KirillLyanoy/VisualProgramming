@@ -10,8 +10,30 @@ namespace LogicGateLibrary
         public XNOR(Standart standart) : base(standart)
         {
             ValueIn.CollectionChanged += UpdateConnectorsValue;
+            StartPoint = new Point(100, 50);
         }
         public ObservableCollection<bool> ValueIn = new ObservableCollection<bool>() { false, false };
+        private Point _startPoint;
+        public override Point StartPoint
+        {
+            get { return _startPoint; }
+            set
+            {
+                _startPoint = value;
+                if (Standart == Standart.GOST)
+                {
+                    FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
+                    SecondInPoint = new(StartPoint.X, StartPoint.Y + 80);
+                    OutPoint = new(StartPoint.X + 60, StartPoint.Y + 50);
+                }
+                else if (Standart == Standart.ANSI)
+                {
+                    FirstInPoint = new(StartPoint.X - 20, StartPoint.Y + 20);
+                    SecondInPoint = new(StartPoint.X - 20, StartPoint.Y + 80);
+                    OutPoint = new(StartPoint.X + 90, StartPoint.Y + 50);
+                }
+            }
+        }
         public override bool ValueOut { get; set; } = false;
         public sealed override void Render(DrawingContext context)
         {
@@ -41,9 +63,6 @@ namespace LogicGateLibrary
                         context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 110));
                     }
 
-                    FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
-                    SecondInPoint = new(StartPoint.X, StartPoint.Y + 80);
-                    OutPoint = new(StartPoint.X + 60, StartPoint.Y + 50);
                     context.DrawEllipse(valueBrush0, null, FirstInPoint, 4, 4);
                     context.DrawEllipse(valueBrush1, null, SecondInPoint, 4, 4);
                     context.DrawEllipse(valueBrushOut, null, OutPoint, 4, 4);
@@ -102,10 +121,6 @@ namespace LogicGateLibrary
                     {
                         context.DrawText(new FormattedText(Label, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 10, StartPoint.Y + 110));
                     }
-
-                    FirstInPoint = new(StartPoint.X - 20, StartPoint.Y + 20);
-                    SecondInPoint = new(StartPoint.X - 20, StartPoint.Y + 80);
-                    OutPoint = new(StartPoint.X + 90, StartPoint.Y + 50);
                     context.DrawEllipse(valueBrush0, null, FirstInPoint, 4, 4);
                     context.DrawEllipse(valueBrush1, null, SecondInPoint, 4, 4);
                     context.DrawEllipse(valueBrushOut, null, OutPoint, 4, 4);
