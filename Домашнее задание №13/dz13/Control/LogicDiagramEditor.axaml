@@ -64,7 +64,7 @@
 								Name="DeleteWithConnectorsButton"
 								Grid.Row="3">
 							<Button.Content>
-								<TextBlock Text="Удалить элементы и коннекторы" TextWrapping="Wrap" TextAlignment="Center"/>
+								<TextBlock Text="Удалить элементы и их коннекторы" TextWrapping="Wrap" TextAlignment="Center"/>
 							</Button.Content>
 						</Button>
 					</Grid>
