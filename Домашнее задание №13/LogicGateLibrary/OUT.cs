@@ -1,11 +1,6 @@
 ﻿using Avalonia.Media;
 using Avalonia;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogicGateLibrary
 {
@@ -22,6 +17,7 @@ namespace LogicGateLibrary
             set
             {
                 _valueIn = value;
+                ValueOut = ValueIn;
                 RenderTransform = new TranslateTransform();
             }
         }
@@ -35,7 +31,7 @@ namespace LogicGateLibrary
                 FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
             }
         }
-        public override bool ValueOut { get => throw new NotImplementedException() ; set => throw new NotImplementedException(); }
+        public override bool ValueOut { get; set; }
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -75,7 +71,7 @@ namespace LogicGateLibrary
             geometry.Figures.Add(figure);
             context.DrawGeometry(Brushes.White, pen, geometry);
 
-            if (ValueIn) context.DrawText(new FormattedText("1", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 26, StartPoint.Y + 10));
+            if (ValueOut) context.DrawText(new FormattedText("1", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 26, StartPoint.Y + 10));
             else context.DrawText(new FormattedText("0", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Black), new Point(StartPoint.X + 26, StartPoint.Y + 10));
             context.DrawText(new FormattedText("b", CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(LabelFont, FontStyle.Normal, FontWeight.Normal, FontStretch.Normal), 15, Brushes.Blue), new Point(StartPoint.X + 42, StartPoint.Y + 17));
             if (Label != null)

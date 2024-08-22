@@ -235,7 +235,7 @@ namespace dz13.Control
         }
         public static void UnLinkItems(Connector connector)
         {
-            foreach (var item in connector.Connections)
+            foreach (var item in connector.Connections.ToList())
             {
                 switch (item)
                 {
@@ -243,6 +243,8 @@ namespace dz13.Control
                         Connector childConnector = item as Connector;
                         childConnector.ValueOut = false;
                         childConnector.Connections.Remove(connector);
+
+                        connector.Connections.Remove(childConnector);
                         break;
                     case LogicGate:
 
@@ -252,16 +254,19 @@ namespace dz13.Control
                         {
                             childLogicGate.ValueOut = false;
                             childLogicGate.FirstIn = null;
+                            connector.Connections.Remove(childLogicGate.FirstIn);
                         }
                         if (childLogicGate.SecondIn == connector)
                         {
                             childLogicGate.ValueOut = false;
                             childLogicGate.SecondIn = null;
+                            connector.Connections.Remove(childLogicGate.SecondIn);
                         }
                         if (childLogicGate.Out == connector)
                         {
                             childLogicGate.ValueOut = false;
                             childLogicGate.Out = null;
+                            connector.Connections.Remove(childLogicGate.Out);
                         }
                         break;
                 }
@@ -273,17 +278,20 @@ namespace dz13.Control
             {
                 Connector firstConnector = gate.FirstIn as Connector;
                 firstConnector.Connections.Remove(gate);
+                gate.FirstIn = null;
             }
             if (gate.SecondIn != null)
             {
                 Connector secondConnector = gate.SecondIn as Connector;
                 secondConnector.Connections.Remove(gate);
+                gate.SecondIn = null;
             }
             if (gate.Out != null)
             {
                 Connector outConnector = gate.Out as Connector;
                 outConnector.Connections.Remove(gate);
                 outConnector.ValueOut = false;
+                gate.Out = null;
             }                 
         }
         public static void CheckConnectorEndOut(Canvas canvas, Connector connector)
@@ -354,6 +362,47 @@ namespace dz13.Control
                     _in.UpdateConnectorsValue();
                 }
 
+            }
+        }
+        public static void DeleteItemsWithConnectors(Canvas canvas)
+        {
+            foreach (var item in canvas.Children.ToList())
+            {
+                if (item is Connector)
+                {
+                   var connector = item as Connector;
+                   if (connector.IsSelected)
+                   {
+                       UnLinkItems(connector);
+                       canvas.Children.Remove(item);
+                   }
+                }      
+                else if (item is LogicGate)
+                {
+                    var logicGate = item as LogicGate;
+                    if (logicGate.IsSelected)
+                    {
+                        if (logicGate.FirstIn != null)
+                        {
+                            Connector connector = logicGate.FirstIn as Connector;
+                            UnLinkItems(logicGate.FirstIn);
+                            canvas.Children.Remove(connector);
+                        }
+                        if (logicGate.SecondIn != null)
+                        {
+                            Connector connector = logicGate.SecondIn as Connector;
+                            UnLinkItems(logicGate.SecondIn);
+                            canvas.Children.Remove(connector);
+                        }
+                        if (logicGate.Out != null)
+                        {
+                            Connector connector = logicGate.Out as Connector;
+                            UnLinkItems(logicGate.Out);
+                            canvas.Children.Remove(connector);
+                        }
+                        canvas.Children.Remove(logicGate);
+                    }
+                }
             }
         }
     }

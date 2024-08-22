@@ -22,6 +22,8 @@ public class LogicDiagramEditor : TemplatedControl
     private RadioButton _radioButton2;
     private const string DeleteButton = "DeleteButton";
     private Button _deleteButton;
+    private const string DeleteWithConnectorsButton = "DeleteWithConnectorsButton";
+    private Button _deleteWithConnectorsButton;
     private const string ClearButton = "ClearButton";
     private Button _clearButton;
     private const string MainCanvas = "MainCanvas";
@@ -78,7 +80,8 @@ public class LogicDiagramEditor : TemplatedControl
             ?? throw new Exception($"{DeleteButton} does not exist.");
         _clearButton = e.NameScope.Find(name: ClearButton) as Button
             ?? throw new Exception($"{ClearButton} does not exist.");
-
+        _deleteWithConnectorsButton = e.NameScope.Find(name: DeleteWithConnectorsButton) as Button
+            ?? throw new Exception($"{DeleteWithConnectorsButton} does not exist.");
         _mainCanvas.Children.Add(new CanvasLayout(_mainCanvas.GetVisualRoot().ClientSize.Width, _mainCanvas.GetVisualRoot().ClientSize.Height));
 
         _itemsList.DoubleTapped += ItemsList_DoubleTapped;
@@ -89,6 +92,7 @@ public class LogicDiagramEditor : TemplatedControl
         _mainCanvas.DoubleTapped += MainCanvas_DoubleTapped;
         _clearButton.Click += ClearButton_Click;
         _mainCanvas.SizeChanged += MainCanvas_SizeChanged;
+        _deleteWithConnectorsButton.Click += DeleteItemsWithConnectors;
 
         _mainCanvas.PointerMoved += MainCanvas_PointerMoved;
         _mainCanvas.PointerPressed += MainCanvas_PointerPressed;
@@ -96,6 +100,12 @@ public class LogicDiagramEditor : TemplatedControl
 
         
     }
+
+    private void DeleteItemsWithConnectors(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        LogicGateActions.DeleteItemsWithConnectors(_mainCanvas);
+    }
+
     private void MainCanvas_SizeChanged(object? sender, SizeChangedEventArgs e)
     {
         foreach (var item in _mainCanvas.Children.ToList())
@@ -223,6 +233,8 @@ public class LogicDiagramEditor : TemplatedControl
             case Canvas:
             case CanvasLayout:
                 LogicGateActions.RemoveAllSelections(_mainCanvas);
+                break;
+            case Connector:
                 break;
             case LogicGate:
                 var logicGate = e.Source as LogicGate;
