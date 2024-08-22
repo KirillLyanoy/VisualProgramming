@@ -130,7 +130,7 @@ public class LogicDiagramEditor : TemplatedControl
     private void DeleteButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         LogicGateActions.Delete(_mainCanvas);
-        LogicGateActions.UpdateDiagram(_mainCanvas);
+        LogicGateActions.UpdateDiagramValue(_mainCanvas);
     }
     private bool _gateMoving = false;
     private bool _connectorCreating = false;
@@ -145,15 +145,16 @@ public class LogicDiagramEditor : TemplatedControl
                 LogicGateActions.UnLinkItems(temporaryConnector);
                 _mainCanvas.Children.Remove(temporaryConnector);
 
-                LogicGateActions.IsSelected(e.Source as Connector);
+                LogicGateActions.IsSelected(e.Source as LogicGate);
             }
             else
             {
                 LogicGateActions.CheckConnectorEndOut(_mainCanvas, temporaryConnector);
             }
             _connectorCreating = false;
-        }
-        LogicGateActions.UpdateDiagram(_mainCanvas);
+            LogicGateActions.UpdateDiagramValue(_mainCanvas);
+        }        
+        LogicGateActions.ResetPassedIndex(_mainCanvas);
     }
     private LogicGate temporaryLogicGate;
     private void MainCanvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)

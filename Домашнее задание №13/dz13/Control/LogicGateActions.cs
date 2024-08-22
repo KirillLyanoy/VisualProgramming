@@ -344,16 +344,8 @@ namespace dz13.Control
                 }
             }
         }
-        public static void UpdateDiagram(Canvas canvas)
+        public static void UpdateDiagramValue(Canvas canvas)
         {
-            foreach (var item in canvas.Children.ToList())
-            {
-                if (item is Connector)
-                {
-                    var connector = item as Connector;
-                    connector.IsPassed = false;
-                }
-            }
             foreach (var item in canvas.Children.ToList())
             {
                 if (item is IN)
@@ -361,7 +353,6 @@ namespace dz13.Control
                     var _in = item as IN;
                     _in.UpdateConnectorsValue();
                 }
-
             }
         }
         public static void DeleteItemsWithConnectors(Canvas canvas)
@@ -402,6 +393,17 @@ namespace dz13.Control
                         }
                         canvas.Children.Remove(logicGate);
                     }
+                }
+            }
+        }
+        public static void ResetPassedIndex(Canvas canvas)
+        {
+            foreach (var item in canvas.Children.ToList())
+            {
+                if (item is Connector)
+                {
+                    var connector = item as Connector;
+                    connector.IsPassed = false;
                 }
             }
         }
