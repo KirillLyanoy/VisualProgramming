@@ -65,9 +65,15 @@ namespace LogicGateLibrary
             IBrush currentBrush;
             if (ValueOut) currentBrush = Brushes.Lime;
             else currentBrush = Brushes.Green;
-            if (IsSelected)
-                context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 5, StartPoint.Y - 5), new Point (EndPoint.X + 5, EndPoint.Y + 5)));
 
+            if (IsSelected)
+            {
+                if (StartPoint.X < EndPoint.X || StartPoint.Y < EndPoint.Y)
+                    context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), 
+                        new Rect(new Point(StartPoint.X - 5, StartPoint.Y - 5), new Point(EndPoint.X + 5, EndPoint.Y + 5)));
+                else context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), 
+                    new Rect(new Point(EndPoint.X - 5, EndPoint.Y - 5), new Point(StartPoint.X + 5, StartPoint.Y + 5)));
+            }
             //if (_error) currentBrush = Brushes.Red;
 
             context.DrawLine(new Pen(currentBrush, 3, null, PenLineCap.Flat, PenLineJoin.Bevel, 10), StartPoint, EndPoint);

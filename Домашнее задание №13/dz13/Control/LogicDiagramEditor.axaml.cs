@@ -100,7 +100,6 @@ public class LogicDiagramEditor : TemplatedControl
 
         
     }
-
     private void DeleteItemsWithConnectors(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
     {
         LogicGateActions.DeleteItemsWithConnectors(_mainCanvas);
@@ -145,6 +144,8 @@ public class LogicDiagramEditor : TemplatedControl
             {
                 LogicGateActions.UnLinkItems(temporaryConnector);
                 _mainCanvas.Children.Remove(temporaryConnector);
+
+                LogicGateActions.IsSelected(e.Source as Connector);
             }
             else
             {
