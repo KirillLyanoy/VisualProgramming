@@ -81,10 +81,6 @@ namespace dz13.Control
             switch (logicGate)
             {
                 case Connector:
-                    Connector connector = logicGate as Connector;
-                    connector.StartPoint = new Avalonia.Point(current.X, current.Y);
-                    connector.EndPoint = new Avalonia.Point(current.X, current.Y);
-                    connector.RenderTransform = new TranslateTransform();
                     break;
                 case IN:
                 case OUT:
