@@ -11,6 +11,8 @@ namespace LogicGateLibrary
         {
             ValueIn.CollectionChanged += UpdateConnectorsValue;
             StartPoint = new Point(100, 50);
+            if (standart is Standart.GOST) CenterPoint = new Point(StartPoint.X + 25, StartPoint.Y + 50);
+            else CenterPoint = new Point (StartPoint.X + 40, StartPoint.Y + 40);
         }
         public ObservableCollection<bool> ValueIn = new ObservableCollection<bool>() { false, false };
         public override bool ValueOut { get; set; } = false;
@@ -33,6 +35,8 @@ namespace LogicGateLibrary
                     SecondInPoint = new(StartPoint.X, StartPoint.Y + 80);
                     OutPoint = new(StartPoint.X + 80, StartPoint.Y + 50);
                 }
+                if (this.Standart is Standart.GOST) CenterPoint = new Point(StartPoint.X + 25, StartPoint.Y + 50);
+                else CenterPoint = new Point(StartPoint.X + 40, StartPoint.Y + 40);
             }
         }
         public sealed override void Render(DrawingContext context)
@@ -70,7 +74,7 @@ namespace LogicGateLibrary
                     break;
                 case (Standart.ANSI):
                     if (IsSelected)
-                        context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 10, StartPoint.Y - 10), new Size(100, 120)));
+                        context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X - 10, StartPoint.Y), new Size(100, 100)));
 
                     context.DrawEllipse(Brushes.White, pen, new Rect(new Point(StartPoint.X, StartPoint.Y + 10), new Size(80, 80)));
                     context.DrawRectangle(Brushes.White, new Pen(Brushes.White, 2, null, PenLineCap.Flat, PenLineJoin.Miter, 10), new Rect(new Point(StartPoint.X, StartPoint.Y + 10), new Size(40, 80)));

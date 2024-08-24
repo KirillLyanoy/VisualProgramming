@@ -14,6 +14,7 @@ namespace LogicGateLibrary
         public IN() 
         {
             StartPoint = new Point(100, 50);
+            CenterPoint = new Point(StartPoint.X + 40, StartPoint.Y + 20);
         }
         private bool _valueOut = false;
         public override bool ValueOut
@@ -33,6 +34,7 @@ namespace LogicGateLibrary
             {
                 _startPoint = value;
                 OutPoint = new(StartPoint.X + 80, StartPoint.Y + 20);
+                CenterPoint = new Point(StartPoint.X + 40, StartPoint.Y + 20);
             }
         }
         public sealed override void Render(DrawingContext context)

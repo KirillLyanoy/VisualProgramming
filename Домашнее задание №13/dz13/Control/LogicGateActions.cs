@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using Avalonia.Media;
 using LogicGateLibrary;
+using Avalonia.OpenGL.Surfaces;
 namespace dz13.Control
 {
     public class LogicGateActions
@@ -85,7 +86,6 @@ namespace dz13.Control
             logicGate.StartPoint = newCoord;
             logicGate.RenderTransform = new TranslateTransform();
         }
-
         public static void Delete(Canvas canvas)
         {
             foreach (var item in canvas.Children.ToList())
@@ -420,7 +420,26 @@ namespace dz13.Control
         }
         public static void CheckItemsInGroupSelectionRectangle(Canvas canvas, GroupSelectionRectangle selections)
         {
-
+            foreach (var item in canvas.Children)
+            {
+                if (item is LogicGate)
+                {
+                    LogicGate logicGate = item as LogicGate;
+                    if (logicGate.CenterPoint.X <= selections.RectangleSelect.BottomRight.X &&
+                        logicGate.CenterPoint.X >= selections.RectangleSelect.TopLeft.X &&
+                        logicGate.CenterPoint.Y <= selections.RectangleSelect.BottomRight.Y &&
+                        logicGate.CenterPoint.Y >= selections.RectangleSelect.TopLeft.Y)
+                    {
+                        logicGate.IsSelected = true;
+                        logicGate.RenderTransform = new TranslateTransform();
+                    }
+                    else
+                    {
+                        logicGate.IsSelected = false;
+                        logicGate.RenderTransform = new TranslateTransform();
+                    }
+                }
+            }
         }
     }
 }

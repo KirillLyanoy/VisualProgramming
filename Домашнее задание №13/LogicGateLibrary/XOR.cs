@@ -11,6 +11,8 @@ namespace LogicGateLibrary
         {
             ValueIn.CollectionChanged += UpdateConnectorsValue;
             StartPoint = new Point(100, 50);
+            if (standart is Standart.GOST) CenterPoint = new Point(StartPoint.X + 25, StartPoint.Y + 50);
+            else CenterPoint = new Point(StartPoint.X + 45, StartPoint.Y + 50);
         }
         public ObservableCollection<bool> ValueIn = new ObservableCollection<bool>() { false, false };
         private Point _startPoint;
@@ -32,6 +34,8 @@ namespace LogicGateLibrary
                     SecondInPoint = new(StartPoint.X - 20, StartPoint.Y + 80);
                     OutPoint = new(StartPoint.X + 80, StartPoint.Y + 50);
                 }
+                if (this.Standart is Standart.GOST) CenterPoint = new Point(StartPoint.X + 25, StartPoint.Y + 50);
+                else CenterPoint = new Point(StartPoint.X + 45, StartPoint.Y + 50);
             }
         }
         public override bool ValueOut { get; set; } = false;

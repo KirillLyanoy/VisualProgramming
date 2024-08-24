@@ -141,8 +141,6 @@ public class LogicDiagramEditor : TemplatedControl
     {
         if (_groupSelection)
         {
-            LogicGateActions.CheckItemsInGroupSelectionRectangle(_mainCanvas, temoraryGroupSelectionRectangle);
-
             _mainCanvas.Children.Remove(temoraryGroupSelectionRectangle);
             _groupSelection = false;
         }
@@ -175,6 +173,7 @@ public class LogicDiagramEditor : TemplatedControl
         if (_groupSelection)
         {
             LogicGateActions.ChangeGroupSelectedRectangleSize(temoraryGroupSelectionRectangle, new Point(Math.Round(e.GetPosition(_mainCanvas).X / 10) * 10, Math.Round(e.GetPosition(_mainCanvas).Y / 10) * 10));
+            LogicGateActions.CheckItemsInGroupSelectionRectangle(_mainCanvas, temoraryGroupSelectionRectangle);
         }
         else
         {

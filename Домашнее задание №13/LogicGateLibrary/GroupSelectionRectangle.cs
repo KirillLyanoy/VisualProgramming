@@ -14,6 +14,7 @@ namespace LogicGateLibrary
             StartPoint = startPoint;
             EndPoint = endPoint;    
         }
+        public Rect RectangleSelect;
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -23,25 +24,26 @@ namespace LogicGateLibrary
             {
                 if (StartPoint.Y <= EndPoint.Y)
                 {
-                    context.DrawRectangle(Brushes.Transparent, pen, new Rect(StartPoint, EndPoint));
+                    RectangleSelect = new Rect(StartPoint, EndPoint);    
                 }
                 else
                 {
-                    context.DrawRectangle(Brushes.Transparent, pen, new Rect(new Point(StartPoint.X, EndPoint.Y), new Point(EndPoint.X, StartPoint.Y)));
+                    RectangleSelect = new Rect(new Point(StartPoint.X, EndPoint.Y), new Point(EndPoint.X, StartPoint.Y));
                 }
             }
             else
             {
                 if (StartPoint.Y <= EndPoint.Y)
                 {
-                    context.DrawRectangle(Brushes.Transparent, pen, new Rect(new Point(EndPoint.X, StartPoint.Y), new Point(StartPoint.X, EndPoint.Y)));
+                    RectangleSelect =  new Rect(new Point(EndPoint.X, StartPoint.Y), new Point(StartPoint.X, EndPoint.Y));
 
                 }
                 else
                 {
-                    context.DrawRectangle(Brushes.Transparent, pen, new Rect(EndPoint, StartPoint));
+                    RectangleSelect =  new Rect(EndPoint, StartPoint);
                 }
             }
+            context.DrawRectangle(Brushes.Transparent, pen, RectangleSelect);
         }
     }
 }

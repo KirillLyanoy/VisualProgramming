@@ -9,6 +9,9 @@ namespace LogicGateLibrary
         public INV(Standart standart) : base(standart) 
         {
             StartPoint = new Point(100, 50);
+            if (standart is Standart.GOST) CenterPoint = new Point(StartPoint.X + 25, StartPoint.Y + 50);
+            else CenterPoint = new Point(StartPoint.X + 30, StartPoint.Y + 50);
+
         }
         private bool _valueIn = false;
         public bool ValueIn
@@ -37,6 +40,8 @@ namespace LogicGateLibrary
                     FirstInPoint = new(StartPoint.X, StartPoint.Y + 50);
                     OutPoint = new(StartPoint.X + 70, StartPoint.Y + 50);
                 }
+                if (this.Standart is Standart.GOST) CenterPoint = new Point(StartPoint.X + 25, StartPoint.Y + 50);
+                else CenterPoint = new Point(StartPoint.X + 30, StartPoint.Y + 50);
             }
         }
         public override bool ValueOut { get; set; } = false;

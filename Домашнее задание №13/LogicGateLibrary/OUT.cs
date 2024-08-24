@@ -9,6 +9,7 @@ namespace LogicGateLibrary
         public OUT() 
         {
             StartPoint = new Point(100, 50);
+            CenterPoint = new Point(StartPoint.X + 40, StartPoint.Y + 20);
         }
         private bool _valueIn = false;
         public bool ValueIn
@@ -29,6 +30,7 @@ namespace LogicGateLibrary
             {
                 _startPoint = value;
                 FirstInPoint = new(StartPoint.X, StartPoint.Y + 20);
+                CenterPoint = new Point(StartPoint.X + 40, StartPoint.Y + 20);
             }
         }
         public override bool ValueOut { get; set; }

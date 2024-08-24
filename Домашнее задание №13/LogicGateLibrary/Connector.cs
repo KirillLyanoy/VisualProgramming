@@ -10,6 +10,7 @@ namespace LogicGateLibrary
         {
             StartPoint = new Point(100, 50);
             EndPoint = new Point(100, 50);
+            CenterPoint = new Point((StartPoint.X + EndPoint.X) / 2, (StartPoint.Y + EndPoint.Y) / 2);
         }
         public Connector(Point startPoint, Point endPoint)
         {
@@ -54,10 +55,24 @@ namespace LogicGateLibrary
 
 
 
-    private bool _isPassed = false;
-    public bool IsPassed { get { return _isPassed; } set { _isPassed = value; } }
-    private LogicGate temporaryParentItem;
-        public Avalonia.Point EndPoint { get; set; }
+        private bool _isPassed = false;
+        public bool IsPassed { get { return _isPassed; } set { _isPassed = value; } }
+        private LogicGate temporaryParentItem;
+            private Avalonia.Point _endPoint;
+        public Avalonia.Point EndPoint 
+        {
+            get 
+            {
+                return _endPoint; 
+            } 
+            set
+            {
+                _endPoint = value;
+                CenterPoint = new Point((StartPoint.X + EndPoint.X) / 2, (StartPoint.Y + EndPoint.Y) / 2);
+            }
+        }
+
+
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);

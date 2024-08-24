@@ -23,6 +23,7 @@ namespace LogicGateLibrary
         public bool IsSelected { get; set; } = false;
         public abstract bool ValueOut { get; set; }
         public abstract Point StartPoint { get; set; }
+        public Point CenterPoint { get; set; }
         public Point FirstInPoint { get; set; }
         public Point SecondInPoint { get; set; }
         public Point OutPoint { get; set; }
