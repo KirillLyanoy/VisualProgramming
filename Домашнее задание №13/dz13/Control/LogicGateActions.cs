@@ -305,7 +305,7 @@ namespace dz13.Control
                         if (oldConnector != connector)
                         {
                             if ((connector.EndPoint.X - oldConnector.StartPoint.X) * (oldConnector.EndPoint.Y - oldConnector.StartPoint.Y) ==
-                                (oldConnector.EndPoint.X - oldConnector.StartPoint.Y) * (connector.EndPoint.Y - oldConnector.StartPoint.Y))
+                                (oldConnector.EndPoint.X - oldConnector.StartPoint.X) * (connector.EndPoint.Y - oldConnector.StartPoint.Y))
                             {
                                 LinkItems(oldConnector, connector);
                                 connector.RenderTransform = new TranslateTransform();
