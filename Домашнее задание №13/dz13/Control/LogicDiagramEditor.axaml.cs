@@ -4,6 +4,7 @@ using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.VisualTree;
 using LogicGateLibrary;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -134,67 +135,84 @@ public class LogicDiagramEditor : TemplatedControl
     }
     private bool _gateMoving = false;
     private bool _connectorCreating = false;
+    private bool _groupSelection = false;
     private Connector temporaryConnector;
     private void MainCanvas_PointerReleased(object? sender, Avalonia.Input.PointerReleasedEventArgs e)
     {
-        _gateMoving = false;
-        if (_connectorCreating)
+        if (_groupSelection)
         {
-            if (!LogicGateActions.CheckConnectorSize(_mainCanvas, temporaryConnector))
-            {
-                LogicGateActions.UnLinkItems(temporaryConnector);
-                _mainCanvas.Children.Remove(temporaryConnector);
+            LogicGateActions.CheckItemsInGroupSelectionRectangle(_mainCanvas, temoraryGroupSelectionRectangle);
 
-                LogicGateActions.IsSelected(e.Source as LogicGate);
-            }
-            else
-            {
-                LogicGateActions.CheckConnectorEndOut(_mainCanvas, temporaryConnector);
-            }
-            _connectorCreating = false;
-            LogicGateActions.UpdateDiagramValue(_mainCanvas);
-        }        
-        LogicGateActions.ResetPassedIndex(_mainCanvas);
-    }
-    private LogicGate temporaryLogicGate;
-    private void MainCanvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)
-    {
-        if (_connectorCreating)
-        {
-            Avalonia.Point currentPosition = e.GetPosition(_mainCanvas);
-
-            if (e.Source is Connector)
-            {
-                var connector = e.Source as Connector;
-                if (Math.Abs(currentPosition.X - temporaryConnector.StartPoint.X) >= Math.Abs(currentPosition.Y - temporaryConnector.StartPoint.Y)) //отрисовка горизонтальной или вертикальной линии в зависимости от курсора//
-                    LogicGateActions.ChangeConnectorEndPointX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
-                else LogicGateActions.ChangeConnectorEndPointY(temporaryConnector, Math.Round(currentPosition.Y / 10) * 10);
-            }
-            else
-            {
-                LogicGateActions.ChangeConnectorEndPointX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
-            }
+            _mainCanvas.Children.Remove(temoraryGroupSelectionRectangle);
+            _groupSelection = false;
         }
         else
         {
-            switch (e.Source)
+            _gateMoving = false;
+            if (_connectorCreating)
             {
-                case Connector:
+                if (!LogicGateActions.CheckConnectorSize(_mainCanvas, temporaryConnector))
+                {
+                    LogicGateActions.UnLinkItems(temporaryConnector);
+                    _mainCanvas.Children.Remove(temporaryConnector);
+                    LogicGateActions.IsSelected(e.Source as LogicGate);
+                }
+                else
+                {
+                    LogicGateActions.CheckConnectorEndOut(_mainCanvas, temporaryConnector);
+                }
+                _connectorCreating = false;
+                LogicGateActions.UpdateDiagramValue(_mainCanvas);
+            }
+            LogicGateActions.ResetPassedIndex(_mainCanvas);
+        }
+    }
+    private LogicGate temporaryLogicGate;
+    private GroupSelectionRectangle temoraryGroupSelectionRectangle;
 
-                    break;
-                case LogicGate:
-                    if (_gateMoving && !_connectorCreating)
-                    {
-                        var logicGate = e.Source as LogicGate;
-                        if (logicGate.IsSelected)
+    private void MainCanvas_PointerMoved(object? sender, Avalonia.Input.PointerEventArgs e)
+    {
+        if (_groupSelection)
+        {
+            LogicGateActions.ChangeGroupSelectedRectangleSize(temoraryGroupSelectionRectangle, new Point(Math.Round(e.GetPosition(_mainCanvas).X / 10) * 10, Math.Round(e.GetPosition(_mainCanvas).Y / 10) * 10));
+        }
+        else
+        {
+            if (_connectorCreating)
+            {
+                Avalonia.Point currentPosition = e.GetPosition(_mainCanvas);
+
+                if (e.Source is Connector)
+                {
+                    var connector = e.Source as Connector;
+                    if (Math.Abs(currentPosition.X - temporaryConnector.StartPoint.X) >= Math.Abs(currentPosition.Y - temporaryConnector.StartPoint.Y)) //отрисовка горизонтальной или вертикальной линии в зависимости от курсора//
+                        LogicGateActions.ChangeConnectorEndPointX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
+                    else LogicGateActions.ChangeConnectorEndPointY(temporaryConnector, Math.Round(currentPosition.Y / 10) * 10);
+                }
+                else
+                {
+                    LogicGateActions.ChangeConnectorEndPointX(temporaryConnector, Math.Round(currentPosition.X / 10) * 10);
+                }
+            }
+            else
+            {
+                switch (e.Source)
+                {
+                    case Connector:
+
+                        break;
+                    case LogicGate:
+                        if (_gateMoving && !_connectorCreating)
                         {
-                            LogicGateActions.Move(logicGate, e.GetPosition(_mainCanvas));
-                            temporaryLogicGate = logicGate;
+                            var logicGate = e.Source as LogicGate;
+                            if (logicGate.IsSelected)
+                            {
+                                LogicGateActions.Move(logicGate, e.GetPosition(_mainCanvas));
+                                temporaryLogicGate = logicGate;
+                            }
                         }
-                    }
-                    break;
-                default:
-                    break;
+                        break;
+                }
             }
         }
     }
@@ -225,7 +243,11 @@ public class LogicDiagramEditor : TemplatedControl
                     temporaryConnector = LogicGateActions.CreateConnector(_mainCanvas, logicGate, e.GetPosition(_mainCanvas));
                     if (temporaryConnector != null) _connectorCreating = true;
                 }
-                break;            
+                break;
+            default:
+                _groupSelection = true;
+                temoraryGroupSelectionRectangle = LogicGateActions.CreateGroupSelectedRectangle(_mainCanvas, new Point(Math.Round(e.GetPosition(_mainCanvas).X / 10) * 10, Math.Round(e.GetPosition(_mainCanvas).Y / 10) * 10));
+                break;
         }
     }
     private void MainCanvas_Tapped(object? sender, Avalonia.Input.TappedEventArgs e)

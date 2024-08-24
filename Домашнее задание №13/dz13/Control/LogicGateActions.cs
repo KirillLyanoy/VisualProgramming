@@ -209,7 +209,7 @@ namespace dz13.Control
         {
             if (Math.Abs(connector.StartPoint.X - connector.EndPoint.X) < 20 &&
                 Math.Abs(connector.StartPoint.Y - connector.EndPoint.Y) < 20) return false;
-            else return true;                
+            else return true;
         }
         public static void LinkItems(LogicGate parentLogicGate, Connector childLogicGate, short connectIndex)
         {
@@ -292,7 +292,7 @@ namespace dz13.Control
                 outConnector.Connections.Remove(gate);
                 outConnector.ValueOut = false;
                 gate.Out = null;
-            }                 
+            }
         }
         public static void CheckConnectorEndOut(Canvas canvas, Connector connector)
         {
@@ -305,7 +305,7 @@ namespace dz13.Control
                         if (oldConnector != connector)
                         {
                             if ((connector.EndPoint.X - oldConnector.StartPoint.X) * (oldConnector.EndPoint.Y - oldConnector.StartPoint.Y) ==
-                                (oldConnector.EndPoint.X - oldConnector.StartPoint.X) * (connector.EndPoint.Y - oldConnector.StartPoint.Y))
+                                (oldConnector.EndPoint.X - oldConnector.StartPoint.Y) * (connector.EndPoint.Y - oldConnector.StartPoint.Y))
                             {
                                 LinkItems(oldConnector, connector);
                                 connector.RenderTransform = new TranslateTransform();
@@ -361,13 +361,13 @@ namespace dz13.Control
             {
                 if (item is Connector)
                 {
-                   var connector = item as Connector;
-                   if (connector.IsSelected)
-                   {
-                       UnLinkItems(connector);
-                       canvas.Children.Remove(item);
-                   }
-                }      
+                    var connector = item as Connector;
+                    if (connector.IsSelected)
+                    {
+                        UnLinkItems(connector);
+                        canvas.Children.Remove(item);
+                    }
+                }
                 else if (item is LogicGate)
                 {
                     var logicGate = item as LogicGate;
@@ -406,6 +406,21 @@ namespace dz13.Control
                     connector.IsPassed = false;
                 }
             }
+        }
+        public static GroupSelectionRectangle CreateGroupSelectedRectangle(Canvas canvas, Avalonia.Point startPoint)
+        {
+            GroupSelectionRectangle rectangle = new(startPoint, startPoint);
+            canvas.Children.Add(rectangle);
+            return rectangle;
+        }
+        public static void ChangeGroupSelectedRectangleSize(GroupSelectionRectangle rectangle, Avalonia.Point newEndPoint)
+        {
+            rectangle.EndPoint = newEndPoint;
+            rectangle.RenderTransform = new TranslateTransform();
+        }
+        public static void CheckItemsInGroupSelectionRectangle(Canvas canvas, GroupSelectionRectangle selections)
+        {
+
         }
     }
 }
