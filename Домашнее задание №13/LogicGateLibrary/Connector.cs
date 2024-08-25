@@ -58,7 +58,7 @@ namespace LogicGateLibrary
         private bool _isPassed = false;
         public bool IsPassed { get { return _isPassed; } set { _isPassed = value; } }
         private LogicGate temporaryParentItem;
-            private Avalonia.Point _endPoint;
+        private Avalonia.Point _endPoint;
         public Avalonia.Point EndPoint 
         {
             get 
@@ -71,8 +71,6 @@ namespace LogicGateLibrary
                 CenterPoint = new Point((StartPoint.X + EndPoint.X) / 2, (StartPoint.Y + EndPoint.Y) / 2);
             }
         }
-
-
         public sealed override void Render(DrawingContext context)
         {
             base.Render(context);
@@ -84,10 +82,15 @@ namespace LogicGateLibrary
             if (IsSelected)
             {
                 if (StartPoint.X < EndPoint.X || StartPoint.Y < EndPoint.Y)
-                    context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), 
+                {
+                    context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10),
                         new Rect(new Point(StartPoint.X - 5, StartPoint.Y - 5), new Point(EndPoint.X + 5, EndPoint.Y + 5)));
-                else context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10), 
-                    new Rect(new Point(EndPoint.X - 5, EndPoint.Y - 5), new Point(StartPoint.X + 5, StartPoint.Y + 5)));
+                }
+                else
+                {
+                    context.DrawRectangle(Brushes.Transparent, new Pen(Brushes.Black, 2, DashStyle.DashDotDot, PenLineCap.Flat, PenLineJoin.Miter, 10),
+                        new Rect(new Point(EndPoint.X - 5, EndPoint.Y - 5), new Point(StartPoint.X + 5, StartPoint.Y + 5)));
+                }
             }
             //if (_error) currentBrush = Brushes.Red;
 
@@ -100,13 +103,20 @@ namespace LogicGateLibrary
                     var connector = item as Connector;
                     if ((this.StartPoint.X - connector.StartPoint.X) * (connector.EndPoint.Y - connector.StartPoint.Y) ==
                         (connector.EndPoint.X - connector.StartPoint.X) * (this.StartPoint.Y - connector.StartPoint.Y))
-                        if (this.StartPoint == connector.StartPoint || this.StartPoint == connector.EndPoint) break;
-                        else context.DrawEllipse(currentBrush, null, StartPoint, 4, 4);
-
+                    {
+                        if (this.StartPoint != connector.StartPoint && this.StartPoint != connector.EndPoint)
+                        {
+                            context.DrawEllipse(currentBrush, null, StartPoint, 4, 4);
+                        }
+                    }
                     else if ((this.EndPoint.X - connector.StartPoint.X) * (connector.EndPoint.Y - connector.StartPoint.Y) ==
                         (connector.EndPoint.X - connector.StartPoint.X) * (this.EndPoint.Y - connector.StartPoint.Y))
-                        if (this.EndPoint == connector.StartPoint || this.EndPoint == connector.EndPoint) break;
-                        else context.DrawEllipse(currentBrush, null, EndPoint, 4, 4);
+                    {
+                        if (this.EndPoint != connector.StartPoint && this.EndPoint != connector.EndPoint)
+                        {
+                            context.DrawEllipse(currentBrush, null, EndPoint, 4, 4);
+                        }
+                    }
                 }
             }
         }

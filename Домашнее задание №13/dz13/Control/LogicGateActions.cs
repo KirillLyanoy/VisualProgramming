@@ -229,8 +229,7 @@ namespace dz13.Control
         }
         public static void LinkItems(Connector parentLogicGate, Connector childLogicGate)
         {
-            Connector connector = parentLogicGate as Connector;
-            connector.Connections.Add(childLogicGate);
+            parentLogicGate.Connections.Add(childLogicGate);
             childLogicGate.Connections.Add(parentLogicGate);
         }
         public static void UnLinkItems(Connector connector)
