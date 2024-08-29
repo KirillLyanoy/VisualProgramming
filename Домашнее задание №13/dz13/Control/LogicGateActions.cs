@@ -83,8 +83,48 @@ namespace dz13.Control
             if (logicGate is IN || logicGate is OUT) newCoord = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 30, Math.Round(current.Y / 10) * 10 - 20);
             else newCoord = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 20, Math.Round(current.Y / 10) * 10 - 50);
 
-            logicGate.StartPoint = newCoord;
+            Avalonia.Point firstInPoint = logicGate.FirstInPoint;
+            Avalonia.Point secondInPoint = logicGate.SecondInPoint;
+            Avalonia.Point outPoint = logicGate.OutPoint;
+
+            logicGate.StartPoint = new Avalonia.Point(newCoord.X, logicGate.StartPoint.Y);
+
+            bool hasConnector = false;
+
+            if (logicGate.FirstIn != null)
+            {
+                MoveHorizontalConnector(logicGate.FirstIn, firstInPoint, logicGate.FirstInPoint);
+                hasConnector = true;
+            }
+            if (logicGate.SecondIn != null)
+            {
+                MoveHorizontalConnector(logicGate.SecondIn, secondInPoint, logicGate.SecondInPoint);
+                hasConnector = true;
+            }
+            if (logicGate.Out != null)
+            {
+                MoveHorizontalConnector(logicGate.Out, outPoint, logicGate.OutPoint);
+                hasConnector = true;
+            }
+
+            if (!hasConnector) logicGate.StartPoint = newCoord;
             logicGate.RenderTransform = new TranslateTransform();
+        }
+        public static void MoveHorizontalConnector(Connector connector, Avalonia.Point point, Avalonia.Point newPoint)
+        {
+            if (connector.StartPoint.X == point.X)
+            {
+                connector.StartPoint = new Avalonia.Point(newPoint.X, connector.StartPoint.Y);
+                connector.RenderTransform = new TranslateTransform();
+            }
+            else
+            {
+                if (connector.EndPoint.X == point.X)
+                {
+                    connector.EndPoint = new Avalonia.Point(newPoint.X, connector.EndPoint.Y);
+                    connector.RenderTransform = new TranslateTransform();
+                }
+            }
         }
         public static void Delete(Canvas canvas)
         {

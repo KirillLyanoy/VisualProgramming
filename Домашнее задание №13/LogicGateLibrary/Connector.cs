@@ -28,30 +28,19 @@ namespace LogicGateLibrary
                 UpdateConnectorsValue(_valueOut);
             }
         }
-        public override Avalonia.Point StartPoint { get; set; }
-
-
-
-
-        //private bool _error = false;
-        //public bool Error { get 
-        //    { 
-        //        return _error; 
-        //    } 
-        //    set 
-        //    { 
-        //        _error = value;
-        //        RenderTransform = new TranslateTransform();
-        //        if (temporaryParentItem is Connector)
-        //        {
-        //            var parentConnector = temporaryParentItem as Connector;
-        //            parentConnector.Error = true;
-        //        }
-        //    } 
-    //}
-
-    //private bool _hasIn = false;
-    //public bool HasIn { get { return _hasIn; } set { _hasIn = value; } }
+        private Avalonia.Point _startPoint;
+        public override Avalonia.Point StartPoint
+        {
+            get
+            {
+                return _startPoint;
+            }
+            set
+            {
+                _startPoint = value;
+                CenterPoint = new Point((StartPoint.X + EndPoint.X) / 2, (StartPoint.Y + EndPoint.Y) / 2);
+            }
+        }
 
 
 
