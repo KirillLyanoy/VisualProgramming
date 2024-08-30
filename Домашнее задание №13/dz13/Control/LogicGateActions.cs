@@ -83,49 +83,11 @@ namespace dz13.Control
             if (logicGate is IN || logicGate is OUT) newCoord = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 30, Math.Round(current.Y / 10) * 10 - 20);
             else newCoord = new Avalonia.Point(Math.Round(current.X / 10) * 10 - 20, Math.Round(current.Y / 10) * 10 - 50);
 
-            Avalonia.Point firstInPoint = logicGate.FirstInPoint;
-            Avalonia.Point secondInPoint = logicGate.SecondInPoint;
-            Avalonia.Point outPoint = logicGate.OutPoint;
+            if (logicGate.FirstIn != null || logicGate.SecondIn != null || logicGate.Out != null) return;
+            else logicGate.StartPoint = newCoord;
 
-            logicGate.StartPoint = new Avalonia.Point(newCoord.X, logicGate.StartPoint.Y);
-
-            bool hasConnector = false;
-
-            if (logicGate.FirstIn != null)
-            {
-                MoveHorizontalConnector(logicGate.FirstIn, firstInPoint, logicGate.FirstInPoint);
-                hasConnector = true;
-            }
-            if (logicGate.SecondIn != null)
-            {
-                MoveHorizontalConnector(logicGate.SecondIn, secondInPoint, logicGate.SecondInPoint);
-                hasConnector = true;
-            }
-            if (logicGate.Out != null)
-            {
-                MoveHorizontalConnector(logicGate.Out, outPoint, logicGate.OutPoint);
-                hasConnector = true;
-            }
-
-            if (!hasConnector) logicGate.StartPoint = newCoord;
             logicGate.RenderTransform = new TranslateTransform();
-        }
-        public static void MoveHorizontalConnector(Connector connector, Avalonia.Point point, Avalonia.Point newPoint)
-        {
-            if (connector.StartPoint.X == point.X)
-            {
-                connector.StartPoint = new Avalonia.Point(newPoint.X, connector.StartPoint.Y);
-                connector.RenderTransform = new TranslateTransform();
-            }
-            else
-            {
-                if (connector.EndPoint.X == point.X)
-                {
-                    connector.EndPoint = new Avalonia.Point(newPoint.X, connector.EndPoint.Y);
-                    connector.RenderTransform = new TranslateTransform();
-                }
-            }
-        }
+        }       
         public static void Delete(Canvas canvas)
         {
             foreach (var item in canvas.Children.ToList())
@@ -225,16 +187,6 @@ namespace dz13.Control
             }
             return null;
         }
-        //public static void ChangeConnectorStartPointX(Connector connector, double value)
-        //{
-        //    connector.StartPoint = new Avalonia.Point(value, connector.EndPoint.Y);
-        //    connector.RenderTransform = new TranslateTransform();
-        //}
-        //public static void ChangeConnectorStartPointY(Connector connector, double value)
-        //{
-        //    connector.StartPoint = new Avalonia.Point(connector.EndPoint.X, value);
-        //    connector.RenderTransform = new TranslateTransform();
-        //}
         public static void ChangeConnectorEndPointX(Connector connector, double value)
         {
             connector.EndPoint = new Avalonia.Point(value, connector.StartPoint.Y);
@@ -271,6 +223,7 @@ namespace dz13.Control
         {
             parentLogicGate.Connections.Add(childLogicGate);
             childLogicGate.Connections.Add(parentLogicGate);
+            if (parentLogicGate.Error) childLogicGate.Error = true;
         }
         public static void UnLinkItems(Connector connector)
         {
@@ -346,13 +299,55 @@ namespace dz13.Control
                             if ((connector.EndPoint.X - oldConnector.StartPoint.X) * (oldConnector.EndPoint.Y - oldConnector.StartPoint.Y) ==
                                 (oldConnector.EndPoint.X - oldConnector.StartPoint.X) * (connector.EndPoint.Y - oldConnector.StartPoint.Y))
                             {
-                                LinkItems(oldConnector, connector);
-                                connector.RenderTransform = new TranslateTransform();
-                                return;
+                                if (oldConnector.StartPoint.X == oldConnector.EndPoint.X)
+                                {
+                                    if (oldConnector.StartPoint.Y <= oldConnector.EndPoint.Y)
+                                    {
+                                        if (connector.EndPoint.Y >= oldConnector.StartPoint.Y && connector.EndPoint.Y <= oldConnector.EndPoint.Y)
+                                        {
+                                            LinkItems(oldConnector, connector);
+                                            connector.RenderTransform = new TranslateTransform();
+                                            return;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (connector.EndPoint.Y >= oldConnector.EndPoint.Y && connector.EndPoint.Y <= oldConnector.StartPoint.Y)
+                                        {
+                                            LinkItems(oldConnector, connector);
+                                            connector.RenderTransform = new TranslateTransform();
+                                            return;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (oldConnector.StartPoint.Y == oldConnector.EndPoint.Y)
+                                    {
+                                        if (oldConnector.StartPoint.X <= oldConnector.EndPoint.X)
+                                        {
+                                            if (connector.EndPoint.X >= oldConnector.StartPoint.X && connector.EndPoint.X <= oldConnector.EndPoint.X)
+                                            {
+                                                LinkItems(oldConnector, connector);
+                                                connector.RenderTransform = new TranslateTransform();
+                                                return;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (connector.EndPoint.X >= oldConnector.EndPoint.X && connector.EndPoint.X <= oldConnector.StartPoint.X)
+                                            {
+                                                LinkItems(oldConnector, connector);
+                                                connector.RenderTransform = new TranslateTransform();
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             else break;
                         }
-                        else break;
+                        break;
                     case LogicGate:
                         LogicGate logicGate = item as LogicGate;
                         if (logicGate.FirstIn == null && logicGate.FirstInPoint.X != 0 && logicGate.FirstInPoint.Y != 0)
@@ -385,6 +380,55 @@ namespace dz13.Control
         }
         public static void UpdateDiagramValue(Canvas canvas)
         {
+            foreach (var item in canvas.Children.ToList())
+            {
+                if (item is Connector)
+                {
+                    Connector connector = item as Connector;
+                    connector.Error = false;
+                }
+            }
+            foreach (var item in canvas.Children.ToList())
+            {
+                switch (item)
+                {
+                    case BUF:
+                        var _buf = item as BUF;
+                        _buf.ValueIn = _buf.ValueIn;
+                        break;
+                    case AND:
+                        var _and = item as AND;
+                        _and.ValueIn[0] = _and.ValueIn[0];
+                        break;
+                    case (INV):
+                        INV _inv = item as INV;
+                        _inv.ValueIn = _inv.ValueIn;
+                        break;
+                    case (NAND):
+                        NAND _nand = item as NAND;
+                        _nand.ValueIn[0] = _nand.ValueIn[0];
+                        break;
+                    case (OR):
+                        OR _or = item as OR;
+                        _or.ValueIn[0] = _or.ValueIn[0];
+                        break;
+                    case (NOR):
+                        NOR _nor = item as NOR;
+                        _nor.ValueIn[0] = _nor.ValueIn[0];
+                        break;
+                    case (XOR):
+                        XOR _xor = item as XOR;
+                        _xor.ValueIn[0] = _xor.ValueIn[0];
+                        break;
+                    case (XNOR):
+                        XNOR _xnor = item as XNOR;
+                        _xnor.ValueIn[0] = _xnor.ValueIn[0];
+                        break;                 
+                    default:
+                        break;
+                }                       
+            }
+            ResetPassedIndex(canvas);
             foreach (var item in canvas.Children.ToList())
             {
                 if (item is IN)

@@ -98,7 +98,7 @@ namespace LogicGateLibrary
                     break;
             }
         }
-        private void UpdateConnectorsValue(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public void UpdateConnectorsValue(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             Connector connector = Out as Connector;
             if (ValueIn[0] && ValueIn[1]) ValueOut = true;
