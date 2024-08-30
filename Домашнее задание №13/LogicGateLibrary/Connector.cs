@@ -66,7 +66,6 @@ namespace LogicGateLibrary
                 RenderTransform = new TranslateTransform();
             } 
         }
-
         private Avalonia.Point _endPoint;
         public Avalonia.Point EndPoint 
         {
@@ -102,9 +101,7 @@ namespace LogicGateLibrary
                 }
             }
             if (Error) currentBrush = Brushes.Red;
-
             context.DrawLine(new Pen(currentBrush, 3, null, PenLineCap.Flat, PenLineJoin.Bevel, 10), StartPoint, EndPoint);
-
             foreach (var item in Connections.ToList())
             {
                 if (item is Connector)
